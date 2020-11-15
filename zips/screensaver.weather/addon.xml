@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="screensaver.weather" name="Weather Screensaver" version="100.5.0" provider-name="drinfernoo">
+    <requires>
+        <import addon="xbmc.python" version="2.14.0"/>
+    </requires>
+    
+    <extension point="xbmc.ui.screensaver" library="default.py"/>
+    
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Weather Screensaver</summary>
+        <description lang="en">Screensaver that displays the weather.</description>
+        <platform>all</platform>
+        <license>See LICENSE.txt</license>
+        <news>v100.5.0 (2020-02-12)[CR]- Massive cleanup</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
