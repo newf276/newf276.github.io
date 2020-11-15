@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.extendedinfo" name="OpenInfo" version="202.2.4" provider-name="Newf276, A4K">
+<addon id="script.extendedinfo" name="Discover-Info" version="300.0.1" provider-name="Newf276">
 	<requires>
 		<import addon="xbmc.python" version="2.25.0"/>
 		<import addon="script.module.pil" version="1.1.7"/>
@@ -7,7 +7,6 @@
 		<import addon="script.module.requests" version="2.9.1"/>
 		<import addon="script.skin.helper.service" version="1.0.0"/>
 		<import addon="resource.images.studios.white" version="0.0.18"/>
-		<import addon="script.meta" version="2.0." optional="true"/>
 	</requires>
 	<extension point="xbmc.python.script" library="script.py"/>
 	<extension point="xbmc.python.pluginsource" library="plugin.py">
@@ -16,7 +15,7 @@
 	<extension point="kodi.context.item">
 		<menu id="kodi.core.main">
 			<item library="context.py">
-				<label>OpenInfo</label>
+				<label>Discover-Info</label>
 				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,season) | String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,actor) | String.IsEqual(ListItem.dbtype,director)</visible>
 			</item>
 		</menu>
@@ -24,8 +23,8 @@
 	<extension point="xbmc.addon.metadata">
 		<reuselanguageinvoker>false</reuselanguageinvoker>
 		<platform>all</platform>
-		<summary>Fork of the ExtendedInfo script from phil65. This version is utilized with Script.Meta vice OpenMeta.</summary>
-		<description>This script offers various possibilities to display online content inside skins as well as a complete MovieDB browser including info dialogs for various media types. Needs skin implementation for lot of functions and Script.Meta for library functions.</description>
+		<summary>Fork of the ExtendedInfo script/OpenInfo from phil65/vitor07/A4K. Thank you all for the amazing coding work.</summary>
+		<description>This script offers various possibilities to display online content inside skins as well as a complete MovieDB browser including info dialogs for various media types. Needs skin implementation for lot of functions and plugin.video.discover for library and player functions.</description>
 		<assets>
 			<icon>resources/icon.png</icon>
 			<fanart>resources/fanart.jpg</fanart>
@@ -33,8 +32,6 @@
 			<screenshot>resources/screenshot2.jpg</screenshot>
 			<screenshot>resources/screenshot3.jpg</screenshot>
 		</assets>
-		<news>
-		202.2.3 - Edited to work with Script.Meta
-		</news>
+		<news>300.0.1 Customized for Discover Addon</news>
 	</extension>
 </addon>

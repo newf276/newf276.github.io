@@ -78,7 +78,7 @@ def get_episode_window(window_type):
 				url = ''
 				PLAYER.play_from_button(url, listitem=None, window=self, type='episodeid', dbid=dbid)
 			else:
-				url = 'plugin://script.meta/tv/play/%s/%s/%s' % (Utils.fetch(TheMovieDB.get_tvshow_ids(self.tvshow_id), 'tvdb_id'), self.info['season'], self.info['episode'])
+				url = 'plugin://plugin.video.discover/tv/play/%s/%s/%s' % (Utils.fetch(TheMovieDB.get_tvshow_ids(self.tvshow_id), 'tvdb_id'), self.info['season'], self.info['episode'])
 				xbmc.executebuiltin('RunPlugin(%s)' % url)
 
 		@ch.action('contextmenu', 8)
@@ -88,14 +88,14 @@ def get_episode_window(window_type):
 				url = ''
 				PLAYER.play_from_button(url, listitem=None, window=self, type='episodeid', dbid=dbid)
 			else:
-				url = 'plugin://script.meta/tv/play_choose_player/%s/%s/%s/False' % (Utils.fetch(TheMovieDB.get_tvshow_ids(self.tvshow_id), 'tvdb_id'), self.info['season'], self.info['episode'])
+				url = 'plugin://plugin.video.discover/tv/play_choose_player/%s/%s/%s/False' % (Utils.fetch(TheMovieDB.get_tvshow_ids(self.tvshow_id), 'tvdb_id'), self.info['season'], self.info['episode'])
 				xbmc.executebuiltin('RunPlugin(%s)' % url)
 
 		@ch.click(445)
 		def show_manage_dialog(self):
 			manage_list = []
 			manage_list.append(["OpenInfo's settings", 'Addon.OpenSettings("script.extendedinfo")'])
-			manage_list.append(["Meta's settings", 'Addon.OpenSettings("script.meta")'])
+			manage_list.append(["Discover's settings", 'Addon.OpenSettings("plugin.video.discover")'])
 			manage_list.append(["YouTube's settings", 'Addon.OpenSettings("plugin.video.youtube")'])
 			selection = xbmcgui.Dialog().select(heading='Settings', list=[i[0] for i in manage_list])
 			if selection > -1:

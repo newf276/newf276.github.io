@@ -76,7 +76,7 @@
     </extension>
 </addon>
 
-<addon id="script.extendedinfo" name="OpenInfo" version="202.2.4" provider-name="Newf276, A4K">
+<addon id="script.extendedinfo" name="Discover-Info" version="300.0.1" provider-name="Newf276">
 	<requires>
 		<import addon="xbmc.python" version="2.25.0"/>
 		<import addon="script.module.pil" version="1.1.7"/>
@@ -84,7 +84,6 @@
 		<import addon="script.module.requests" version="2.9.1"/>
 		<import addon="script.skin.helper.service" version="1.0.0"/>
 		<import addon="resource.images.studios.white" version="0.0.18"/>
-		<import addon="script.meta" version="2.0." optional="true"/>
 	</requires>
 	<extension point="xbmc.python.script" library="script.py"/>
 	<extension point="xbmc.python.pluginsource" library="plugin.py">
@@ -93,7 +92,7 @@
 	<extension point="kodi.context.item">
 		<menu id="kodi.core.main">
 			<item library="context.py">
-				<label>OpenInfo</label>
+				<label>Discover-Info</label>
 				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,season) | String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,actor) | String.IsEqual(ListItem.dbtype,director)</visible>
 			</item>
 		</menu>
@@ -101,8 +100,8 @@
 	<extension point="xbmc.addon.metadata">
 		<reuselanguageinvoker>false</reuselanguageinvoker>
 		<platform>all</platform>
-		<summary>Fork of the ExtendedInfo script from phil65. This version is utilized with Script.Meta vice OpenMeta.</summary>
-		<description>This script offers various possibilities to display online content inside skins as well as a complete MovieDB browser including info dialogs for various media types. Needs skin implementation for lot of functions and Script.Meta for library functions.</description>
+		<summary>Fork of the ExtendedInfo script/OpenInfo from phil65/vitor07/A4K. Thank you all for the amazing coding work.</summary>
+		<description>This script offers various possibilities to display online content inside skins as well as a complete MovieDB browser including info dialogs for various media types. Needs skin implementation for lot of functions and plugin.video.discover for library and player functions.</description>
 		<assets>
 			<icon>resources/icon.png</icon>
 			<fanart>resources/fanart.jpg</fanart>
@@ -110,9 +109,7 @@
 			<screenshot>resources/screenshot2.jpg</screenshot>
 			<screenshot>resources/screenshot3.jpg</screenshot>
 		</assets>
-		<news>
-		202.2.3 - Edited to work with Script.Meta
-		</news>
+		<news>300.0.1 Customized for Discover Addon</news>
 	</extension>
 </addon>
 
@@ -132,7 +129,42 @@
 	</extension>
 </addon>
 
-<addon id="repository.newf" name="Newf Repository" version="1.2" provider-name="Newf276">
+<addon id="plugin.video.discover" name="Discover" version="300.0.1" provider-name="Newf276">
+	<requires>
+		<import addon="xbmc.python" version="2.25.0"/>
+		<import addon="script.module.futures" version="2.2.0"/>
+		<import addon="script.module.requests" version="2.9.1"/>
+		<import addon="script.module.requests-cache" version="0.4.13"/>
+        <import addon="metadata.tvdb.com" version="3.0.14"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" start="login"/>
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="context.py">
+				<label>Discover</label>
+				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)</visible>
+			</item>
+		</menu>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>false</reuselanguageinvoker>
+		<platform>all</platform>
+        <summary>Fork of OpenMeta/Script.Meta script from A4K/vitor07. Thank you both for all the greeat work.</summary>
+		<description>This script offers various possibilities to display online content inside skins as well as a complete MovieDB browser including info dialogs for various media types.Player files required, and Discover-Info for extra information.</description>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot000.jpg</screenshot>
+			<screenshot>resources/screenshot001.jpg</screenshot>
+			<screenshot>resources/screenshot002.jpg</screenshot>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="repository.newf" name="Newf Repository" version="1.3" provider-name="Newf276">
 <extension point="xbmc.addon.repository" name="Newf Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/main/zips/addons.xml</info>
@@ -627,41 +659,6 @@ Added Trakt Manager
     <website>http://iheart.com</website>
     <disclaimer>Some countries are georestricted</disclaimer>
   </extension>
-</addon>
-
-<addon id="script.meta" name="Meta" version="2.3.1" provider-name="vitorp07, newf276">
-	<requires>
-		<import addon="xbmc.python" version="2.25.0"/>
-		<import addon="script.module.futures" version="2.2.0"/>
-		<import addon="script.module.requests" version="2.9.1"/>
-		<import addon="script.module.requests-cache" version="0.4.13"/>
-        <import addon="metadata.tvdb.com" version="3.0.14"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="service.py" start="login"/>
-	<extension point="kodi.context.item">
-		<menu id="kodi.core.main">
-			<item library="context.py">
-				<label>Meta</label>
-				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)</visible>
-			</item>
-		</menu>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<reuselanguageinvoker>false</reuselanguageinvoker>
-		<platform>all</platform>
-		<summary>TMDb, TVDb and Trakt browser</summary>
-		<description>Browse The MovieDb, The TVDb, Trakt and pass info along to library or an addon. Player-files are updated via Newf276 repo and are required to play media via this addon and openinfo.</description>
-		<assets>
-			<icon>resources/icon.png</icon>
-			<fanart>resources/fanart.jpg</fanart>
-			<screenshot>resources/screenshot000.jpg</screenshot>
-			<screenshot>resources/screenshot001.jpg</screenshot>
-			<screenshot>resources/screenshot002.jpg</screenshot>
-		</assets>
-	</extension>
 </addon>
 
 <addon id="service.subtitles.opensubtitles_by_opensubtitles"

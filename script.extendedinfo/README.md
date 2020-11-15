@@ -1,3 +1,2 @@
-# script.extendedinfo
-OpenInfo Kodi Add-on
-Works with Script.Meta (openmeta replacement by Newf276)
+Discover-Info, Kodi Add-on
+Utilize Plugin.Video.Discovery for library integration and player files.

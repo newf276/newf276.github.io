@@ -65,7 +65,7 @@ def get_season_window(window_type):
 
 		@ch.click(120)
 		def browse_season(self):
-			url = 'plugin://script.meta/tv/tvdb/%s/%s/' % (self.info['tvdb_id'], self.info['season'])
+			url = 'plugin://plugin.video.discover/tv/tvdb/%s/%s/' % (self.info['tvdb_id'], self.info['season'])
 			self.close()
 			xbmc.executebuiltin('ActivateWindow(videos,%s,return)' % url)
 
@@ -80,19 +80,19 @@ def get_season_window(window_type):
 
 		@ch.click(10)
 		def play_season(self):
-			url = 'plugin://script.meta/tv/play/%s/%s/1' % (self.info['tvdb_id'], self.info['season'])
+			url = 'plugin://plugin.video.discover/tv/play/%s/%s/1' % (self.info['tvdb_id'], self.info['season'])
 			xbmc.executebuiltin('RunPlugin(%s)' % url)
 
 		@ch.action('contextmenu', 10)
 		def play_season_choose_player(self):
-			url = 'plugin://script.meta/tv/play_choose_player/%s/%s/1/False' % (self.info['tvdb_id'], self.info['season'])
+			url = 'plugin://plugin.video.discover/tv/play_choose_player/%s/%s/1/False' % (self.info['tvdb_id'], self.info['season'])
 			xbmc.executebuiltin('RunPlugin(%s)' % url)
 
 		@ch.click(445)
 		def show_manage_dialog(self):
 			manage_list = []
 			manage_list.append(["OpenInfo's settings", 'Addon.OpenSettings("script.extendedinfo")'])
-			manage_list.append(["Meta's settings", 'Addon.OpenSettings("script.meta")'])
+			manage_list.append(["Discover's settings", 'Addon.OpenSettings("plugin.video.discover")'])
 			manage_list.append(["YouTube's settings", 'Addon.OpenSettings("plugin.video.youtube")'])
 			selection = xbmcgui.Dialog().select(heading='Settings', list=[i[0] for i in manage_list])
 			if selection > -1:

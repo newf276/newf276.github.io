@@ -8,8 +8,8 @@ IMAGES_DATA_PATH = xbmc.translatePath('special://profile/addon_data/script.exten
 SKIN_DIR = xbmc.getSkinDir()
 AUTOPLAY_TRAILER = xbmcaddon.Addon().getSetting('autoplay_trailer')
 NETFLIX_VIEW = xbmcaddon.Addon().getSetting('netflix_view')
-META_TV_FOLDER = xbmcaddon.Addon('meta').getSetting('tv_library_folder') if xbmc.getCondVisibility('System.HasAddon(meta)') else None
-META_MOVIE_FOLDER = xbmcaddon.Addon('meta').getSetting('movies_library_folder') if xbmc.getCondVisibility('System.HasAddon(meta)') else None
+DISCOVER_TV_FOLDER = xbmcaddon.Addon('plugin.video.discover').getSetting('tv_library_folder') if xbmc.getCondVisibility('System.HasAddon(plugin.video.discover)') else None
+DISCOVER_MOVIE_FOLDER = xbmcaddon.Addon('plugin.video.discover').getSetting('movies_library_folder') if xbmc.getCondVisibility('System.HasAddon(plugin.video.discover)') else None
 
 def show_busy():
 	if int(xbmc.getInfoLabel('System.BuildVersion')[:2]) > 17:
