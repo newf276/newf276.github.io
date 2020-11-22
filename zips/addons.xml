@@ -247,7 +247,7 @@ INFO: For latest changes see Changelog within Tools of add-on.
 	</extension>
 </addon>
 
-<addon id="repository.newf" name="Newf Repository" version="1.5" provider-name="Newf276">
+<addon id="repository.newf" name="Newf Repository" version="1.6" provider-name="Newf276">
 <extension point="xbmc.addon.repository" name="Newf Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml</info>
