@@ -247,36 +247,6 @@ INFO: For latest changes see Changelog within Tools of add-on.
 	</extension>
 </addon>
 
-<addon id="repository.newf" name="Newf Repository" version="1.6" provider-name="Newf276">
-<extension point="xbmc.addon.repository" name="Newf Repository">
-        <dir>
-            <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/</datadir>
-        </dir>
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
-		</dir>
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
-		</dir>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Newf Repository</summary>
-        <description>My personal addons, not for distribution</description>
-        <disclaimer>Use at your own risk</disclaimer>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-
 <addon id="screensaver.weather" name="Weather Screensaver" version="100.5.0" provider-name="drinfernoo">
     <requires>
         <import addon="xbmc.python" version="2.14.0"/>
@@ -299,7 +269,7 @@ INFO: For latest changes see Changelog within Tools of add-on.
 
 <addon id="plugin.video.cbc"
        name="Canadian Broadcasting Corp (CBC)"
-       version="14.0.6"
+       version="15.0.6"
        provider-name="micahg,t1m">
   <requires>
     <import addon="xbmc.python" version="2.26.0"/>
@@ -601,6 +571,36 @@ More minor bugfixes (honestly could not list them all)
 		<disclaimer></disclaimer>
 		<platform>all</platform>
 	</extension>
+</addon>
+
+<addon id="repository.newf" name="Newf Repository" version="1.7" provider-name="Newf276">
+<extension point="xbmc.addon.repository" name="Newf Repository">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/</datadir>
+        </dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+		</dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Newf Repository</summary>
+        <description>My personal addons, not for distribution</description>
+        <disclaimer>Use at your own risk</disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
 </addon>
 
 <addon id="context.seren" version="1.0.4" name="Seren - Global Context Menu Items" provider-name="Nixgates">
