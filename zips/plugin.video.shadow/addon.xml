@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.shadow"                                                                                                                                    
 	   name="Shadow"                                                 
-	   version="202.4.5"                                                                                                                                        
+	   version="203.4.5"                                                                                                                                        
 	   provider-name="Darkness">
   <requires>
 	
