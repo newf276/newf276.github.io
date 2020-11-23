@@ -1,0 +1,22 @@
+v100.5.0 (2020-02-12)
+- Massive cleanup
+
+v100.4.0 (2018-06-01)
+- Final Update
+
+v100.3.0 (2016-12-16)
+- Update for support of URepo
+
+v1.2.1 (2016-08-19)
+- Moved to robwebset repository
+
+v1.1.1 (2016-04-05)
+- Tidy up import, globals and plugin provides
+
+v1.1.0 (2015-08-28)
+- Stop Screen dimming after a few minutes
+
+v1.0.0 (2015-07-28)
+- Initial Version
+
+Icon Font: Adobe Caslon Pro Bold

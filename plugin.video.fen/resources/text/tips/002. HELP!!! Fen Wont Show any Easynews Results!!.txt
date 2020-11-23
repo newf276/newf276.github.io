@@ -1,0 +1,4 @@
+[COLOR dodgerblue][B] Fen Wont Show any Easynews Results!![/B][/COLOR]
+[I]Recent subscribers to Easynews will most likely have access to only the v3 html search page. If this is the case, and you cannot get Easynews results through Fen, then you need to change "API Version" to "Version 3" in Settings->Accounts->Easynews.
+
+You should now receive results through Fen for Easynews.[/I]

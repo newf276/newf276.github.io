@@ -1,0 +1,6 @@
+[COLOR dodgerblue][B]Fen Extras[/B][/COLOR]
+[I]Movie and TV Show context menus have an 'Extras...' listing.
+
+This will house features such as 'Play Trailer', 'Similar/Recommended' and 'Extended Info'. It includes many additional features such as 'Actor Info', 'Director Info'(Movie only), and other options like movies/tvshows from the same year, same genre/s etc. Also it will feature reviews, parental guide advice, and other interesting info such as trivia etc.
+
+Select it from the context menu and see what extras are available to discover...[/I]
