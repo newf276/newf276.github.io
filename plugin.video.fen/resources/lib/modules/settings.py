@@ -25,9 +25,6 @@ def check_database(database):
 	import xbmcvfs
 	if not xbmcvfs.exists(database): initialize_databases()
 
-def display_mode():
-	return int(get_setting('display_mode', '0'))
-
 def store_resolved_torrent_to_cloud(debrid_service):
 	return get_setting('store_torrent.%s' % debrid_service.lower()) == 'true'
 
@@ -137,13 +134,6 @@ def minimal_notifications():
 def autoplay_next_episode():
 	if auto_play() and get_setting('autoplay_next_episode') == "true": return True
 	else: return False
-
-def advancescrape_next_episode():
-	if not auto_play() and get_setting('advancescrape_next_episode') == "true": return True
-	else: return False
-
-def advancescrape_show_results():
-	return get_setting('advancescrape_show_results') == "true"
 
 def autoplay_next_check_threshold():
 	return int(get_setting('autoplay_next_check_threshold'))
@@ -294,9 +284,6 @@ def nav_jump_use_alphabet():
 	if get_setting('nav_jump') == '0': return False
 	else: return True
 
-def all_trailers():
-	return get_setting('all_trailers') == "true"
-
 def use_season_title():
 	return get_setting('use_season_title') == "true"
 
@@ -334,21 +321,11 @@ def nextep_content_settings():
 def scraping_settings():
 	extra_info = show_extra_info()
 	enable_filenames = show_filenames()
-	multiline_highlight = get_setting('secondline.identify', '')
-	if multiline_highlight.lower() == 'no color': multiline_highlight = ''
-	highlight_type = get_setting('highlight.type', '0')
-	highlight_4K = get_setting('scraper_4k_highlight', 'magenta')
-	highlight_1080p = get_setting('scraper_1080p_highlight', 'lawngreen')
-	highlight_720p = get_setting('scraper_720p_highlight', 'gold')
-	highlight_SD = get_setting('scraper_SD_highlight', 'lightsaltegray')
-	hoster_highlight = get_setting('hoster.identify', 'blue')
-	if hoster_highlight.lower() == 'no color': hoster_highlight = ''
+	multiline_highlight = get_setting('secondline.identify', 'white')
+	hoster_highlight = get_setting('hoster.identify', 'dodgerblue')
 	torrent_highlight = get_setting('torrent.identify', 'magenta')
-	if torrent_highlight.lower() == 'no color': torrent_highlight = ''
-	return {'extra_info': extra_info, 'show_filenames': enable_filenames,
-			'multiline_highlight': multiline_highlight, 'highlight_type': highlight_type,
-			'highlight_4K': highlight_4K, 'highlight_1080p': highlight_1080p, 'highlight_720p': highlight_720p,
-			'highlight_SD': highlight_SD, 'hoster_highlight': hoster_highlight, 'torrent_highlight': torrent_highlight}
+	return {'extra_info': extra_info, 'show_filenames': enable_filenames, 'hoster_highlight': hoster_highlight,
+			'torrent_highlight': torrent_highlight, 'multiline_highlight': multiline_highlight}
 
 def create_directory(dir_path, dir_name=None):
 	import os

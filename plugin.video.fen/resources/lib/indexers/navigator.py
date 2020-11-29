@@ -604,7 +604,10 @@ class Navigator:
 		return menu_type.replace('tvshow', self.tvshows_string).replace('movie', self.movies_string)
 	
 	def shortcut_folders(self):
+		def _make_icon(chosen_icon):
+			return os.path.join(self.icon_directory, chosen_icon)
 		def _make_new_item():
+			icon = _make_icon('new.png')
 			display_name = '[I]%s...[/I]' % ls(32702)
 			url_params = {'mode': 'navigator.adjust_shortcut_folder_lists', 'method': 'add_shortcut_folder'}
 			url = self._build_url(url_params)
@@ -617,11 +620,11 @@ class Navigator:
 		folders = dbcur.fetchall()
 		try: folders = sorted([(str(i[0]), i[1]) for i in folders], key=lambda s: s[0].lower())
 		except: folders = []
-		icon = os.path.join(self.icon_directory, 'furk.png')
 		_make_new_item()
 		short_str = ls(32514)
 		delete_str = ls(32703)
 		all_str = ls(32704)
+		icon = os.path.join(self.icon_directory, 'furk.png')
 		for i in folders:
 			try:
 				cm = []

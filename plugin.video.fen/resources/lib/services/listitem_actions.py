@@ -6,9 +6,8 @@ try: from urlparse import parse_qsl
 except ImportError: from urllib.parse import parse_qsl
 try: from sqlite3 import dbapi2 as database
 except ImportError: from pysqlite2 import dbapi2 as database
-from modules.indicators_bookmarks import get_resumetime, get_progress_percent, get_watched_info_tv, get_watched_status, get_watched_status_season
+from modules.indicators_bookmarks import get_resumetime, get_progress_percent, get_watched_info_tv, get_watched_status
 from apis.trakt_api import trakt_get_next_episodes
-from apis.imdb_api import imdb_parentsguide
 from modules.nav_utils import build_url
 from modules.utils import local_string as ls
 from modules.settings_reader import get_setting
@@ -57,53 +56,45 @@ def nextep_notification(priority):
 	return settings.list_actions.append((ls(33041), next_episode, meta['poster'], priority))
 
 def watched_status_notification(db_type, priority):
-	meta = _get_meta()
-	if not meta: return settings.list_actions.append(None)
-	if db_type == 'tvshow':
-		total_episodes, total_watched = meta['total_episodes'], meta['total_watched']
+	if db_type == 'movie':
+		meta = _get_meta()
+		if not meta: return settings.list_actions.append(None)
+		resumetime = get_resumetime(db_type, meta['tmdb_id'])
+		duration = meta['duration']
+		if resumetime in (0, '0'):
+			playcount = meta['playcount']
+			if playcount == 1: resumetime = duration
+		total_watched = '%imins' % int(float(resumetime)/60)
+		total = '%imins' % int(float(duration)/60)
 		icon = meta['poster']
 	else:
-		season_number = xbmc.getInfoLabel('Listitem.Season')
-		meta_user_info = tikimeta.retrieve_user_info()
-		season_data = tikimeta.all_episodes_meta(meta['tmdb_id'], meta['tvdb_id'], meta['tvdb_summary']['airedSeasons'], meta['season_data'], meta_user_info)
-		try: season_data = [i for i in season_data if int(i['season_number']) == int(season_number)][0]
-		except: return settings.list_actions.append(None)
-		aired_episodes = season_data['episode_count']
-		watched_info, use_trakt = get_watched_info_tv()
-		playcount, overlay, watched, unwatched = get_watched_status_season(watched_info, use_trakt, meta['tmdb_id'], int(season_number), aired_episodes)
-		total_watched, total_episodes = watched, aired_episodes
-		icon = season_data['poster_path'] if season_data['poster_path'] is not None else meta['poster']
-	watched_status = ls(33046) % (total_watched, total_episodes)
+		total_watched = xbmc.getInfoLabel('ListItem.Property(WatchedEpisodes)')
+		total = xbmc.getInfoLabel('ListItem.Property(TotalEpisodes)')
+		icon = xbmc.getInfoLabel('Container.ListItem.Art(poster)')
+	watched_status = ls(33046) % (total_watched, total)
 	return settings.list_actions.append((ls(33048), watched_status, icon, priority))
 
 def progress_notification(db_type, priority):
-	meta = _get_meta()
-	if not meta: return settings.list_actions.append(None)
-	icon = meta['poster']
 	if db_type in ['movie', 'episode']:
+		meta = _get_meta()
+		if not meta: return settings.list_actions.append(None)
+		icon = meta['poster']
 		season = meta.get('season', '')
 		episode = meta.get('episode', '')
-		resumetime = get_resumetime(db_type, meta['tmdb_id'], season, episode)
-		duration = meta['duration']
-		if db_type == 'episode' and resumetime in (0, '0'):
-			watched_info, use_trakt = get_watched_info_tv()
-			playcount, overlay = get_watched_status(watched_info, use_trakt, 'episode', meta['tmdb_id'], season, episode)
-			if playcount == 1: resumetime = duration
-	elif db_type == 'season':
-		season_number = xbmc.getInfoLabel('Listitem.Season')
-		meta_user_info = tikimeta.retrieve_user_info()
-		season_data = tikimeta.all_episodes_meta(meta['tmdb_id'], meta['tvdb_id'], meta['tvdb_summary']['airedSeasons'], meta['season_data'], meta_user_info)
-		try: season_data = [i for i in season_data if int(i['season_number']) == int(season_number)][0]
-		except: return settings.list_actions.append(None)
-		aired_episodes = season_data['episode_count']
-		watched_info, use_trakt = get_watched_info_tv()
-		playcount, overlay, watched, unwatched = get_watched_status_season(watched_info, use_trakt, meta['tmdb_id'], int(season_number), aired_episodes)
-		resumetime, duration = watched, aired_episodes
-		icon = season_data['poster_path'] if season_data['poster_path'] is not None else meta['poster']
+		total_watched = get_resumetime(db_type, meta['tmdb_id'], season, episode)
+		total = meta['duration']
+		if total_watched in (0, '0'):
+			if db_type == 'movie':
+				playcount = meta['playcount']
+			else:
+				watched_info, use_trakt = get_watched_info_tv()
+				playcount, overlay = get_watched_status(watched_info, use_trakt, 'episode', meta['tmdb_id'], season, episode)
+			if playcount == 1: total_watched = total
 	else:
-		resumetime = int(meta['total_watched'])
-		duration = int(meta['total_episodes'])
-	percent_watched = get_progress_percent(resumetime, duration)
+		total_watched = int(xbmc.getInfoLabel('ListItem.Property(WatchedEpisodes)'))
+		total = int(xbmc.getInfoLabel('ListItem.Property(TotalEpisodes)'))
+		icon = xbmc.getInfoLabel('Container.ListItem.Art(poster)')
+	percent_watched = get_progress_percent(total_watched, total)
 	progress_status = '%s%% %s' % (percent_watched, ls(32475))
 	return settings.list_actions.append((ls(33049), progress_status, icon, priority))
 

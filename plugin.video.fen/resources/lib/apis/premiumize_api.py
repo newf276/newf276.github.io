@@ -225,12 +225,9 @@ class PremiumizeAPI:
 		return self._get(url)
 
 	def instant_transfer(self, magnet_url):
-		self.clear_cache()
-		string = "fen_pm_instant_transfer_%s" % magnet_url
 		url = 'transfer/directdl'
 		data = {'src': magnet_url}
-		args = [url, data]
-		return cache_object(self._post, string, args, False, 2)
+		return self._post(url, data)
 
 	def rename_cache_item(self, file_type, file_id, new_name):
 		if file_type == 'folder': url = "folder/rename"

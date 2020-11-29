@@ -235,7 +235,7 @@ def build_next_episode_manager(params):
 	xbmcplugin.endOfDirectory(__handle__)
 	setView('view.main', 'tvshows')
 
-def nextep_playback_info(tmdb_id, current_season, current_episode, autoplay_episode=True, from_library=None):
+def nextep_playback_info(tmdb_id, current_season, current_episode, from_library=None):
 	def build_next_episode_play():
 		ep_data = [i['episodes_data'] for i in seasons_data if i['season_number'] == season][0]
 		ep_data = [i for i in ep_data if i['airedEpisodeNumber'] == episode][0]
@@ -248,7 +248,7 @@ def nextep_playback_info(tmdb_id, current_season, current_episode, autoplay_epis
 		meta.update({'vid_type': 'episode', 'rootname': display_name, "season": season, 'ep_name': ep_data['episodeName'],
 					"episode": episode, 'premiered': airdate, 'plot': ep_data['overview']})
 		meta_json = json.dumps(meta)
-		url_params = {'mode': 'play_media', 'background': 'true', 'autoplay_nextep': autoplay_episode, 'vid_type': 'episode', 'tmdb_id': meta['tmdb_id'],
+		url_params = {'mode': 'play_media', 'background': 'true', 'vid_type': 'episode', 'tmdb_id': meta['tmdb_id'],
 					'query': query, 'tvshowtitle': meta['rootname'], 'season': season,
 					'episode': episode, 'meta': meta_json, 'ep_name': ep_data['episodeName']}
 		if from_library: url_params.update({'library': 'True', 'plot': ep_data['overview']})
@@ -257,29 +257,27 @@ def nextep_playback_info(tmdb_id, current_season, current_episode, autoplay_epis
 	meta_user_info = retrieve_user_info()
 	meta = tvshow_meta('tmdb_id', tmdb_id, meta_user_info)
 	nextep_info = {'pass': True}
-	if autoplay_episode:
-		autoplay_next_check_threshold = settings.autoplay_next_check_threshold()
-		try: current_number = int(window.getProperty('fen_total_autoplays'))
-		except: current_number = 1
-		if current_number == autoplay_next_check_threshold:
-			current_number = 1
-			window.setProperty('fen_total_autoplays', str(current_number))
-			continue_playing = xbmcgui.Dialog().yesno('Fen', ls(32802) % meta['title'], autoclose=10000)
-			if not continue_playing == 1:
-				notification(ls(32736), 6000)
-				return nextep_info
-		else:
-			current_number += 1
-			window.setProperty('fen_total_autoplays', str(current_number))
-	else: window.clearProperty('fen_total_autoplays')
-	try:
-		current_adjusted_date = settings.adjusted_datetime()
-		seasons_data = all_episodes_meta(tmdb_id, meta['tvdb_id'], meta['tvdb_summary']['airedSeasons'], meta['season_data'], meta_user_info)
-		curr_season_data = [i for i in seasons_data if i['season_number'] == current_season][0]
-		season = current_season if current_episode < curr_season_data['episode_count'] else current_season + 1
-		episode = current_episode + 1 if current_episode < curr_season_data['episode_count'] else 1
-		nextep_info = {'season': season, 'episode': episode, 'url': build_next_episode_play()}
-	except: pass
+	autoplay_next_check_threshold = settings.autoplay_next_check_threshold()
+	try: current_number = int(window.getProperty('fen_total_autoplays'))
+	except: current_number = 1
+	if current_number == autoplay_next_check_threshold:
+		current_number = 1
+		window.setProperty('fen_total_autoplays', str(current_number))
+		continue_playing = xbmcgui.Dialog().yesno('Fen', ls(32802) % meta['title'], autoclose=10000)
+		if not continue_playing == 1:
+			notification(ls(32736), 6000)
+			return nextep_info
+	else:
+		current_number += 1
+		window.setProperty('fen_total_autoplays', str(current_number))
+	# try:
+	current_adjusted_date = settings.adjusted_datetime()
+	seasons_data = all_episodes_meta(tmdb_id, meta['tvdb_id'], meta['tvdb_summary']['airedSeasons'], meta['season_data'], meta_user_info)
+	curr_season_data = [i for i in seasons_data if i['season_number'] == current_season][0]
+	season = current_season if current_episode < curr_season_data['episode_count'] else current_season + 1
+	episode = current_episode + 1 if current_episode < curr_season_data['episode_count'] else 1
+	nextep_info = {'season': season, 'episode': episode, 'url': build_next_episode_play()}
+	# except: pass
 	return nextep_info
 
 def nextep_execute(nextep_info):

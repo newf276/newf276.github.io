@@ -46,10 +46,6 @@ msgctxt "#32010"
 msgid "Use Season Titles When Available"
 msgstr "Gebruik Seizoen Titels Indien Beschikbaar"
 
-msgctxt "#32011"
-msgid "Show Choice for All Trailer Videos"
-msgstr "Toon Keuze Voor Alle Trailer Video's"
-
 msgctxt "#32012"
 msgid "Disable Auto View of Changelog When Add-on Updates"
 msgstr "Weergave Van Changelog Uitschakelen bij Update"
@@ -570,25 +566,9 @@ msgctxt "#32141"
 msgid "Scraper Timeout"
 msgstr "Scraper Timeout"
 
-msgctxt "#32142"
-msgid "Results Display"
-msgstr "Resultaten Weergave"
-
 msgctxt "#32143"
 msgid "Search Dialog Heading"
 msgstr "Zoeken Dialoog Rubriek"
-
-msgctxt "#32144"
-msgid "Highlight Results Based On..."
-msgstr "Markeer Resultaten Gebaseerd Op..."
-
-msgctxt "#32145"
-msgid "Paginate Results"
-msgstr "Pagineer Resultaten"
-
-msgctxt "#32146"
-msgid "Max. Results Per Page"
-msgstr "Maximale Resultaten Per Pagina"
 
 msgctxt "#32147"
 msgid "Display Results as Multi Line"
@@ -681,22 +661,6 @@ msgstr "Externe Scrapers Voortgang Dialoog Kleur"
 msgctxt "#32169"
 msgid "Multi Line Color"
 msgstr "Dubbele Regel Kleur"
-
-msgctxt "#32170"
-msgid "4K Results Color"
-msgstr "4K Resultaten Kleur"
-
-msgctxt "#32171"
-msgid "1080P Results Color"
-msgstr "1080P Resultaten Kleur"
-
-msgctxt "#32172"
-msgid "720P Results Color"
-msgstr "720P Resultaten Kleur"
-
-msgctxt "#32173"
-msgid "SD Results Color"
-msgstr "SD Resultaten Kleur"
 
 msgctxt "#32174"
 msgid "Playback"
@@ -941,14 +905,6 @@ msgstr "Een Dag"
 msgctxt "#32234"
 msgid "One Week"
 msgstr "Een Week"
-
-msgctxt "#32235"
-msgid "Directory"
-msgstr "Directory"
-
-msgctxt "#32236"
-msgid "Very Simple Directory"
-msgstr "Zeer Eenvoudige Directory"
 
 msgctxt "#32237"
 msgid "Dialog"
@@ -3359,18 +3315,6 @@ msgid "Next Episode"
 msgstr "Volgende Aflevering"
 msgstr ""
 
-msgctxt "#33042"
-msgid "Advance Scrape Next Episode"
-msgstr "Geavanceerd Scrapen Volgende Aflevering"
-
-msgctxt "#33043"
-msgid "Show Next Episode Results When Playback Ends"
-msgstr "Toon Volgende Aflevering Resultaten Wanneer Afspelen Stopt"
-
-msgctxt "#33044"
-msgid "[B]Scrape Complete:[/B]"
-msgstr "[B]Scrapen Voltooid:[/B]"
-
 msgctxt "#33045"
 msgid "Tagged"
 msgstr "Getagd"
@@ -3380,8 +3324,8 @@ msgid "%s of %s Watched"
 msgstr "%s van %s Bekeken"
 
 msgctxt "#33047"
-msgid "Watched Status Notifications (TV Show, Season)"
-msgstr "Bekeken Status Meldingen (TV Serie, Seizoen)"
+msgid "Watched Status Notifications (Movie, TV Show, Season)"
+msgstr "Bekeken Status Meldingen (Film, TV Serie, Seizoen)"
 
 msgctxt "#33048"
 msgid "Watched Status"
@@ -3459,7 +3403,59 @@ msgctxt "#33066"
 msgid "Enable Notifications"
 msgstr "Notificaties Aanzetten"
 
-msgctxt "#33067"
+msgctxt "#32011"
+msgid ""
+msgstr ""
+
+msgctxt "#32142"
+msgid ""
+msgstr ""
+
+msgctxt "#32144"
+msgid ""
+msgstr ""
+
+msgctxt "#32145"
+msgid ""
+msgstr ""
+
+msgctxt "#32146"
+msgid ""
+msgstr ""
+
+msgctxt "#32170"
+msgid ""
+msgstr ""
+
+msgctxt "#32171"
+msgid ""
+msgstr ""
+
+msgctxt "#32172"
+msgid ""
+msgstr ""
+
+msgctxt "#32173"
+msgid ""
+msgstr ""
+
+msgctxt "#32235"
+msgid ""
+msgstr ""
+
+msgctxt "#32236"
+msgid ""
+msgstr ""
+
+msgctxt "#33042"
+msgid ""
+msgstr ""
+
+msgctxt "#33043"
+msgid ""
+msgstr ""
+
+msgctxt "#33044"
 msgid ""
 msgstr ""
 

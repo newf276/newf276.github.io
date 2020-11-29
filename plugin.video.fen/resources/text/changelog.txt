@@ -1,5 +1,14 @@
 [B]Please utilize Fen Tips (Tools->Tips for Fen Use) to catch up on any important new features. New features will be highlighted with a [COLOR chartreuse]NEW!!![/COLOR] label.[/B]
 
+[COLOR dodgerblue][B]Version 1.8.20[/B][/COLOR]
+[B]THIS IS A REGRESSION UPDATE. FEATURES ARE BEING REMOVED. PLEASE REVERT YOUR INSTALL TO 1.8.19 IF YOU NEED TO KEEP THE FOLLOWING FEATURES, AND TURN OFF AUTO-UPDATES. THESE FEATURES WILL NOT BE RETURNING TO FEN.[/B]
+- "Results Display" setting removed. "Very Simple Directory" setting removed as a consequence.
+- "Paginate Results" setting removed.
+- "Highlight Results Based On..." setting removed.
+- "Show Choice for All Trailer Videos" setting removed.
+- "Advance Scrape Next Episode" setting removed. "Show Next Episode Results When Playback Ends" setting removed as a consequence.
+- "No Color" for results highlights option removed.
+
 [COLOR dodgerblue][B]Version 1.8.19[/B][/COLOR]
 - Added a volume checker under Settings->Playback->Playback Volume. Set maximum volume percentage and Fen will lower the volume to that setting at the start of playback if the volume is currently above that percentage. If the volume is currently muted, Fen will not change the volume percentage.
 - Added "Enable Notifications" to the notifications settings so you can turn them all on/off at once. You will need to enable this if currently using notifications.

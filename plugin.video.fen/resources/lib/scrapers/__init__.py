@@ -14,24 +14,10 @@ def label_settings(scraper_settings, scrape_provider, scraper_name=None):
 	provider_color = prov_color(scrape_provider)
 	second_line_color = scraper_settings['multiline_highlight']
 	if scraper_name: scrape_provider = scraper_name
-	if provider_color == '':
-		single_leading = ''
-		single_closing = ''
-		multi1_leading = ''
-		multi1_closing = ''
-	else:
-		single_leading = '[COLOR=%s]' % provider_color
-		single_closing = '[/COLOR]'
-		multi1_leading = '[COLOR=%s]' % provider_color
-		multi1_closing = '[/COLOR]'
-	if second_line_color == '':
-		multi2_leading = multi1_leading
-		multi2_closing = multi1_closing
-	else:
-		multi2_leading = '[COLOR=%s]' % second_line_color
-		multi2_closing = '[/COLOR]'
-	updates = {'scrape_provider':scrape_provider, 'single_leading': single_leading, 'single_closing': single_closing, 'multi1_leading': multi1_leading,
-			   'multi1_closing': multi1_closing, 'multi2_leading': multi2_leading, 'multi2_closing': multi2_closing, 'provider_color': provider_color,
+	single_leading = '[COLOR=%s]' % provider_color
+	multi_leading = '[COLOR=%s]' % second_line_color
+	updates = {'scrape_provider':scrape_provider, 'single_leading': single_leading,
+			   'multi_leading': multi_leading, 'provider_color': provider_color,
 			   'second_line_color': second_line_color}
 	scraper_settings.update(updates)
 	return scraper_settings
@@ -91,16 +77,7 @@ def make_labels(label_settings, label, multiline_label1, multiline_label2, video
 		files_num_video = str(kwargs['files_num_video'])
 		label = '[I]' + label.replace('[B]FURK[/B]', '[COLOR %s][B]FURK[/B][/COLOR]' % provider_color).replace('[B]FURK PACK (X%s)[/B]' % files_num_video, '[COLOR %s][B]FURK PACK (X%s)[/B][/COLOR]' % (provider_color, files_num_video)).replace('[B]UNCACHED[/B]', '[COLOR %s][B]UNCACHED[/B][/COLOR]' % provider_color).replace('[B]ACTIVE[/B]', '[COLOR lawngreen][B]ACTIVE[/B][/COLOR]').replace('[/I]', '') + '[/I]'
 		multiline_label = '[I]' + multiline_label1.replace('[B]FURK[/B]', '[COLOR %s][B]FURK[/B][/COLOR]' % provider_color).replace('[B]FURK PACK (X%s)[/B]' % files_num_video, '[COLOR %s][B]FURK PACK (X%s)[/B][/COLOR]' % (provider_color, files_num_video)).replace('[B]UNCACHED[/B]', '[COLOR %s][B]UNCACHED[/B][/COLOR]' % provider_color).replace('[B]ACTIVE[/B]', '[COLOR lawngreen][B]ACTIVE[/B][/COLOR]').replace('[/I]', '') + multiline_open + multiline_label2 + multiline_close + '[/I]'
-	elif label_settings['highlight_type'] == '1':
-		if video_quality.upper() == '4K': leading_color = label_settings['highlight_4K']
-		elif video_quality.upper()  == '1080P': leading_color = label_settings['highlight_1080p']
-		elif video_quality.upper() == '720P': leading_color = label_settings['highlight_720p']
-		else: leading_color = label_settings['highlight_SD']
-		if label_settings['multiline_highlight'] == '': multiline_open = leading_color
-		else: multiline_open = label_settings['multiline_highlight']
-		label = '[COLOR=%s]' % leading_color + label + '[/COLOR]'
-		multiline_label = '[COLOR=%s]' % leading_color + multiline_label1 + '[/COLOR]' + '[COLOR=%s]' % multiline_open + multiline_label2 + '[/COLOR]'
 	else:
-		label = label_settings['single_leading'] + label + label_settings['single_closing']
-		multiline_label = label_settings['multi1_leading'] + multiline_label1 + label_settings['multi1_closing'] + label_settings['multi2_leading'] + multiline_label2 + label_settings['multi2_closing']
+		label = label_settings['single_leading'] + label + '[/COLOR]'
+		multiline_label = label_settings['single_leading'] + multiline_label1 + '[/COLOR]' + label_settings['multi_leading'] + multiline_label2 + '[/COLOR]'
 	return label, multiline_label

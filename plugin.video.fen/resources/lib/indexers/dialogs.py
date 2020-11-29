@@ -203,13 +203,6 @@ def set_media_action():
 	if choice2 is None: choice2 = get_setting('default_open_db_type')
 	return _set()
 
-def set_display_mode():
-	from modules.nav_utils import toggle_setting
-	names = (ls(32235), ls(32236))
-	settings = ('0', '1')
-	choice = selection_dialog(names, settings)
-	if choice: return toggle_setting('display_mode', choice)
-
 def results_sorting_choice():
 	from modules.nav_utils import toggle_setting
 	quality = ls(32241)
@@ -436,7 +429,7 @@ def scraper_color_choice(setting):
 				('second_line', 'secondline.identify')]
 	setting = [i[1] for i in choices if i[0] == setting][0]
 	dialog = 'Fen'
-	chosen_color = color_chooser(dialog, no_color=True)
+	chosen_color = color_chooser(dialog)
 	if chosen_color: toggle_setting(setting, chosen_color)
 
 def folder_sources_choice(setting):
@@ -540,8 +533,6 @@ def options_menu(params):
 	media_action_status = ls(33034) % (media_action_setting, media_included_setting)
 	quality_filter_setting = 'autoplay' if autoplay_status == on_str else 'results'
 	autoplay_next_status, autoplay_next_toggle = (on_str, 'false') if settings.autoplay_next_episode() else (off_str, 'true')
-	display_mode = settings.display_mode()
-	display_mode_status = ls(32235) if display_mode == 0 else ls(32236)
 	results_sorting_status = get_setting('results.sort_order_display')
 	current_subs_action = get_setting('subtitles.subs_action')
 	current_subs_action_status = 'Auto' if current_subs_action == '0' else ls(32193) if current_subs_action == '1' else off_str
@@ -553,13 +544,10 @@ def options_menu(params):
 	listing = []
 	if content in ('movies', 'episodes', 'movie', 'episode'): listing += [(ls(32014).upper(), 'rescrape_select')]
 	listing += [(base_str % ('', ls(32175).upper(), autoplay_status), 'toggle_autoplay')]
-	if autoplay_status == on_str:
-		listing += [(base_str % (' - ', ls(32178).upper(), autoplay_next_status), 'toggle_autoplay_next')]
+	if autoplay_status == on_str: listing += [(base_str % (' - ', ls(32178).upper(), autoplay_next_status), 'toggle_autoplay_next')]
 	listing += [(base_str % ('', ls(33010).upper(), media_action_status), 'set_media_action')]
 	listing += [(base_str % ('', '%s %s' % (ls(32055).upper(), ls(32533).upper()), current_scrapers_status), 'enable_scrapers')]
-	if autoplay_status == off_str:
-		listing += [(base_str % ('', ls(32638).upper(), display_mode_status), 'set_display_mode')]
-		listing += [(base_str % ('', ls(32151).upper(), results_sorting_status), 'set_results_sorting')]
+	if autoplay_status == off_str: listing += [(base_str % ('', ls(32151).upper(), results_sorting_status), 'set_results_sorting')]
 	listing += [(base_str % ('', ls(32105).upper(), current_filter_status), 'set_filters')]
 	listing += [(base_str % ('', ls(32183).upper(), current_subs_action_status), 'set_subs_action')]
 	if 'external' in active_scrapers:
@@ -579,7 +567,6 @@ def options_menu(params):
 	elif choice == 'set_media_action': set_media_action()
 	elif choice == 'toggle_autoplay_next': toggle_setting('autoplay_next_episode', autoplay_next_toggle)
 	elif choice == 'enable_scrapers': enable_scrapers()
-	elif choice == 'set_display_mode': set_display_mode()
 	elif choice == 'set_results_sorting': results_sorting_choice()
 	elif choice == 'set_filters': set_quality(quality_filter_setting)
 	elif choice == 'set_subs_action': set_subtitle_action()
@@ -616,7 +603,6 @@ def extras_menu(media_type, meta_json, action=None, play_params=None, default_se
 	try: action = int(action)
 	except: pass
 	meta = json.loads(meta_json)
-	all_trailers = settings.all_trailers()
 	autoplay = settings.auto_play()
 	title = meta['title']
 	rootname = meta['rootname']
@@ -648,7 +634,7 @@ def extras_menu(media_type, meta_json, action=None, play_params=None, default_se
 	else: genre_dict = None
 	sim_recom_runner = build_url({"mode": "similar_recommendations_choice", "db_type": base_media, 'sim_recom_name': rootname, "sim_recom_tmdb": tmdb_id, "sim_recom_imdb": imdb_id})
 	if plot: plot_runner = build_url({"mode": "plot_choice", "heading": rootname, 'plot_text': plot})
-	if all_trailers and meta.get('all_trailers', False): trailer_runner = build_url({'mode': 'play_trailer', 'url': trailer, 'all_trailers': json.dumps(meta['all_trailers'])})
+	if meta.get('all_trailers', False): trailer_runner = build_url({'mode': 'play_trailer', 'url': trailer, 'all_trailers': json.dumps(meta['all_trailers'])})
 	else: trailer_runner = build_url({'mode': 'play_trailer', 'url': trailer})
 	if cast: actors_runner = build_url({'mode': 'show_all_actors_choice', 'media_rootname': rootname, 'full_cast': json.dumps(cast)})
 	director_runner = build_url({'mode': 'people_search.extras_person_data', 'person_name': director})

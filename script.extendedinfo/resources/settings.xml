@@ -9,7 +9,7 @@
 		<setting label="TMDB" type="lsep"/>
 		<setting label="Language" type="select" values="bg|cs|da|de|el|en|es|fi|fr|he|hr|hu|it|ja|ko|nl|no|pl|pt|ru|sl|sv|tr|zh" id="LanguageID" default="en"/>
 		<setting label="Include adult?" type="bool" id="include_adults"/>
-        <setting label="API key" id="tmdb_api" type="text" default="772defd0fb9daa76166a0163c458ad7e"/>
+        <setting label="API key" id="tmdb_api" type="text" default=""/>
 		<setting label="Maintenance" type="lsep"/>
 		<setting label="Clear cache..." type="action" action="RunScript(script.extendedinfo,info=deletecache)"/>
 	</category>

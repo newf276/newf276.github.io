@@ -152,13 +152,13 @@ def get_tmdb_window(window_type):
 							self.update(force_update=True)
 							self.getControl(500).selectItem(self.position)
 					else:
-						if xbmcgui.Dialog().yesno('OpenInfo', 'Add [B]%s[/B] to library?' % self.listitem.getProperty('TVShowTitle')):
+						if xbmcgui.Dialog().yesno('extendedinfo', 'Add [B]%s[/B] to library?' % self.listitem.getProperty('TVShowTitle')):
 							xbmc.executebuiltin('RunPlugin(plugin://plugin.video.discover/tv/add_to_library/%s)' % tvdb_id)
 							Utils.after_add(type='tv')
 							Utils.notify(header='[B]%s[/B] added to library' % self.listitem.getProperty('TVShowTitle'), message='Exit & re-enter to refresh', icon=self.listitem.getProperty('poster'), time=5000, sound=False)
 				else:
 					if self.listitem.getProperty('dbid'):
-						if xbmcgui.Dialog().yesno('OpenInfo', 'Remove [B]%s[/B] from library?' % self.listitem.getProperty('title')):
+						if xbmcgui.Dialog().yesno('extendedinfo', 'Remove [B]%s[/B] from library?' % self.listitem.getProperty('title')):
 							Utils.get_kodi_json(method='VideoLibrary.RemoveMovie', params='{"movieid": %s}' % dbid)
 							MovieLibrary = xbmcaddon.Addon('plugin.video.discover').getSetting('movies_library_folder')
 							if os.path.exists(xbmc.translatePath('%s%s/' % (MovieLibrary, imdb_id))):
@@ -169,7 +169,7 @@ def get_tmdb_window(window_type):
 								self.update(force_update=True)
 								self.getControl(500).selectItem(self.position)
 					else:
-						if xbmcgui.Dialog().yesno('OpenInfo', 'Add [B]%s[/B] to library?' % self.listitem.getProperty('title')):
+						if xbmcgui.Dialog().yesno('extendedinfo', 'Add [B]%s[/B] to library?' % self.listitem.getProperty('title')):
 							xbmc.executebuiltin('RunPlugin(plugin://plugin.video.discover/movies/add_to_library/tmdb/%s)' % item_id)
 							Utils.after_add(type='movie')
 							Utils.notify(header='[B]%s[/B] added to library' % self.listitem.getProperty('title'), message='Exit & re-enter to refresh', icon=self.listitem.getProperty('poster'), time=5000, sound=False)

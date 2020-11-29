@@ -117,10 +117,7 @@ def routing(argv):
 			Sources().playback_prep(params)
 		elif mode == 'play_display_results':
 			from modules.sources import Sources
-			Sources().display_results(params.get('page_no', None), params.get('previous_nav', None))
-		elif mode == 'play_return_from_pagination':
-			from modules.sources import Sources
-			Sources().return_from_pagination(params['previous_nav'])
+			Sources().display_results()
 		elif mode == 'play_file':
 			from modules.sources import Sources
 			Sources().play_file(params['title'], params['source'])
@@ -129,7 +126,7 @@ def routing(argv):
 			Sources().play_auto()
 		elif mode == 'play_execute_nextep':
 			from modules.sources import Sources
-			Sources().play_execute_nextep(params.get('autoplay_nextep', 'True'), params.get('library', 'False'))
+			Sources().play_execute_nextep()
 		elif mode == 'media_play':
 			from modules.player import FenPlayer
 			FenPlayer().run(params.get('url', None), params.get('rootname', None))
@@ -188,9 +185,6 @@ def routing(argv):
 			dialogs.media_extra_info(params['media_type'], params['meta'], params['extra_info'])
 		elif mode == 'plot_choice':
 			dialogs.display_plot(params['heading'], params['plot_text'])
-		elif mode == 'display_mode_choice':
-			from indexers.dialogs import set_display_mode
-			set_display_mode()
 		elif mode == 'enable_scrapers_choice':
 			from indexers.dialogs import enable_scrapers
 			enable_scrapers()

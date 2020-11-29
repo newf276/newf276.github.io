@@ -112,9 +112,8 @@ class RealDebridAPI:
 		return response
 
 	def check_hash(self, hash_string):
-		string = "fen_rd_check_hash_%s" % hash_string
 		url = 'torrents/instantAvailability/%s' % hash_string
-		return cache_object(self._get, string, url, False, 2)
+		return self._get(url)
 
 	def check_single_magnet(self, hash_string):
 		cache_info = self.check_hash(hash_string)

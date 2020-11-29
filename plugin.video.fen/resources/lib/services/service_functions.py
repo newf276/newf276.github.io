@@ -136,7 +136,7 @@ class ListItemNotifications():
 					if activate_function:
 						if get_setting('notification.nextep') == 'true' and current_dbtype == 'tvshow':
 							threads.append(Thread(target=listitem_actions.nextep_notification, args=(0,)))
-						if get_setting('notification.watched_status') == 'true' and current_dbtype in ('tvshow', 'season'):
+						if get_setting('notification.watched_status') == 'true' and current_dbtype in ('movie', 'tvshow', 'season'):
 							threads.append(Thread(target=listitem_actions.watched_status_notification, args=(current_dbtype,1)))
 						if get_setting('notification.progress') == 'true':
 							threads.append(Thread(target=listitem_actions.progress_notification, args=(current_dbtype,2)))

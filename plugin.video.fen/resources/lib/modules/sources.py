@@ -48,7 +48,6 @@ class Sources:
 		self.folder_scrapers = ('folder1', 'folder2', 'folder3', 'folder4', 'folder5')
 		self.file_scrapers = ('local', 'downloads', 'folder1', 'folder2', 'folder3', 'folder4', 'folder5')
 		self.internal_scrapers = ('furk', 'easynews', 'rd-cloud', 'pm-cloud', 'ad-cloud', 'local', 'downloads', 'folder1', 'folder2', 'folder3', 'folder4', 'folder5')
-		self.display_mode = settings.display_mode()
 		self.active_scrapers = settings.active_scrapers()
 		self.sleep_time = settings.display_sleep_time()
 
@@ -76,7 +75,6 @@ class Sources:
 		else: self.remove_scrapers = []
 		if 'prescrape_sources' in self.params: self.prescrape_sources = json.loads(self.params['prescrape_sources'])
 		else: self.prescrape_sources = []
-		self.autoplay_nextep = self.params.get('autoplay_nextep', 'False') == 'True'
 		self.minimal_notifications = settings.minimal_notifications()
 		self.dialog_background = True if self.autoplay and self.minimal_notifications \
 							else True if 'random_play' in self.meta \
@@ -271,9 +269,9 @@ class Sources:
 
 	def play_source(self):
 		if self.from_library and self.background:
-			return self.play_execute_nextep('True' if self.autoplay_nextep else 'False', 'True')
+			return self.play_execute_nextep()
 		if self.background:
-			return xbmc.executebuiltin(self.action % build_url({'mode': 'play_execute_nextep', 'autoplay_nextep': self.autoplay_nextep, 'library': self.from_library}))
+			return xbmc.executebuiltin(self.action % build_url({'mode': 'play_execute_nextep'}))
 		if self.play_physical or self.autoplay:
 			return self.play_auto()
 		if self.from_library or self.widget:
@@ -421,26 +419,7 @@ class Sources:
 		self.progress_dialog.update(0)
 		function()
 
-	def display_results(self, page_no=None, previous_nav=None):
-		def _build_simple_directory():
-			for item in results:
-				try:
-					cm = []
-					title = item.get('title')
-					item_id = item.get('id', None)
-					uncached = item.get('uncached', False)
-					mode = 'furk.add_uncached_file' if uncached else 'play_file'
-					source = json.dumps([item])
-					url = build_url({'mode': mode, 'name': title, 'title': title, 'id': item_id, 'source': source})
-					try: listitem = xbmcgui.ListItem(item.get("label"), offscreen=True)
-					except: listitem = xbmcgui.ListItem(item.get("label"))
-					listitem.setArt({'poster': poster})
-					if paginate_results:
-						return_from_pagination_params = {'mode': 'play_return_from_pagination', 'previous_nav': previous_nav}
-						cm.append((exit_str,'XBMC.RunPlugin(%s)' % build_url(return_from_pagination_params)))
-					listitem.addContextMenuItems(cm)
-					yield (url, listitem, False)
-				except: pass
+	def display_results(self):
 		def _build_directory():
 			for item in results:
 				try:
@@ -462,9 +441,6 @@ class Sources:
 					else: display = item.get("label")
 					try: listitem = xbmcgui.ListItem(display, offscreen=True)
 					except: listitem = xbmcgui.ListItem(display)
-					if paginate_results:
-						return_from_pagination_params = {'mode': 'play_return_from_pagination', 'previous_nav': previous_nav}
-						cm.append((exit_str,'RunPlugin(%s)' % build_url(return_from_pagination_params)))
 					
 					if not uncached:
 						if scrape_provider not in self.file_scrapers:
@@ -528,17 +504,6 @@ class Sources:
 		try: results = json.loads(window.getProperty('fen_search_results'))
 		except: results = []
 		down_str, exit_str, browse_str, browse_debrid_str, addto_str, down_archive_str = ls(32747), ls(32810), ls(32811), ls(33004), ls(32769), ls(32982)
-		paginate_results = get_setting('results.paginate') == 'true'
-		if paginate_results and results:
-			from modules.nav_utils import paginate_list
-			if not previous_nav: previous_nav = xbmc.getInfoLabel('Container.FolderPath')
-			try: limit = int(get_setting('results.page_limit'))
-			except: limit = 100
-			if not page_no: page_no = 1
-			page_no = int(page_no)
-			next_page = page_no + 1
-			results, total_pages = paginate_list(results, page_no, 'None', limit)
-			if page_no > 1: self.prescrape = False
 		meta_json = window.getProperty('fen_media_meta')
 		meta = json.loads(meta_json)
 		poster, fanart, banner, clearart = meta['poster'], meta['fanart'], meta['banner'], meta['clearart']
@@ -549,8 +514,7 @@ class Sources:
 		for k in entries_to_remove:
 			info_meta.pop(k, None)
 		multiline_label = settings.multiline_results()
-		build_results = _build_simple_directory if self.display_mode == 1 else _build_directory
-		item_list = list(build_results())
+		item_list = list(_build_directory())
 		xbmcplugin.addDirectoryItems(int(argv[1]), item_list)
 		try:
 			if self.prescrape:
@@ -564,13 +528,6 @@ class Sources:
 				listitem.setInfo('video', info_meta)
 				xbmcplugin.addDirectoryItem(handle=int(argv[1]), url=scrape_url, listitem=listitem, isFolder=True)
 		except: pass
-		if paginate_results and results:
-			if limit == len(results):
-				next_page_url = build_url({'mode': 'play_display_results', 'page_no': str(next_page), 'previous_nav': previous_nav})
-				listitem = xbmcgui.ListItem('[B]%s[/B]' % ls(32799))
-				listitem.setArt({'icon': os.path.join(settings.get_theme(), 'item_next.png'), 'banner': banner, 'clearart': clearart, 'clearlogo': clearlogo, 'landscape': landscape, 'discart': discart})
-				listitem.setInfo('video', info_meta)
-				xbmcplugin.addDirectoryItem(handle=int(argv[1]), url=next_page_url, listitem=listitem, isFolder=True)
 		xbmcplugin.setContent(int(argv[1]), 'files')
 		xbmcplugin.endOfDirectory(int(argv[1]))
 		setView('view.search_results')
@@ -608,37 +565,20 @@ class Sources:
 			return add_uncached_file(chosen_result.get('name'), chosen_result.get('id'))
 		return self.play_file(chosen_result.get('title'), json.dumps([chosen_result]))
 
-	def return_from_pagination(self, previous_nav):
-		return xbmc.executebuiltin('Container.Update(%s,replace)' % previous_nav)
-
-	def play_execute_nextep(self, autoplay_nextep, from_library):
-		self.autoplay_nextep = autoplay_nextep == 'True'
-		from_library = from_library == 'True'
+	def play_execute_nextep(self):
 		try: results = json.loads(window.getProperty('fen_search_results'))
 		except: return
 		from modules.player import FenPlayer
 		meta = json.loads(window.getProperty('fen_media_meta'))
-		if self.autoplay_nextep:
-			url = self.play_auto(background=True)
-			line = ls(32801)
-		else: line = ls(33044)
-		notification('%s %s S%02dE%02d' % (line, meta['title'], meta['season'], meta['episode']), 10000, meta['poster'])
+		url = self.play_auto(background=True)
+		notification('%s %s S%02dE%02d' % (ls(32801), meta['title'], meta['season'], meta['episode']), 10000, meta['poster'])
 		player = xbmc.Player()
 		while player.isPlaying():
 			xbmc.sleep(100)
-		if self.autoplay_nextep:
-			xbmc.sleep(1200)
-			if 'plugin://' in url:
-				return xbmc.executebuiltin("RunPlugin({0})".format(url))
-			FenPlayer().run(url)
-		else:
-			if not settings.advancescrape_show_results(): return
-			xbmc.sleep(2500)
-			widget = False if 'plugin' in xbmc.getInfoLabel('Container.PluginName') else True
-			if widget or from_library:
-				return self.dialog_results()
-			else:
-				return xbmc.executebuiltin('Container.Update(%s)' % build_url({'mode': 'play_display_results'}))
+		xbmc.sleep(1200)
+		if 'plugin://' in url:
+			return xbmc.executebuiltin("RunPlugin({0})".format(url))
+		FenPlayer().run(url)
 
 	def _no_results(self):
 		hide_busy_dialog()

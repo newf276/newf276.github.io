@@ -21,12 +21,12 @@ class FenCache(BaseCache):
 		sql = sql[:-12]
 		dbcur.execute(sql)
 		results = dbcur.fetchall()
-		remove_list = [str(i[0]) for i in results]
-		if not remove_list: return 'success'
 		try:
-			for item in remove_list:
-				dbcur.execute("""DELETE FROM fencache WHERE id=?""", (item,))
-				self.delete_memory_cache(item)
+			for item in results:
+				try:
+					dbcur.execute("""DELETE FROM fencache WHERE id=?""", (str(item[0]),))
+					self.delete_memory_cache(str(item[0]))
+				except Exception: pass
 			dbcon.commit()
 			dbcon.execute("VACUUM")
 			dbcon.commit()

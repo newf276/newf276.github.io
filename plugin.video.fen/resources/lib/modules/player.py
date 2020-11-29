@@ -27,8 +27,6 @@ class FenPlayer(xbmc.Player):
 		self.set_watched = settings.set_watched()
 		self.autoplay_nextep = settings.autoplay_next_episode()
 		self.nextep_threshold = settings.nextep_threshold()
-		self.advancescrape_nextep = settings.advancescrape_next_episode()
-		self.advancescrape_next_episode = False
 		self.delete_nextep_playcount = True
 		self.cancel_autoplay_count = True
 		self.kodi_library_resumed = True
@@ -39,54 +37,54 @@ class FenPlayer(xbmc.Player):
 
 	def run(self, url=None, rootname=None):
 		if not url: return
+		# try:
+		if rootname in ('video', 'music'):
+			p_list = xbmc.PLAYLIST_VIDEO if rootname == 'video' else xbmc.PLAYLIST_MUSIC
+			playlist = xbmc.PlayList(p_list)
+			playlist.clear()
+			listitem = xbmcgui.ListItem()
+			listitem.setInfo(type=rootname, infoLabels={})
+			playlist.add(url, listitem)
+			close_all_dialog()
+			return self.play(playlist)
+		self.meta = json.loads(window.getProperty('fen_media_meta'))
+		rootname = self.meta['rootname'] if 'rootname' in self.meta else ''
+		background = self.meta.get('background', False) == True
+		library_item = True if 'from_library' in self.meta else False
+		if library_item: bookmark = self.bookmarkLibrary()
+		else: bookmark = self.bookmarkFen()
+		if bookmark == -1: return
+		self.meta.update({'url': url, 'bookmark': bookmark})
+		listitem = xbmcgui.ListItem(path=url)
 		try:
-			if rootname in ('video', 'music'):
-				p_list = xbmc.PLAYLIST_VIDEO if rootname == 'video' else xbmc.PLAYLIST_MUSIC
-				playlist = xbmc.PlayList(p_list)
-				playlist.clear()
-				listitem = xbmcgui.ListItem()
-				listitem.setInfo(type=rootname, infoLabels={})
-				playlist.add(url, listitem)
-				close_all_dialog()
-				return self.play(playlist)
-			self.meta = json.loads(window.getProperty('fen_media_meta'))
-			rootname = self.meta['rootname'] if 'rootname' in self.meta else ''
-			background = self.meta.get('background', False) == True
-			library_item = True if 'from_library' in self.meta else False
-			if library_item: bookmark = self.bookmarkLibrary()
-			else: bookmark = self.bookmarkFen()
-			if bookmark == -1: return
-			self.meta.update({'url': url, 'bookmark': bookmark})
-			listitem = xbmcgui.ListItem(path=url)
+			if not library_item: listitem.setProperty('StartPercent', str(self.meta.get('bookmark')))
+			listitem.setArt({'poster': self.meta.get('poster'), 'fanart': self.meta.get('fanart'), 'banner': self.meta.get('banner'),
+							'clearart': self.meta.get('clearart'), 'clearlogo': self.meta.get('clearlogo'),
+							'landscape': self.meta.get('landscape'), 'discart': self.meta.get('discart')})
+			listitem.setCast(self.meta['cast'])
+			if self.meta['vid_type'] == 'movie':
+				listitem.setUniqueIDs({'imdb': str(self.meta['imdb_id']), 'tmdb': str(self.meta['tmdb_id'])})
+				listitem.setInfo(
+					'video', {'mediatype': 'movie', 'trailer': str(self.meta['trailer']),
+					'title': self.meta['title'], 'size': '0', 'duration': self.meta['duration'],
+					'plot': self.meta['plot'], 'rating': self.meta['rating'], 'premiered': self.meta['premiered'],
+					'studio': self.meta['studio'],'year': self.meta['year'], 'genre': self.meta['genre'],
+					'tagline': self.meta['tagline'], 'code': self.meta['imdb_id'], 'imdbnumber': self.meta['imdb_id'],
+					'director': self.meta['director'], 'writer': self.meta['writer'], 'votes': self.meta['votes']})
+			elif self.meta['vid_type'] == 'episode':
+				listitem.setUniqueIDs({'imdb': str(self.meta['imdb_id']), 'tmdb': str(self.meta['tmdb_id']), 'tvdb': str(self.meta['tvdb_id'])})
+				listitem.setInfo(
+					'video', {'mediatype': 'episode', 'trailer': str(self.meta['trailer']), 'title': self.meta['ep_name'], 'imdbnumber': self.meta['imdb_id'],
+					'tvshowtitle': self.meta['title'], 'size': '0', 'plot': self.meta['plot'], 'year': self.meta['year'], 'votes': self.meta['votes'],
+					'premiered': self.meta['premiered'], 'studio': self.meta['studio'], 'genre': self.meta['genre'], 'season': int(self.meta['season']),
+					'episode': int(self.meta['episode']), 'duration': str(self.meta['duration']), 'rating': self.meta['rating']})
 			try:
-				if not library_item: listitem.setProperty('StartPercent', str(self.meta.get('bookmark')))
-				listitem.setArt({'poster': self.meta.get('poster'), 'fanart': self.meta.get('fanart'), 'banner': self.meta.get('banner'),
-								'clearart': self.meta.get('clearart'), 'clearlogo': self.meta.get('clearlogo'),
-								'landscape': self.meta.get('landscape'), 'discart': self.meta.get('discart')})
-				listitem.setCast(self.meta['cast'])
-				if self.meta['vid_type'] == 'movie':
-					listitem.setUniqueIDs({'imdb': str(self.meta['imdb_id']), 'tmdb': str(self.meta['tmdb_id'])})
-					listitem.setInfo(
-						'video', {'mediatype': 'movie', 'trailer': str(self.meta['trailer']),
-						'title': self.meta['title'], 'size': '0', 'duration': self.meta['duration'],
-						'plot': self.meta['plot'], 'rating': self.meta['rating'], 'premiered': self.meta['premiered'],
-						'studio': self.meta['studio'],'year': self.meta['year'], 'genre': self.meta['genre'],
-						'tagline': self.meta['tagline'], 'code': self.meta['imdb_id'], 'imdbnumber': self.meta['imdb_id'],
-						'director': self.meta['director'], 'writer': self.meta['writer'], 'votes': self.meta['votes']})
-				elif self.meta['vid_type'] == 'episode':
-					listitem.setUniqueIDs({'imdb': str(self.meta['imdb_id']), 'tmdb': str(self.meta['tmdb_id']), 'tvdb': str(self.meta['tvdb_id'])})
-					listitem.setInfo(
-						'video', {'mediatype': 'episode', 'trailer': str(self.meta['trailer']), 'title': self.meta['ep_name'], 'imdbnumber': self.meta['imdb_id'],
-						'tvshowtitle': self.meta['title'], 'size': '0', 'plot': self.meta['plot'], 'year': self.meta['year'], 'votes': self.meta['votes'],
-						'premiered': self.meta['premiered'], 'studio': self.meta['studio'], 'genre': self.meta['genre'], 'season': int(self.meta['season']),
-						'episode': int(self.meta['episode']), 'duration': str(self.meta['duration']), 'rating': self.meta['rating']})
-				try:
-					window.clearProperty('script.trakt.ids')
-					trakt_ids = {'tmdb': self.meta['tmdb_id'], 'imdb': str(self.meta['imdb_id']), 'slug': make_trakt_slug(self.meta['title'])}
-					if self.meta['vid_type'] == 'episode': trakt_ids['tvdb'] = self.meta['tvdb_id']
-					window.setProperty('script.trakt.ids', json.dumps(trakt_ids))
-				except: pass
-			except Exception: pass
+				window.clearProperty('script.trakt.ids')
+				trakt_ids = {'tmdb': self.meta['tmdb_id'], 'imdb': str(self.meta['imdb_id']), 'slug': make_trakt_slug(self.meta['title'])}
+				if self.meta['vid_type'] == 'episode': trakt_ids['tvdb'] = self.meta['tvdb_id']
+				window.setProperty('script.trakt.ids', json.dumps(trakt_ids))
+			except: pass
+			# except Exception: pass
 			if library_item and not background: xbmcplugin.setResolvedUrl(int(argv[1]), True, listitem)
 			else: self.play(url, listitem)
 			self.monitor()
@@ -136,8 +134,6 @@ class FenPlayer(xbmc.Player):
 		self.library_setting = 'library' if 'from_library' in self.meta else None
 		self.random_episodes = True if 'played_eps' in self.meta else False
 		self.autoplay_next_episode = True if (self.meta['vid_type'] == 'episode' and self.autoplay_nextep and not 'random_play' in self.meta) else False
-		if not self.autoplay_next_episode:
-			self.advancescrape_next_episode = True if (self.meta['vid_type'] == 'episode' and self.advancescrape_nextep and not 'random_play' in self.meta) else False
 		while not self.isPlayingVideo():
 			xbmc.sleep(100)
 		close_all_dialog()
@@ -154,7 +150,7 @@ class FenPlayer(xbmc.Player):
 					if not self.random_info:
 						if self.current_point >= self.nextep_threshold:
 							self.randomPrep()
-				elif self.autoplay_next_episode or self.advancescrape_next_episode:
+				elif self.autoplay_next_episode:
 					if self.current_point >= self.nextep_threshold:
 						if not self.nextep_info:
 							self.nextEpPrep()
@@ -205,9 +201,9 @@ class FenPlayer(xbmc.Player):
 
 	def nextEpPrep(self):
 		from indexers.next_episode import nextep_playback_info, nextep_execute
-		self.nextep_info = nextep_playback_info(self.meta['tmdb_id'], int(self.meta['season']), int(self.meta['episode']), self.autoplay_next_episode, self.library_setting)
+		self.nextep_info = nextep_playback_info(self.meta['tmdb_id'], int(self.meta['season']), int(self.meta['episode']), self.library_setting)
 		if not self.nextep_info.get('pass', False):
-			if self.autoplay_next_episode: self.cancel_autoplay_count = False
+			self.cancel_autoplay_count = False
 			nextep_execute(self.nextep_info)
 
 	def fetch_subtitles(self):

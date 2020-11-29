@@ -228,7 +228,6 @@ class Movies:
 		threads = []
 		if self.is_widget == 'unchecked': self.is_widget = False if 'plugin' in xbmc.getInfoLabel('Container.PluginName') else True
 		if not self.exit_list_params: self.exit_list_params = xbmc.getInfoLabel('Container.FolderPath')
-		self.all_trailers = settings.all_trailers()
 		self.watched_info, self.use_trakt = get_watched_info_movie()
 		self.meta_user_info = tikimeta.retrieve_user_info()
 		self.watched_title = 'Trakt' if self.use_trakt in (1, 2) else "Fen"

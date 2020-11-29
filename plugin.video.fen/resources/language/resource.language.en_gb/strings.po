@@ -46,10 +46,6 @@ msgctxt "#32010"
 msgid "Use Season Titles When Available"
 msgstr ""
 
-msgctxt "#32011"
-msgid "Show Choice for All Trailer Videos"
-msgstr ""
-
 msgctxt "#32012"
 msgid "Disable Auto View of Changelog When Add-on Updates"
 msgstr ""
@@ -570,24 +566,8 @@ msgctxt "#32141"
 msgid "Scraper Timeout"
 msgstr ""
 
-msgctxt "#32142"
-msgid "Results Display"
-msgstr ""
-
 msgctxt "#32143"
 msgid "Search Dialog Heading"
-msgstr ""
-
-msgctxt "#32144"
-msgid "Highlight Results Based On..."
-msgstr ""
-
-msgctxt "#32145"
-msgid "Paginate Results"
-msgstr ""
-
-msgctxt "#32146"
-msgid "Max. Results Per Page"
 msgstr ""
 
 msgctxt "#32147"
@@ -680,22 +660,6 @@ msgstr ""
 
 msgctxt "#32169"
 msgid "Multi Line Color"
-msgstr ""
-
-msgctxt "#32170"
-msgid "4K Results Color"
-msgstr ""
-
-msgctxt "#32171"
-msgid "1080P Results Color"
-msgstr ""
-
-msgctxt "#32172"
-msgid "720P Results Color"
-msgstr ""
-
-msgctxt "#32173"
-msgid "SD Results Color"
 msgstr ""
 
 msgctxt "#32174"
@@ -940,14 +904,6 @@ msgstr ""
 
 msgctxt "#32234"
 msgid "One Week"
-msgstr ""
-
-msgctxt "#32235"
-msgid "Directory"
-msgstr ""
-
-msgctxt "#32236"
-msgid "Very Simple Directory"
 msgstr ""
 
 msgctxt "#32237"
@@ -3358,18 +3314,6 @@ msgctxt "#33041"
 msgid "Next Episode"
 msgstr ""
 
-msgctxt "#33042"
-msgid "Advance Scrape Next Episode"
-msgstr ""
-
-msgctxt "#33043"
-msgid "Show Next Episode Results When Playback Ends"
-msgstr ""
-
-msgctxt "#33044"
-msgid "[B]Scrape Complete:[/B]"
-msgstr ""
-
 msgctxt "#33045"
 msgid "Tagged"
 msgstr "Getagd"
@@ -3379,7 +3323,7 @@ msgid "%s of %s Watched"
 msgstr ""
 
 msgctxt "#33047"
-msgid "Watched Status Notifications (TV Show, Season)"
+msgid "Watched Status Notifications (Movie, TV Show, Season)"
 msgstr ""
 
 msgctxt "#33048"
@@ -3458,7 +3402,59 @@ msgctxt "#33066"
 msgid "Enable Notifications"
 msgstr ""
 
-msgctxt "#33067"
+msgctxt "#32011"
+msgid ""
+msgstr ""
+
+msgctxt "#32142"
+msgid ""
+msgstr ""
+
+msgctxt "#32144"
+msgid ""
+msgstr ""
+
+msgctxt "#32145"
+msgid ""
+msgstr ""
+
+msgctxt "#32146"
+msgid ""
+msgstr ""
+
+msgctxt "#32170"
+msgid ""
+msgstr ""
+
+msgctxt "#32171"
+msgid ""
+msgstr ""
+
+msgctxt "#32172"
+msgid ""
+msgstr ""
+
+msgctxt "#32173"
+msgid ""
+msgstr ""
+
+msgctxt "#32235"
+msgid ""
+msgstr ""
+
+msgctxt "#32236"
+msgid ""
+msgstr ""
+
+msgctxt "#33042"
+msgid ""
+msgstr ""
+
+msgctxt "#33043"
+msgid ""
+msgstr ""
+
+msgctxt "#33044"
 msgid ""
 msgstr ""
 

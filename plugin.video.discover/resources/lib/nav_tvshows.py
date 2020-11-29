@@ -526,7 +526,7 @@ def make_tvshow_item(info):
                     if show['backdrop_path'] != None and show['backdrop_path'] != '': info['fanart'] = u'https://image.tmdb.org/t/p/original%s' % show['backdrop_path']
     if info['fanart'] == None or info['fanart'] == '': info['fanart'] = nav_base.get_background_path()
     if xbmc.getCondVisibility('system.hasaddon(script.extendedinfo)'):
-        context_menu = [('OpenInfo', 'RunScript(script.extendedinfo,info=extendedtvinfo,tvdb_id=%s)' % tvdb_id),
+        context_menu = [('Extended Info', 'RunScript(script.extendedinfo,info=extendedtvinfo,tvdb_id=%s)' % tvdb_id),
                         ('TV trailer', 'RunScript(script.extendedinfo,info=playtvtrailer,tvdb_id=%s)' % tvdb_id),
                         ('Add to library', 'RunPlugin(%s)' % plugin.url_for('tv_add_to_library', id=tvdb_id))]
     else: context_menu = [('Add to library', 'RunPlugin(%s)' % plugin.url_for('tv_add_to_library', id=tvdb_id))]
@@ -553,7 +553,7 @@ def list_seasons_tvdb(id):
         elif not season.has_aired(flexible=False): continue
         season_info = meta_info.get_season_metadata_tvdb(show_info, season)
         if xbmc.getCondVisibility('system.hasaddon(script.extendedinfo)'):
-            context_menu = [('OpenInfo', 'RunScript(script.extendedinfo,info=seasoninfo,tvshow=%s,season=%s)' % (title, season_num)),
+            context_menu = [('Extended Info', 'RunScript(script.extendedinfo,info=seasoninfo,tvshow=%s,season=%s)' % (title, season_num)),
                             ('TV trailer', 'RunScript(script.extendedinfo,info=playtvtrailer,tvdb_id=%s)' % id)]
         else: context_menu = []
         items.append({'label': u'Season %s' % season_num,
@@ -580,7 +580,7 @@ def list_episodes_tvdb(id, season_num):
         if not season_num == 0 and not episode.has_aired(flexible=False): break
         episode_info = meta_info.get_episode_metadata_tvdb(season_info, episode)
         if xbmc.getCondVisibility('system.hasaddon(script.extendedinfo)'):
-            context_menu = [('OpenInfo', 'RunScript(script.extendedinfo,info=extendedepisodeinfo,tvshow=%s,season=%s,episode=%s)' % (title, season_num, episode_num)),
+            context_menu = [('Extended Info', 'RunScript(script.extendedinfo,info=extendedepisodeinfo,tvshow=%s,season=%s,episode=%s)' % (title, season_num, episode_num)),
                             ('TV trailer', 'RunScript(script.extendedinfo,info=playtvtrailer,tvdb_id=%s)' % id)]
         else: context_menu = []
         items.append({'label': episode_info.get('title'),

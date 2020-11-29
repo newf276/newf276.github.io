@@ -504,7 +504,7 @@ def make_movie_item(movie_info):
         title = '%s not found'.replace('%s ','')
         dialogs.notify(msg='tmdb or imdb id', title=title, delay=2000, image=nav_base.get_icon_path('movies'))
     if xbmc.getCondVisibility('system.hasaddon(script.extendedinfo)'):
-        context_menu = [('OpenInfo', 'RunScript(script.extendedinfo,info=extendedinfo,id=%s)' % id),
+        context_menu = [('Extended Info', 'RunScript(script.extendedinfo,info=extendedinfo,id=%s)' % id),
                         ('Movie trailer', 'RunScript(script.extendedinfo,info=playtrailer,id=%s)' % id),
                         ('Add to library','RunPlugin(%s)' % plugin.url_for('movies_add_to_library', src=src, id=id))]
     else: context_menu = [('Add to library','RunPlugin(%s)' % plugin.url_for('movies_add_to_library', src=src, id=id))]

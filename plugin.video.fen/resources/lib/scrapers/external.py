@@ -473,77 +473,21 @@ class ExternalSource:
 				if multiline_label2 != '':
 					multiline_label2 = multiline_label2.replace('| 0 |', '|').replace(' | [I]0 [/I]', '').replace('[I] [/I] | ', '')
 					multiline_label2 = multiline_label2.upper()
-				if highlightType == '1':
-					if quality.upper() == '4K': LeadingColor = highlight_4K
-					elif quality.upper()  == '1080P': LeadingColor = highlight_1080p
-					elif quality.upper() == '720P': LeadingColor = highlight_720p
-					else: LeadingColor = highlight_SD
-					if multiLineHighlight == '': multilineOpen = LeadingColor
-					else: multilineOpen = multiLineHighlight
-					item['label'] = '[COLOR=%s]' % LeadingColor + label + '[/COLOR]'
-					item['multiline_label'] = '[COLOR=%s]' % LeadingColor + multiline_label1 + '[/COLOR]' + '[COLOR=%s]' % multilineOpen + multiline_label2 + '[/COLOR]'
+				if 'torrent' in source.lower():
+					item['label'] = torrent_leading + label + '[/COLOR]'
+					item['multiline_label'] = torrent_leading + multiline_label1 + '[/COLOR]' + multiline_leading + multiline_label2 + '[/COLOR]'
 				else:
-					if 'torrent' in source.lower():
-						item['label'] = singleTorrentLeading + label + singleTorrentClosing
-						item['multiline_label'] = multi1TorrentLeading + multiline_label1 + multi1TorrentClosing + multi2TorrentLeading + multiline_label2 + multi2TorrentClosing
-					else:
-						item['label'] = singleHosterLeading + label + singleHosterClosing
-						item['multiline_label'] = multi1HosterLeading + multiline_label1 + multi1HosterClosing + multi2HosterLeading + multiline_label2 + multi2HosterClosing
+					item['label'] = hoster_leading + label + '[/COLOR]'
+					item['multiline_label'] = hoster_leading + multiline_label1 + '[/COLOR]' + multiline_leading + multiline_label2 + '[/COLOR]'
 			except: pass
 		enableExtraInfo = self.scraper_settings['extra_info']
 		enableShowFilenames = self.scraper_settings['show_filenames']
 		multiLineHighlight = self.scraper_settings['multiline_highlight']
-		highlightType = self.scraper_settings['highlight_type']
-		if highlightType == '1':
-			highlight_4K = self.scraper_settings['highlight_4K']
-			highlight_1080p = self.scraper_settings['highlight_1080p']
-			highlight_720p = self.scraper_settings['highlight_720p']
-			highlight_SD = self.scraper_settings['highlight_SD']
-		else:
-			hosterHighlight = self.scraper_settings['hoster_highlight']
-			torrentHighlight = self.scraper_settings['torrent_highlight']
-			# Single Line...
-			# Torrent...
-			if torrentHighlight == '':
-				singleTorrentLeading = ''
-				singleTorrentClosing = ''
-			else:
-				singleTorrentLeading = '[COLOR=%s]' % torrentHighlight
-				singleTorrentClosing = '[/COLOR]'
-			# Hoster...
-			if hosterHighlight == '':
-				singleHosterLeading = ''
-				singleHosterClosing = ''
-			else:
-				singleHosterLeading = '[COLOR=%s]' % hosterHighlight
-				singleHosterClosing = '[/COLOR]'
-			# Multiline...
-			# Torrent...
-			if torrentHighlight == '':
-				multi1TorrentLeading = ''
-				multi1TorrentClosing = ''
-			else:
-				multi1TorrentLeading = '[COLOR=%s]' % torrentHighlight
-				multi1TorrentClosing = '[/COLOR]'
-			if multiLineHighlight == '':
-				multi2TorrentLeading = multi1TorrentLeading
-				multi2TorrentClosing = multi1TorrentClosing
-			else:
-				multi2TorrentLeading = '[COLOR=%s]' % multiLineHighlight
-				multi2TorrentClosing = '[/COLOR]'
-			# Hoster...
-			if hosterHighlight == '':
-				multi1HosterLeading = ''
-				multi1HosterClosing = ''
-			else:
-				multi1HosterLeading = '[COLOR=%s]' % hosterHighlight
-				multi1HosterClosing = '[/COLOR]'
-			if multiLineHighlight == '':
-				multi2HosterLeading = multi1HosterLeading
-				multi2HosterClosing = multi1HosterClosing
-			else:
-				multi2HosterLeading = '[COLOR=%s]' % multiLineHighlight
-				multi2HosterClosing = '[/COLOR]'
+		hosterHighlight = self.scraper_settings['hoster_highlight']
+		torrentHighlight = self.scraper_settings['torrent_highlight']
+		torrent_leading = '[COLOR=%s]' % torrentHighlight
+		hoster_leading = '[COLOR=%s]' % hosterHighlight
+		multiline_leading = '[COLOR=%s]' % multiLineHighlight
 		threads = []
 		for i in self.final_sources: threads.append(Thread(target=_processLabels, args=(i,)))
 		[i.start() for i in threads]

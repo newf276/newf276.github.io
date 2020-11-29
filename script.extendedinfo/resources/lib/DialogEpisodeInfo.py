@@ -94,7 +94,7 @@ def get_episode_window(window_type):
 		@ch.click(445)
 		def show_manage_dialog(self):
 			manage_list = []
-			manage_list.append(["OpenInfo's settings", 'Addon.OpenSettings("script.extendedinfo")'])
+			manage_list.append(["Extended Info's settings", 'Addon.OpenSettings("script.extendedinfo")'])
 			manage_list.append(["Discover's settings", 'Addon.OpenSettings("plugin.video.discover")'])
 			manage_list.append(["YouTube's settings", 'Addon.OpenSettings("plugin.video.youtube")'])
 			selection = xbmcgui.Dialog().select(heading='Settings', list=[i[0] for i in manage_list])
