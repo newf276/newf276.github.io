@@ -146,45 +146,6 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.fen" name="Fen" provider-name="Tiki" version="20.8.20">
-    <requires>
-        <import addon="script.module.requests" version="2.19.1" />
-        <import addon="script.tiki.artwork" version="1.0.0" />
-        <import addon="script.module.tikimeta" version="1.0.0" />
-        <import addon="script.module.myaccounts" version="0.0.0" />
-        <import addon="script.module.fenomscrapers" />
-    </requires>
-    <extension library="resources/lib/fen.py" point="xbmc.python.pluginsource">
-        <provides>video</provides>
-    </extension>
-    <extension library="resources/lib/service.py" point="xbmc.service" start="startup" />
-    <extension library="resources/lib/" point="xbmc.python.module" />
-    <extension point="xbmc.addon.metadata">
-        <reuselanguageinvoker>true</reuselanguageinvoker>
-        <summary>
-            Specializes in Furk and Easynews. This add-on is intended for advanced Kodi users only. You must have a debrid service to use this add-on without Furk/Easynews.
-        </summary>
-        <description>
-Specializes in Furk and Easynews(web) account access.
-Also utilizes Fenomscrapers for those without a Furk or Easynews(web) account.
-You must have a debrid service to use this add-on without Furk/Easynews.
-This add-on is intended for advanced Kodi users only.
-Please Note: This add-on is NOT an Exodus fork, and as such will behave differently to an Exodus fork.
-        </description>
-        <platform>all</platform>
-        <disclaimer>
-        </disclaimer>
-        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-        <news>
-INFO: For latest changes see Changelog within Tools of add-on.
-        </news>
-    </extension>
-</addon>
-
 <addon id="plugin.video.discover" name="Discover" version="301.1.1" provider-name="Newf276">
 	<requires>
 		<import addon="xbmc.python" version="2.25.0"/>
@@ -220,7 +181,7 @@ INFO: For latest changes see Changelog within Tools of add-on.
 	</extension>
 </addon>
 
-<addon id="repository.newf" name="Newf Repository" version="2.2" provider-name="Newf276">
+<addon id="repository.newf" name="Newf Repository" version="2.3" provider-name="Newf276">
 <extension point="xbmc.addon.repository" name="Newf Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml</info>
@@ -241,6 +202,16 @@ INFO: For latest changes see Changelog within Tools of add-on.
             <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/</datadir>
         </dir>
 	</extension>
     <extension point="xbmc.addon.metadata">
@@ -273,6 +244,44 @@ INFO: For latest changes see Changelog within Tools of add-on.
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
+</addon>
+
+<addon id="plugin.video.newf" name="[COLOR white]Newf[/COLOR]" provider-name="Newf276" version="1.0">
+	<requires>
+		<import addon="xbmc.python" version="2.25.0" />
+		<import addon="context.newf" version="1.0" />
+		<import addon="script.module.myaccounts" version="1.0.0" />
+		<import addon="script.module.fenomscrapers" version="1.0.0" />
+		<import addon="script.module.requests" version="2.19.1" />
+		<import addon="script.module.beautifulsoup4" version="4.5.3" />
+		<import addon="script.module.metahandler" version="2.9.0" />
+		<import addon="plugin.video.youtube" version="6.2.0" />
+		<import addon="script.module.addon.signals" version="0.0.3" />
+	</requires>
+	<extension library="newf.py" point="xbmc.python.pluginsource">
+		<provides>video</provides>
+	</extension>
+	<extension library="service.py" point="xbmc.service" start="startup" />
+	<extension library="resources/lib/" point="xbmc.python.module" />
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>true</reuselanguageinvoker>
+		<summary lang="en">[B][COLOR skyblue]Newf[/COLOR][/B] - We do not host any of the contents streamed</summary>
+		<description lang="en">[B][COLOR skyblue]newf[/COLOR][/B][CR] This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR]The author does not host any of the content in this addon and takes no responsibility for content found</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/newf276/plugin.video.newf</website>
+		<source>https://github.com/newf276/plugin.video.newf</source>
+		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+			<screenshot>resources/screenshots/screenshot001.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot002.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot003.jpg</screenshot>
+		</assets>
+		<news>[B][COLOR skyblue]First Edition V1.0[/COLOR][/B]</news>
+	</extension>
 </addon>
 
 <addon id="plugin.video.cbc"
@@ -563,6 +572,144 @@ Fixed torrent semaphore not being released
 Playback parameters are now applied to further episodes
 Implement new listall endpoint for Premiumize cloud scraping (decreased scrape times)
 More minor bugfixes (honestly could not list them all)
+		</news>
+	</extension>
+</addon>
+
+<addon id="context.newf" version="1.0" name="Newf-Context" provider-name="Newf276">
+	<requires>
+		<import addon="xbmc.python" version="2.23.0" />
+		<import addon="script.module.requests" version="2.19.1" />
+	</requires>
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="contextSettings.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - CM Settings</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.settings)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true)
+				</visible>
+			</item>
+			<item library="traktManager.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Trakt Manager</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.traktManager)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,season) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="clearProviders.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Clear Providers</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.clearProviders)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="clearBookmark.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Clear Item Bookmark</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.clearBookmark)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+<!-- 					!String.IsEqual(ListItem.Property(resumetime),0) + -->
+					!String.IsEqual(ListItem.Property(newf_resumetime),0) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="rescrape.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Rescrape Item</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.rescrape)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+
+<!-- Future for Library CM to Rescrape -->
+<!-- 					!String.IsEmpty(Window(home).Property(context.newf.rescrape)) +
+					[String.Contains(ListItem.Path,plugin.video.newf) + String.IsEqual(ListItem.FileExtension,strm) | String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play)] +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)] -->
+				</visible>
+			</item>
+			<item library="playFromHere.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Play from here</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.playFromHere)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					String.IsEqual(ListItem.dbtype,episode)
+				</visible>
+			</item>
+			<item library="autoPlay.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Auto Play</label>
+				<visible>
+					String.IsEmpty(Window(home).Property(plugin.video.newf.autoPlay)) +
+					!String.IsEmpty(Window(home).Property(context.newf.autoPlay)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="sourceSelect.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Source Select</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(plugin.video.newf.autoPlay)) +
+					!String.IsEmpty(Window(home).Property(context.newf.sourceSelect)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="findSimilar.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Find Similar</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.findSimilar)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="browseSeries.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Browse Series</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.browseSeries)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow)]
+				</visible>
+			</item>
+			<item library="browseEpisodes.py">
+				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Browse Episodes</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.newf.browseEpisodes)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
+					String.IsEqual(ListItem.Property(isnewf_widget),true) +
+					String.IsEqual(ListItem.dbtype,episode)
+<!-- 				[String.IsEqual(ListItem.dbtype,episode) | !String.IsEmpty(ListItem.Property(multi_episodes))] -->
+				</visible>
+			</item>
+		</menu>
+</extension>
+	<extension point="xbmc.service" library="service.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Newf - This Addon is currently in beta. Please be aware there may be bugs present</summary>
+		<description lang="en">Adds Global Contextual Menu Items for newf menu items throughout Kodi
+		</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum></forum>
+		<website></website>
+		<source></source>
+		<disclaimer lang="en"></disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+		</assets>
+		<news>
+[B][COLOR skyblue]First Edition[/COLOR][/B]
 		</news>
 	</extension>
 </addon>
