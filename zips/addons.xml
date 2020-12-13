@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+<addon id="script.module.tikimeta" version="10.2.10" name="Tiki Meta Module" provider-name="Newf276, Tiki">
+    <requires>
+        <import addon="script.module.requests" version="2.19.1" />
+        <import addon="xbmc.python" version="2.19.0"/>
+    </requires>
+    <extension library="lib/default.py" point="xbmc.python.pluginsource">
+        <provides>executable</provides>
+    </extension>
+    <extension library="lib/services.py" point="xbmc.service" start="startup" />
+    <extension library="lib" point="xbmc.python.module" />
+    <extension point="xbmc.addon.metadata">
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+        <summary>Metadata for Addons</summary>
+        <description>Metadata for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+        <news>
+        </news>
+    </extension>
+</addon>
+
 <addon id="plugin.program.autocompletion" name="AutoCompletion for virtual keyboard" version="1.0.1" provider-name="Philipp Temminghoff (phil65)">
     <requires>
         <import addon="xbmc.python" version="2.24.0" />
@@ -46,25 +71,6 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.shadow"
-	   name="Shadow"
-	   version="203.4.5"
-	   provider-name="Darkness">
-  <requires>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">The single light in the Darkness</summary>
-    <description lang="en">All the media as fast as possible</description>
-
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.program.cleaner" name="Kodi Cleaner" version="1.0.3" provider-name="newf276">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
@@ -88,6 +94,22 @@
 1.0.1
  - Initial Commit
         </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="script.tiki.skins" version="10.0.0" name="Tiki Skins" provider-name="Newf276, Tiki">
+    <requires>
+        <import addon="xbmc.python" version="2.19.0"/>
+    </requires>
+    <extension point="xbmc.addon.metadata">
+        <summary>Skins for Addons</summary>
+        <description>Skins for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.png</fanart>
@@ -130,19 +152,43 @@
 	</extension>
 </addon>
 
-<addon id="script.video.F4mProxy" name="F4mProxy" version="2.8.9" provider-name="Shani">
+<addon id="plugin.video.fen" name="Fen" provider-name="Newf276, Tiki" version="10.8.22">
     <requires>
-        <import addon="xbmc.python" version="2.1.0" />
-        <import addon="script.module.requests" />
+        <import addon="script.module.requests" version="2.19.1" />
+        <import addon="script.module.tikimeta" version="1.0.0" />
+        <import addon="script.tiki.artwork" version="1.0.0" />
+        <import addon="script.tiki.skins" version="1.0.0" />
+        <import addon="script.module.myaccounts" version="0.0.0" />
+        <import addon="script.module.fenomscrapers" />
     </requires>
-    <extension point="xbmc.python.module" library="lib" />
-    <extension point="xbmc.python.pluginsource" library="addon.py">
-        <provides>executable</provides>
+    <extension library="resources/lib/fen.py" point="xbmc.python.pluginsource">
+        <provides>video</provides>
     </extension>
+    <extension library="resources/lib/service.py" point="xbmc.service" start="startup" />
+    <extension library="resources/lib/" point="xbmc.python.module" />
     <extension point="xbmc.addon.metadata">
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+        <summary>
+            Specializes in Furk and Easynews. This add-on is intended for advanced Kodi users only. You must have a debrid service to use this add-on without Furk/Easynews.
+        </summary>
+        <description>
+Specializes in Furk and Easynews(web) account access.
+Also utilizes Fenomscrapers for those without a Furk or Easynews(web) account.
+You must have a debrid service to use this add-on without Furk/Easynews.
+This add-on is intended for advanced Kodi users only.
+Please Note: This add-on is NOT an Exodus fork, and as such will behave differently to an Exodus fork.
+        </description>
         <platform>all</platform>
-        <summary lang="en">Proxy for f4m</summary>
-        <description lang="en">Use this addon to play F4m v1 and v2 streams</description>
+        <disclaimer>
+        </disclaimer>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+        <news>
+INFO: For latest changes see Changelog within Tools of add-on.
+        </news>
     </extension>
 </addon>
 
@@ -181,7 +227,7 @@
 	</extension>
 </addon>
 
-<addon id="repository.newf" name="Newf Repository" version="2.3" provider-name="Newf276">
+<addon id="repository.newf" name="Newf Repository" version="2.5" provider-name="Newf276">
 <extension point="xbmc.addon.repository" name="Newf Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml</info>
@@ -244,44 +290,6 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon>
-
-<addon id="plugin.video.newf" name="[COLOR white]Newf[/COLOR]" provider-name="Newf276" version="1.0">
-	<requires>
-		<import addon="xbmc.python" version="2.25.0" />
-		<import addon="context.newf" version="1.0" />
-		<import addon="script.module.myaccounts" version="1.0.0" />
-		<import addon="script.module.fenomscrapers" version="1.0.0" />
-		<import addon="script.module.requests" version="2.19.1" />
-		<import addon="script.module.beautifulsoup4" version="4.5.3" />
-		<import addon="script.module.metahandler" version="2.9.0" />
-		<import addon="plugin.video.youtube" version="6.2.0" />
-		<import addon="script.module.addon.signals" version="0.0.3" />
-	</requires>
-	<extension library="newf.py" point="xbmc.python.pluginsource">
-		<provides>video</provides>
-	</extension>
-	<extension library="service.py" point="xbmc.service" start="startup" />
-	<extension library="resources/lib/" point="xbmc.python.module" />
-	<extension point="xbmc.addon.metadata">
-		<reuselanguageinvoker>true</reuselanguageinvoker>
-		<summary lang="en">[B][COLOR skyblue]Newf[/COLOR][/B] - We do not host any of the contents streamed</summary>
-		<description lang="en">[B][COLOR skyblue]newf[/COLOR][/B][CR] This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR]The author does not host any of the content in this addon and takes no responsibility for content found</description>
-		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-		<forum />
-		<website>https://github.com/newf276/plugin.video.newf</website>
-		<source>https://github.com/newf276/plugin.video.newf</source>
-		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.png</fanart>
-			<screenshot>resources/screenshots/screenshot001.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot002.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot003.jpg</screenshot>
-		</assets>
-		<news>[B][COLOR skyblue]First Edition V1.0[/COLOR][/B]</news>
-	</extension>
 </addon>
 
 <addon id="plugin.video.cbc"
@@ -576,144 +584,6 @@ More minor bugfixes (honestly could not list them all)
 	</extension>
 </addon>
 
-<addon id="context.newf" version="1.0" name="Newf-Context" provider-name="Newf276">
-	<requires>
-		<import addon="xbmc.python" version="2.23.0" />
-		<import addon="script.module.requests" version="2.19.1" />
-	</requires>
-	<extension point="kodi.context.item">
-		<menu id="kodi.core.main">
-			<item library="contextSettings.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - CM Settings</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.settings)) +
-					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true)
-				</visible>
-			</item>
-			<item library="traktManager.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Trakt Manager</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.traktManager)) +
-					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,season) | String.IsEqual(ListItem.dbtype,movie)]
-				</visible>
-			</item>
-			<item library="clearProviders.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Clear Providers</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.clearProviders)) +
-					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-				</visible>
-			</item>
-			<item library="clearBookmark.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Clear Item Bookmark</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.clearBookmark)) +
-					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-<!-- 					!String.IsEqual(ListItem.Property(resumetime),0) + -->
-					!String.IsEqual(ListItem.Property(newf_resumetime),0) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-				</visible>
-			</item>
-			<item library="rescrape.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Rescrape Item</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.rescrape)) +
-					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-
-<!-- Future for Library CM to Rescrape -->
-<!-- 					!String.IsEmpty(Window(home).Property(context.newf.rescrape)) +
-					[String.Contains(ListItem.Path,plugin.video.newf) + String.IsEqual(ListItem.FileExtension,strm) | String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play)] +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)] -->
-				</visible>
-			</item>
-			<item library="playFromHere.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Play from here</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.playFromHere)) +
-					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					String.IsEqual(ListItem.dbtype,episode)
-				</visible>
-			</item>
-			<item library="autoPlay.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Auto Play</label>
-				<visible>
-					String.IsEmpty(Window(home).Property(plugin.video.newf.autoPlay)) +
-					!String.IsEmpty(Window(home).Property(context.newf.autoPlay)) +
-					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-				</visible>
-			</item>
-			<item library="sourceSelect.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Source Select</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(plugin.video.newf.autoPlay)) +
-					!String.IsEmpty(Window(home).Property(context.newf.sourceSelect)) +
-					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.newf/?action=play) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-				</visible>
-			</item>
-			<item library="findSimilar.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Find Similar</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.findSimilar)) +
-					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]
-				</visible>
-			</item>
-			<item library="browseSeries.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Browse Series</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.browseSeries)) +
-					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow)]
-				</visible>
-			</item>
-			<item library="browseEpisodes.py">
-				<label>[B][COLOR skyblue]newf[/COLOR][/B] - Browse Episodes</label>
-				<visible>
-					!String.IsEmpty(Window(home).Property(context.newf.browseEpisodes)) +
-					String.StartsWith(ListItem.path,plugin://plugin.video.newf/) +
-					String.IsEqual(ListItem.Property(isnewf_widget),true) +
-					String.IsEqual(ListItem.dbtype,episode)
-<!-- 				[String.IsEqual(ListItem.dbtype,episode) | !String.IsEmpty(ListItem.Property(multi_episodes))] -->
-				</visible>
-			</item>
-		</menu>
-</extension>
-	<extension point="xbmc.service" library="service.py" />
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Newf - This Addon is currently in beta. Please be aware there may be bugs present</summary>
-		<description lang="en">Adds Global Contextual Menu Items for newf menu items throughout Kodi
-		</description>
-		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-		<forum></forum>
-		<website></website>
-		<source></source>
-		<disclaimer lang="en"></disclaimer>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.png</fanart>
-		</assets>
-		<news>
-[B][COLOR skyblue]First Edition[/COLOR][/B]
-		</news>
-	</extension>
-</addon>
-
 <addon id="context.seren" version="1.0.4" name="Seren - Global Context Menu Items" provider-name="Nixgates">
 	<requires>
 		<import addon="xbmc.python" version="2.23.0" />
@@ -811,6 +681,58 @@ Removed Torrent File Select - Moved to internal seren Menus only
 Added Trakt Manager
 		</news>
 	</extension>
+</addon>
+
+<addon id="context.fencontextmenu" name="Fen Context Menu" version="10.0.14" provider-name="Newf276, Tikipeter">
+  <requires>
+    <import addon="xbmc.python" version="2.25.0"/>
+  </requires>
+  <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <menu>
+                <label>32008</label>
+                <item library="lib/refresh_widgets.py">
+                    <label>32001</label>
+                    <visible>String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+                </item>
+                <item library="lib/mark_watched.py">
+                    <label>32003</label>
+                    <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)] + String.IsEqual(ListItem.Property(fen_widget),true) + String.IsEqual(ListItem.Property(fen_playcount),0)</visible>
+                </item>
+                <item library="lib/mark_unwatched.py">
+                    <label>32004</label>
+                    <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)] + String.IsEqual(ListItem.Property(fen_widget),true) + String.IsEqual(ListItem.Property(fen_playcount),1)</visible>
+                </item>
+                <item library="lib/browse_into.py">
+                    <label>32002</label>
+                    <visible>String.IsEqual(ListItem.dbtype,episode) + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+                </item>
+                <item library="lib/add_remove.py">
+                    <label>32005</label>
+                    <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow)] + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+                </item>
+                <item library="lib/extras.py">
+                    <label>32006</label>
+                    <visible>String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+                </item>
+                <item library="lib/options_menu.py">
+                    <label>32007</label>
+                    <visible>String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+                </item>
+            </menu>
+        </menu>
+    </extension>
+  <extension point="xbmc.service"
+              library="service.py" start="startup">
+  </extension>
+  <extension point="kodi.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Access Fen Options, Settings and Features from Kodi</summary>
+    <description lang="en">Access Fen Options, Settings and Features from Kodi</description>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+    <forum></forum>
+    <source></source>
+  </extension>
 </addon>
 
 <addon id="plugin.video.f4mTester" version="3.0.0" name="F4mTester" provider-name="Shani">
@@ -929,5 +851,21 @@ v5.2.14 (2017-01-23)
 	</assets>
     <source>https://github.com/opensubtitles/service.subtitles.opensubtitles_by_opensubtitles</source>
   </extension>
+</addon>
+
+<addon id="script.tiki.artwork" version="10.1.12" name="Tiki Artwork" provider-name="Newf276, Tiki">
+    <requires>
+        <import addon="xbmc.python" version="2.19.0"/>
+    </requires>
+    <extension point="xbmc.addon.metadata">
+        <summary>Themes for Addons</summary>
+        <description>Themes for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
 </addon>
 </addons>

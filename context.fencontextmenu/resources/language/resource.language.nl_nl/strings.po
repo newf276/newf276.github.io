@@ -1,0 +1,39 @@
+ # Kodi Media Center language file
+# Addon Name: Fen
+# Addon id: context.fencontextmenu
+# Addon Provider: Fen
+# Translator Dutch: Tinuz97
+msgid ""
+msgstr ""
+
+msgctxt "#32001"
+msgid "[B]Fen Refresh Widgets[/B]"
+msgstr "[B]Fen Widgets Vernieuwen[/B]"
+
+msgctxt "#32002"
+msgid "[B]Fen Browse...[/B]"
+msgstr "[B]Fen Bladeren...[/B]"
+
+msgctxt "#32003"
+msgid "[B]Fen Mark Watched[/B]"
+msgstr "[B]Fen Markeer Bekeken[/B]"
+
+msgctxt "#32004"
+msgid "[B]Fen Mark Unwatched[/B]"
+msgstr "[B]Fen Markeer Onbekeken[/B]"
+
+msgctxt "#32005"
+msgid "[B]Fen Add/Remove[/B]"
+msgstr "[B]Fen Toevoegen/Verwijderen[/B]"
+
+msgctxt "#32006"
+msgid "[B]Fen Extras...[/B]"
+msgstr "[B]Fen Extras...[/B]"
+
+msgctxt "#32007"
+msgid "[B]Fen Options...[/B]"
+msgstr "[B]Fen Opties...[/B]"
+
+msgctxt "#32008"
+msgid "[B]Fen Menu...[/B]"
+msgstr "[B]Fen Menu...[/B]"

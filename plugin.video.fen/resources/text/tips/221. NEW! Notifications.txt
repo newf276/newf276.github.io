@@ -1,0 +1,2 @@
+[COLOR dodgerblue][B]Notifications[/B][/COLOR]
+[I]Found at Settings->Notifications. Here you can set Fen to show you notifications when browsing related to the highlighted media. You can choose notifications for Next Episode, Watched Status, and/or Watched Percentage, plus many others. When you are browsing media menus, a notification will pop up if the currently highlighted Movie/TV Show/Episode has information related to the notifications you have set.[/I]

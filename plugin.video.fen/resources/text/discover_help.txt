@@ -1,0 +1,30 @@
+
+*Select a category and assign a filter value. You only need to assign the values you wish to include in the search. e.g. If you don\'t need a certain actor included, then leave "Includes Cast Member" blank etc. 
+
+*Once you have filled in all the categories you need, hit "Save & Browse Results" to immediately browse the results. 
+
+*Alternately, you can select "Export Search", give the search a name, and choose which of the main Fen lists you wish to save it to e.g. Root Menu or Movies or TV Shows. You can then browse that list whenever you want, without having to re-enter the different filters continuously.
+
+*Fen will keep a history of the last 7 days of filtered lists you have made. Select "Discover: History" to re-browse these lists.
+
+[B]EXAMPLE 1:[/B]
+[I]You want to search for Comedy Action Movies made in the 1980's that are PG Rated.[/I]
+ - Assign a "[B]Year Start[/B]" filter of "1980"
+ - Assign a "[B]Year End[/B]" filter of "1989"
+ - Assign a "[B]Include Genres[/B]" filter of "Action, Comedy"
+ - Assign a "[B]Certification[/B]" filter of "PG"
+ - Select "[B]Browse Results[/B]" to immediately see the results or "[B]Export List[/B]" to export the list to Fen Root Menu or Fen Movies Menu etc"
+
+[B]Enjoy your 1980's Action/Comedy Family Movie Night!!![/B]
+
+[B]You can also search for Similar or Recommended Titles![/B]
+
+[B]EXAMPLE 2:[/B]
+[I]You want to search for Movies Similar to Avengers Endgame.[/I]
+ - Assign a "[B]Discover Similar[/B]" [B]Title[/B] of "Avengers Endgame"
+ - Assign a "[B]Discover Similar[/B]" [B]Year[/B] of "2019" (leave blank if you don\'t know the year)
+ - Choose from the titles presented for the correct Movie/TV Show
+ - You will notice the other filters have disappeared. Once a "Discover Similar" value has been set, the other filters are not available.
+ - Select "[B]Browse Results[/B]" to immediately see the results or "[B]Export List[/B]" to export the list to Fen Root Menu or Fen Movies Menu etc"
+
+[B]You will see a list of Movies Similar to Avengers Endgame!!![/B]
