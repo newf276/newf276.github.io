@@ -1,9 +1,9 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
 from sys import argv
-import json
 try: from urllib import urlencode
 except ImportError: from urllib.parse import urlencode
+from apis import simplejson as json
 from modules.nav_utils import build_url, setView, show_text, notification
 from modules.utils import to_utf8, safe_string, remove_accents
 from modules.utils import local_string as ls

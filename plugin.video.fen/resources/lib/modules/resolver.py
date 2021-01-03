@@ -55,7 +55,7 @@ def resolve_internal_sources(scrape_provider, item_id, url_dl, direct_debrid_lin
 	try:
 		if scrape_provider == 'furk':
 			import xbmcgui
-			import json
+			from apis import simplejson as json
 			from indexers.furk import t_file_browser
 			from modules.source_utils import seas_ep_query_list
 			meta = json.loads(xbmcgui.Window(10000).getProperty('fen_media_meta'))

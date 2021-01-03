@@ -3,7 +3,7 @@ import xbmc, xbmcplugin, xbmcgui
 import os
 from sys import argv
 import re
-import json
+from apis import simplejson as json
 from apis.premiumize_api import PremiumizeAPI
 from modules.settings import get_theme
 from modules.nav_utils import build_url, setView

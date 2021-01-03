@@ -2,8 +2,8 @@
 import xbmc, xbmcplugin, xbmcgui
 import os
 from sys import argv
-import json
 from apis.alldebrid_api import AllDebridAPI
+from apis import simplejson as json
 from caches import fen_cache
 from modules.settings import get_theme
 from modules.nav_utils import build_url, setView

@@ -2,9 +2,9 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
 import requests
-import json
 from sys import argv
 import time
+from apis import simplejson as json
 from myaccounts.modules.trakt import Trakt
 from caches import trakt_cache
 from caches.fen_cache import cache_object

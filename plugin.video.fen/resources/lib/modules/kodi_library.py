@@ -1,6 +1,6 @@
 import xbmc, xbmcgui
 from sys import argv
-import json
+from apis import simplejson as json
 from modules.utils import clean_file_name, to_utf8
 from modules.utils import local_string as ls
 from modules.settings_reader import get_setting

@@ -366,6 +366,10 @@ msgctxt "#32091"
 msgid "Full"
 msgstr "Volledig"
 
+msgctxt "#32092"
+msgid "Search Keywords"
+msgstr "Zoeken Trefwoorden"
+
 msgctxt "#32093"
 msgid "Search Moderation"
 msgstr "Zoek Moderatie"
@@ -3076,8 +3080,8 @@ msgid "%s of %s Watched"
 msgstr "%s van %s Bekeken"
 
 msgctxt "#33047"
-msgid "Watched Status Notifications (Movie, TV Show, Season)"
-msgstr "Bekeken Status Meldingen (Film, TV Serie, Seizoen)"
+msgid "Watched Status Notifications (Movie, TV Show, Season, Episode)"
+msgstr "Bekeken Status Meldingen (Film, TV Serie, Seizoen, Afleveringen)"
 
 msgctxt "#33048"
 msgid "Watched Status"
@@ -3147,16 +3151,10 @@ msgctxt "#33066"
 msgid "Enable Notifications"
 msgstr "Notificaties Aanzetten"
 
-msgctxt "#32011"
-msgid ""
-msgstr ""
+#########################################################################################################################
 
 msgctxt "#32044"
-msgid ""
-msgstr ""
-
-msgctxt "#32092"
-msgid ""
+msgid "Continue Transfer in Background?"
 msgstr ""
 
 msgctxt "#32094"

@@ -34,26 +34,51 @@ CAM = [' camrip ', ' hdcam ', ' hd cam ', ' cam rip ', ' dvdcam ', ' cam ']
 SCR = [' scr ', ' screener ', ' dvdscr ', ' dvd scr ', ' r5 ', ' r6 ']
 TELE = [' tsrip ', ' hdts ', ' hdtc ', ' dvdts ', ' telesync ', ' ts ', ' tc ']
 
+# def sources():
+# 	sourceDict = []
+# 	try:
+# 		sourceFolderLocation = os.path.join(scraper_module_base_folder, 'sources_fenomscrapers')
+# 		sourceSubFolders = ['hosters', 'torrents']
+# 		path = 'fenomscrapers.sources_fenomscrapers.%s.%s'
+# 		enabled_scrapers = enabledScrapersXML()
+# 		for item in sourceSubFolders:
+# 			files = xbmcvfs.listdir(os.path.join(sourceFolderLocation, item))[1]
+# 			for m in files:
+# 				try:
+# 					if not os.path.splitext(urlparse(m).path)[-1] == '.py':
+# 						continue
+# 					module_name = m.split('.')[0]
+# 					if module_name == '__init__':
+# 						continue
+# 					if str(module_name) in enabled_scrapers:
+# 						module_path = path % (item, module_name)
+# 						sourceDict.append((module_name, module_path))
+# 				except: pass
+# 	except: pass
+# 	return sourceDict
+
 def sources():
 	sourceDict = []
 	try:
+		def import_info():
+			for item in sourceSubFolders:
+				files = xbmcvfs.listdir(os.path.join(sourceFolderLocation, item))[1]
+				for m in files:
+					try:
+						if not os.path.splitext(urlparse(m).path)[-1] == '.py':
+							continue
+						module_name = m.split('.')[0]
+						if module_name == '__init__':
+							continue
+						if str(module_name) in enabled_scrapers:
+							module_path = path % (item, module_name)
+							yield (module_name, module_path)
+					except: pass
 		sourceFolderLocation = os.path.join(scraper_module_base_folder, 'sources_fenomscrapers')
 		sourceSubFolders = ['hosters', 'torrents']
 		path = 'fenomscrapers.sources_fenomscrapers.%s.%s'
 		enabled_scrapers = enabledScrapersXML()
-		for item in sourceSubFolders:
-			files = xbmcvfs.listdir(os.path.join(sourceFolderLocation, item))[1]
-			for m in files:
-				try:
-					if not os.path.splitext(urlparse(m).path)[-1] == '.py':
-						continue
-					module_name = m.split('.')[0]
-					if module_name == '__init__':
-						continue
-					if str(module_name) in enabled_scrapers:
-						module_path = path % (item, module_name)
-						sourceDict.append((module_name, module_path))
-				except: pass
+		sourceDict = list(import_info())
 	except: pass
 	return sourceDict
 

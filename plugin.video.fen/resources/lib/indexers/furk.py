@@ -1,10 +1,10 @@
 import xbmc, xbmcplugin, xbmcgui
-import json
 import os
 from sys import argv
 import urllib
 from caches import fen_cache
 from modules.nav_utils import build_url, setView
+from apis import simplejson as json
 from apis.furk_api import FurkAPI
 from modules.utils import clean_file_name, to_utf8
 from modules.utils import local_string as ls

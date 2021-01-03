@@ -2,12 +2,12 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
 from sys import argv
-import json
 import tikimeta
 from importlib import import_module
 from threading import Thread
 from modules.nav_utils import build_url, setView, remove_unwanted_info_keys
 from modules.indicators_bookmarks import get_watched_status, get_resumetime, get_watched_info_movie
+from apis import simplejson as json
 from apis.trakt_api import get_trakt_movie_id
 from modules.utils import local_string as ls
 from modules import settings
@@ -74,11 +74,12 @@ class Movies:
 			elif self.action == 'imdb_movies_oscar_winners':
 				from modules.nav_utils import oscar_winners_tmdb_ids
 				self.list = oscar_winners_tmdb_ids()
-			elif self.action in ('imdb_watchlist', 'imdb_user_list_contents'):
+			elif self.action in ('imdb_watchlist', 'imdb_user_list_contents', 'imdb_keywords_list_contents'):
 				self.id_type = 'imdb_id'
-				data, next_page = function('movies', self.params.get('list_id', None), page_no)
+				list_id = self.params.get('list_id', None)
+				data, next_page = function('movies', list_id, page_no)
 				self.list = [i['imdb_id'] for i in data]
-				if next_page: self.new_page = {'mode': mode, 'action': self.action, 'new_page': str(page_no + 1), 'new_letter': letter, 'foldername': self.action}
+				if next_page: self.new_page = {'mode': mode, 'action': self.action, 'list_id': list_id, 'new_page': str(page_no + 1), 'new_letter': letter, 'foldername': self.action}
 			elif self.action == ('trakt_movies_mosts'):
 				for item in (function(self.params['period'], self.params['duration'], page_no)): self.list.append(get_trakt_movie_id(item['movie']['ids']))
 				self.new_page = {'mode': mode, 'action': self.action, 'period': self.params['period'], 'duration': self.params['duration'], 'new_page': str(page_no + 1), 'foldername': self.action}
@@ -153,9 +154,9 @@ class Movies:
 		except: pass
 		__handle__ = int(argv[1])
 		xbmcplugin.setContent(__handle__, content_type)
-		xbmcplugin.endOfDirectory(__handle__, cacheToDisc=True)
+		xbmcplugin.endOfDirectory(__handle__)
 		setView('view.movies', content_type)
-
+	
 	def build_movie_content(self, item_position, _id):
 		try:
 			cm = []

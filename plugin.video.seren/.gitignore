@@ -8,22 +8,25 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib64/
 parts/
 sdist/
+report/
 var/
 wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
-
+Changelog.md
+Authors.md
+node_modules/
+package-lock.json
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -38,7 +41,8 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
-.coverage.*
+coverage/
+coverage.*
 .cache
 nosetests.xml
 coverage.xml
@@ -53,7 +57,6 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
 
 # Flask stuff:
 instance/
@@ -63,7 +66,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+_build/
 
 # PyBuilder
 target/
@@ -80,14 +83,13 @@ celerybeat-schedule
 # SageMath parsed files
 *.sage.py
 
-# Environments
+# dotenv
 .env
+
+# virtualenv
 .venv
-env/
 venv/
 ENV/
-env.bak/
-venv.bak/
 
 # Spyder project settings
 .spyderproject
@@ -101,6 +103,21 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# PyCharm
 .idea
-resources/settings.xml
-releases
+
+# Visual Studio Code
+.vscode
+
+# Visual Studio
+*.pyproj
+*.sln
+.vs/
+
+# Packages
+*.zip
+
+# test cache
+.pytest_cache
+/userdata/

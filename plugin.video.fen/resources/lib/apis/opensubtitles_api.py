@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import requests
 import gzip
-import json
 import time
 from datetime import timedelta
 try: from StringIO import StringIO
 except ImportError: from io import StringIO
 try: from urllib import quote
 except ImportError: from urllib.parse import quote
+from apis import simplejson as json
 from caches import fen_cache
 from modules.nav_utils import notification
 from modules.utils import to_utf8

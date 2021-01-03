@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui
 import requests
-import json
 import time
 import re
 from sys import exit as sysexit
+from apis import simplejson as json
 from caches.fen_cache import cache_object
 from modules.utils import to_utf8
 from modules.utils import local_string as ls
@@ -12,6 +12,8 @@ from modules.settings_reader import get_setting, set_setting
 # from modules.utils import logger
 
 progressDialog = xbmcgui.DialogProgress()
+dialog = xbmcgui.Dialog()
+
 monitor = xbmc.Monitor()
 
 class RealDebridAPI:
@@ -294,15 +296,20 @@ class RealDebridAPI:
 		import xbmc
 		from modules.nav_utils import show_busy_dialog, hide_busy_dialog
 		from modules.source_utils import supported_video_extensions
-		def _return_failed(message=ls(32574)):
+		def _return_failed(message=ls(32574), cancelled=False):
 			try:
 				progressDialog.close()
 			except Exception:
 				pass
-			self.delete_torrent(torrent_id)
 			hide_busy_dialog()
 			xbmc.sleep(500)
-			xbmcgui.Dialog().ok(ls(32733), message)
+			if cancelled:
+				if not dialog.yesno('Fen', ls(32044)):
+					self.delete_torrent(torrent_id)
+				else:
+					xbmcgui.Dialog().ok(ls(32733), message)
+			else:
+				xbmcgui.Dialog().ok(ls(32733), message)
 			return False
 		show_busy_dialog()
 		try:
@@ -330,22 +337,27 @@ class RealDebridAPI:
 				if monitor.abortRequested() == True: return sysexit()
 				try:
 					if progressDialog.iscanceled():
-						return _return_failed(ls(32736))
+						return _return_failed(ls(32736), cancelled=True)
 				except Exception:
 					pass
-				if any(x in status for x in stalled):
-					return _return_failed()
 				timeout -= interval
 				xbmc.sleep(1000 * interval)
 				torrent_info = self.torrent_info(torrent_id)
 				status = torrent_info['status']
+				if any(x in status for x in stalled):
+					return _return_failed()
 				line3 = ls(32738) % torrent_info['seeders']
 			try:
 				progressDialog.close()
 			except Exception:
 				pass
+		if status == 'downloaded':
+			hide_busy_dialog()
+			return True
 		if status == 'magnet_conversion':
 			return _return_failed()
+		if any(x in status for x in stalled):
+			return _return_failed(str(status))
 		if status == 'waiting_files_selection':
 			video_files = []
 			all_files = torrent_info['files']
@@ -378,6 +390,7 @@ class RealDebridAPI:
 			torrent_info = self.torrent_info(torrent_id)
 			status = torrent_info['status']
 			if status == 'downloaded':
+				hide_busy_dialog()
 				return True
 			file_size = round(float(video['bytes']) / (1000 ** 3), 2)
 			line1 = '%s...' % (ls(32732) % ls(32054))
@@ -396,7 +409,7 @@ class RealDebridAPI:
 				if monitor.abortRequested() == True: return sys.exit()
 				try:
 					if progressDialog.iscanceled():
-						return _return_failed(ls(32736))
+						return _return_failed(ls(32736), cancelled=True)
 				except Exception:
 					pass
 				if any(x in status for x in stalled):

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui
-import json
 import re
 try: from urlparse import parse_qsl
 except ImportError: from urllib.parse import parse_qsl
 try: from sqlite3 import dbapi2 as database
 except ImportError: from pysqlite2 import dbapi2 as database
-from modules.indicators_bookmarks import get_resumetime, get_progress_percent, get_watched_info_tv, get_watched_status
+from modules.indicators_bookmarks import detect_bookmark, get_resumetime, get_progress_percent, get_watched_info_tv, get_watched_status
 from apis.trakt_api import trakt_get_next_episodes
+from apis import simplejson as json
 from modules.nav_utils import build_url
 from modules.utils import local_string as ls
 from modules.settings_reader import get_setting
@@ -56,17 +56,23 @@ def nextep_notification(priority):
 	return settings.list_actions.append((ls(33041), next_episode, meta['poster'], priority))
 
 def watched_status_notification(db_type, priority):
-	if db_type == 'movie':
+	if db_type in ['movie', 'episode']:
 		meta = _get_meta()
 		if not meta: return settings.list_actions.append(None)
-		resumetime = get_resumetime(db_type, meta['tmdb_id'])
-		duration = meta['duration']
-		if resumetime in (0, '0'):
+		icon = meta['poster']
+		season = meta.get('season', '')
+		episode = meta.get('episode', '')
+		duration = int(float(meta['duration'])/60)
+		try: resume_point, curr_time = detect_bookmark(db_type, meta['tmdb_id'], season, episode)
+		except: resume_point = 0
+		if resume_point in (0, '0', 0.0, '0.0'):
 			playcount = meta['playcount']
 			if playcount == 1: resumetime = duration
-		total_watched = '%imins' % int(float(resumetime)/60)
-		total = '%imins' % int(float(duration)/60)
-		icon = meta['poster']
+			else: resumetime = 0
+		else:
+			resumetime = int(float(curr_time)/60)
+		total_watched = '%imins' % resumetime
+		total = '%imins' % duration
 	else:
 		total_watched = xbmc.getInfoLabel('ListItem.Property(WatchedEpisodes)')
 		total = xbmc.getInfoLabel('ListItem.Property(TotalEpisodes)')
@@ -81,20 +87,19 @@ def progress_notification(db_type, priority):
 		icon = meta['poster']
 		season = meta.get('season', '')
 		episode = meta.get('episode', '')
-		total_watched = get_resumetime(db_type, meta['tmdb_id'], season, episode)
-		total = meta['duration']
-		if total_watched in (0, '0'):
-			if db_type == 'movie':
-				playcount = meta['playcount']
-			else:
-				watched_info, use_trakt = get_watched_info_tv()
-				playcount, overlay = get_watched_status(watched_info, use_trakt, 'episode', meta['tmdb_id'], season, episode)
-			if playcount == 1: total_watched = total
+		try: resume_point, curr_time = detect_bookmark(db_type, meta['tmdb_id'], season, episode)
+		except: resume_point = 0
+		if resume_point in (0, '0', 0.0, '0.0'):
+			playcount = meta['playcount']
+			if playcount == 1: percent_watched = '100'
+			else: percent_watched = '0'
+		else:
+			percent_watched = str(int(float(resume_point)))
 	else:
 		total_watched = int(xbmc.getInfoLabel('ListItem.Property(WatchedEpisodes)'))
 		total = int(xbmc.getInfoLabel('ListItem.Property(TotalEpisodes)'))
 		icon = xbmc.getInfoLabel('Container.ListItem.Art(poster)')
-	percent_watched = get_progress_percent(total_watched, total)
+		percent_watched = get_progress_percent(total_watched, total)
 	progress_status = '%s%% %s' % (percent_watched, ls(32475))
 	return settings.list_actions.append((ls(33049), progress_status, icon, priority))
 

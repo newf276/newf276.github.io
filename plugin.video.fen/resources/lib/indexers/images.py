@@ -2,8 +2,8 @@
 import xbmc, xbmcgui, xbmcplugin, xbmcvfs
 import os
 from sys import argv
-import json
 from threading import Thread
+from apis import simplejson as json
 from apis.tmdb_api import tmdb_media_images, tmdb_people_pictures, tmdb_people_tagged_pictures
 from apis.imdb_api import people_get_imdb_id, imdb_people_images
 from modules.nav_utils import build_url, add_dir, setView

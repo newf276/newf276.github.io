@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import json
+
+from apis import simplejson as json
 from windows.base_dialog import BaseDialog
 from modules.nav_utils import build_url
 from modules.utils import local_string as ls
@@ -20,8 +21,8 @@ class SourceResults(BaseDialog):
 		super(SourceResults, self).onInit()
 		self.make_items()
 		self.set_properties(self.meta, self.total_results)
-		self.win = self.getControl(self.window_id)
-		self.win.addItems(self.item_list)
+		win = self.getControl(self.window_id)
+		win.addItems(self.item_list)
 		self.setFocusId(self.window_id)
 
 	def run(self):

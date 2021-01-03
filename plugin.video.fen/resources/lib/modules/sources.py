@@ -5,11 +5,11 @@ except ImportError: from urllib.parse import unquote
 import os
 from sys import argv
 from sys import exit as sysexit
-import json
 import time
 from datetime import datetime, timedelta
 from threading import Thread
 from modules import debrid
+from apis import simplejson as json
 from windows.source_results import SourceResults
 from modules.source_utils import sources, toggle_all, external_scrapers_reset_stats, scraperNames
 from modules.nav_utils import build_url, setView, notification, close_all_dialog, show_busy_dialog, hide_busy_dialog, remove_unwanted_info_keys
@@ -27,7 +27,7 @@ default_furk_icon = os.path.join(settings.get_theme(), 'furk.png')
 
 monitor = xbmc.Monitor()
 
-class Sources:
+class Sources():
 	def __init__(self):
 		self.progress_dialog = None
 		self.threads = []
@@ -47,6 +47,7 @@ class Sources:
 		self.active_scrapers = settings.active_scrapers()
 		self.sleep_time = settings.display_sleep_time()
 		self.scraper_settings = settings.scraping_settings()
+		self.scraper_cancel = False
 
 	def playback_prep(self, params=None):
 		self._clear_properties()
@@ -127,10 +128,9 @@ class Sources:
 			self.providers.append(('ad-cloud', AllDebridSource()))
 		if 'external' in self.active_scrapers:
 			from scrapers.external import ExternalSource
-			if 'external' in self.active_scrapers:
-				internal_scrapers = self.active_scrapers[:]
-				internal_scrapers.remove('external')
-				if not internal_scrapers: internal_scrapers = []
+			internal_scrapers = self.active_scrapers[:]
+			internal_scrapers.remove('external')
+			if not internal_scrapers: internal_scrapers = []
 			self.providers.append(('external', ExternalSource(self.external_providers, self.debrid_torrent_enabled, self.debrid_valid_hosts, internal_scrapers, self.prescrape_sources, self.progress_dialog)))
 		for i in range(len(self.providers)):
 			self.threads.append(Thread(target=self.activate_providers, args=(self.providers[i][1],), name=self.providers[i][0]))
@@ -303,8 +303,11 @@ class Sources:
 		def _scraperDialog():
 			close_dialog = True
 			while not self.progress_dialog.iscanceled():
+			# percent = 0
+			# while percent < 100:
 				try:
 					if monitor.abortRequested() is True: return sysexit()
+					if self.progress_dialog.iscanceled(): break
 					remaining_providers = [x.getName() for x in _threads if x.is_alive() is True]
 					source_4k_label = total_format % (int_dialog_highlight, len([e for e in _sources if e['quality'] == '4K' and not 'uncached' in e]))
 					source_1080_label = total_format % (int_dialog_highlight, len([e for e in _sources if e['quality']  == '1080p' and not 'uncached' in e]))
@@ -339,12 +342,16 @@ class Sources:
 		_sources = self.sources if scrape_type == 'internal' else self.prescrape_sources
 		_line1_insert = ls(32096) if scrape_type == 'internal' else '%s %s' % (ls(32829), ls(32830))
 		_line2_insert = 'Int:' if scrape_type == 'internal' else 'Pre:'
-		self.progress_dialog = xbmcgui.DialogProgress()
 		start_time = time.time()
 		end_time = start_time + timeout
+		self.progress_dialog = xbmcgui.DialogProgress()
 		self.progress_dialog.create(_progress_title, '')
 		self.progress_dialog.update(0)
 		_scraperDialog()
+		# from windows.get_sources import getSources
+		# self.progress_dialog = getSources()
+		# self.progress_dialog.create('Test', line1='gib1', line2='gib2', line3='gib3')
+		# _scraperDialog()
 
 	def display_results(self):
 		try: results = json.loads(window.getProperty('fen_search_results'))
@@ -617,7 +624,6 @@ class Sources:
 			prev = []
 			total = []
 			results = json.loads(window.getProperty('fen_search_results'))
-			results = [i for i in results if not i.get('uncached', False)]
 			results = [i for i in results if not 'Uncached' in i.get('cache_provider', '') or i == json.loads(source)[0]]
 			source_index = results.index(json.loads(source)[0])
 			for i in range(1, 25):
@@ -704,7 +710,6 @@ class Sources:
 	def play_auto(self, background=False):
 		meta = json.loads(window.getProperty('fen_media_meta'))
 		items = json.loads(window.getProperty('fen_search_results'))
-		items = [i for i in items if not i.get('uncached', False)]
 		items = [i for i in items if not 'Uncached' in i.get('cache_provider', '')]
 		filter = [i for i in items if i['source'].lower() in ['hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se'] and i['debrid'] == '']
 		items = [i for i in items if i not in filter]

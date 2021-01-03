@@ -2,17 +2,17 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
 from sys import argv
-import json
-import tikimeta
 from importlib import import_module
 from threading import Thread
 from datetime import date
+from apis import simplejson as json
 from modules.nav_utils import build_url, setView, remove_unwanted_info_keys
 from modules.utils import adjust_premiered_date, make_day
 from modules.indicators_bookmarks import get_watched_status, get_resumetime, get_watched_status_season, get_watched_status_tvshow, get_watched_info_tv
 from apis.trakt_api import get_trakt_tvshow_id
 from modules.utils import local_string as ls
 from modules import settings
+import tikimeta
 # from modules.utils import logger
 
 dialog = xbmcgui.Dialog()
@@ -69,11 +69,12 @@ class TVShows:
 				self.list = [i['media_id'] for i in data]
 				if total_pages > 2: self.total_pages = total_pages
 				if total_pages > page_no: self.new_page = {'mode': mode, 'action': self.action, 'new_page': str(page_no + 1), 'new_letter': letter, 'foldername': self.action}
-			elif self.action in ('imdb_watchlist', 'imdb_user_list_contents'):
+			elif self.action in ('imdb_watchlist', 'imdb_user_list_contents', 'imdb_keywords_list_contents'):
 				self.id_type = 'imdb_id'
-				data, next_page = function('tvshows', self.params.get('list_id', None), page_no)
+				list_id = self.params.get('list_id', None)
+				data, next_page = function('tvshows', list_id, page_no)
 				self.list = [i['imdb_id'] for i in data]
-				if next_page: self.new_page = {'mode': mode, 'action': self.action, 'new_page': str(page_no + 1), 'new_letter': letter, 'foldername': self.action}
+				if next_page: self.new_page = {'mode': mode, 'action': self.action, 'list_id': list_id, 'new_page': str(page_no + 1), 'new_letter': letter, 'foldername': self.action}
 			elif self.action == 'trakt_tv_mosts':
 				for item in function(self.params['period'], self.params['duration'], page_no): self.list.append((get_trakt_tvshow_id(item['show']['ids'])))
 				self.new_page = {'mode': mode, 'action': self.action, 'period': self.params['period'], 'duration': self.params['duration'], 'new_page': str(page_no + 1), 'foldername': self.action}
@@ -143,7 +144,7 @@ class TVShows:
 		except: pass
 		__handle__ = int(argv[1])
 		xbmcplugin.setContent(__handle__, content_type)
-		xbmcplugin.endOfDirectory(__handle__, cacheToDisc=True)
+		xbmcplugin.endOfDirectory(__handle__)
 		setView('view.tvshows', content_type)
 
 	def build_tvshow_content(self, item_position, _id):
@@ -346,7 +347,7 @@ def build_season_list(params):
 	item_list = list(_process())
 	xbmcplugin.addDirectoryItems(__handle__, item_list)
 	xbmcplugin.setContent(__handle__, 'seasons')
-	xbmcplugin.endOfDirectory(__handle__, cacheToDisc=True)
+	xbmcplugin.endOfDirectory(__handle__)
 	setView('view.seasons', 'seasons')
 	window.setProperty('fen_media_meta', meta_json)
 
@@ -369,7 +370,7 @@ def build_episode_list(params):
 				thumb = item['thumb'] if item.get('thumb', None) else fanart
 				meta.update({'vid_type': 'episode', 'rootname': display_name, 'season': season,
 							'episode': episode, 'premiered': premiered, 'ep_name': ep_name,
-							'plot': item['plot'], 'thumb': thumb})
+							'plot': item['plot'], 'thumb': thumb, 'playcount': playcount})
 				item.update({'trailer': trailer, 'tvshowtitle': title, 'premiered': premiered,
 							'genre': genre, 'duration': duration, 'mpaa': mpaa,
 							'studio': studio, 'playcount': playcount, 'overlay': overlay})
@@ -447,7 +448,7 @@ def build_episode_list(params):
 	xbmcplugin.addDirectoryItems(__handle__, item_list)
 	xbmcplugin.setContent(__handle__, 'episodes')
 	xbmcplugin.addSortMethod(__handle__, xbmcplugin.SORT_METHOD_EPISODE)
-	xbmcplugin.endOfDirectory(__handle__, cacheToDisc=True)
+	xbmcplugin.endOfDirectory(__handle__)
 	setView('view.episodes', 'episodes')
 
 def build_episode(item, watched_info, use_trakt, meta_user_info, meta_user_info_json, is_widget):
@@ -516,7 +517,7 @@ def build_episode(item, watched_info, use_trakt, meta_user_info, meta_user_info_
 		rootname = '%s (%s)' % (title, year)
 		meta.update({'vid_type': 'episode', 'rootname': rootname, 'season': season,
 					'episode': episode, 'premiered': premiered, 'ep_name': info['title'],
-					'plot': info['plot'], 'thumb': thumb})
+					'plot': info['plot'], 'thumb': thumb, 'playcount': playcount})
 		meta_json = json.dumps(meta)
 		url_params = {'mode': 'play_media', 'vid_type': 'episode', 'tmdb_id': tmdb_id, 'query': query, 'tvshowtitle': meta['rootname'],
 					'season': season, 'episode': episode, 'meta': meta_json}

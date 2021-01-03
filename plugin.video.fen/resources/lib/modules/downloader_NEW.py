@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui, xbmcplugin, xbmcvfs
 import re
-import json
 import os
 from sys import argv
 
@@ -12,6 +11,7 @@ except ImportError: from urllib.parse import parse_qsl, urlparse
 try: from urllib2 import Request, urlopen
 except ImportError: from urllib.request import Request, urlopen
 
+from apis import simplejson as json
 from modules.nav_utils import show_busy_dialog, hide_busy_dialog, notification
 from modules.utils import clean_file_name, clean_title, to_utf8, safe_string, remove_accents
 from modules.utils import local_string as ls
@@ -245,7 +245,7 @@ class Downloader:
 					if percent >= notify:
 						line1 = ''
 						if playing and not suppress_during_playback: notification('%s - [I]%s[/I]' % (str(percent)+'%', self.final_name), 10000, self.image)
-						elif (not playing): notification('%s - [I]%s[/I]' % (str(percent)+'%', title), 10000, self.image)
+						elif (not playing): notification('%s - [I]%s[/I]' % (str(percent)+'%', self.final_name), 10000, self.image)
 						notify += notification_frequency
 			chunk = None
 			error = False

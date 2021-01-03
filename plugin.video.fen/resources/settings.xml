@@ -83,7 +83,7 @@
         <setting id="rd.hoster.enabled" type="bool" label="33016" visible="eq(-3,true)+!eq(-4,)" default="true" />
         <setting id="rd.priority" label="32011" type="slider" range="1,1,10" option="int" visible="eq(-4,true)+!eq(-5,)" default="10" />
         <setting id="store_torrent.real-debrid" label="32060" type="bool" visible="eq(-5,true)+!eq(-6,)" default="false" />
-        <setting id="amble.rd.myaccounts" label="33029" type="action" option="close" action="RunPlugin(plugin://plugin.video.fen/?mode=myaccounts.open&amp;query=1.18)" visible="eq(-7,)" />
+        <setting id="amble.rd.myaccounts" label="33029" type="action" option="close" action="RunPlugin(plugin://plugin.video.fen/?mode=myaccounts.open&amp;query=1.21)" visible="eq(-7,)" />
         <!-- Premiumize -->
         <setting label="32061" type="lsep" />
         <setting id="pm.token" label="pm token" type="text" default="" visible="hidden" />
@@ -93,7 +93,7 @@
         <setting id="pm.hoster.enabled" type="bool" label="33016" visible="eq(-3,true)+!eq(-4,)" default="true" />
         <setting id="pm.priority" label="32011" type="slider" range="1,1,10" option="int" visible="eq(-4,true)+!eq(-5,)" default="10" />
         <setting id="store_torrent.premiumize.me" label="32060" type="bool" visible="eq(-5,true)+!eq(-6,)" default="false" />
-        <setting id="amble.pm.myaccounts" label="33029" type="action" option="close" action="RunPlugin(plugin://plugin.video.fen/?mode=myaccounts.open&amp;query=1.11)" visible="eq(-7,)" />
+        <setting id="amble.pm.myaccounts" label="33029" type="action" option="close" action="RunPlugin(plugin://plugin.video.fen/?mode=myaccounts.open&amp;query=1.13)" visible="eq(-7,)" />
         <!-- All Debrid -->
         <setting label="32063" type="lsep" />
         <setting id="ad.token" label="ad token" type="text" default="" visible="hidden" />
@@ -103,7 +103,7 @@
         <setting id="ad.hoster.enabled" type="bool" label="33016" visible="eq(-3,true)+!eq(-4,)" default="true" />
         <setting id="ad.priority" label="32011" type="slider" range="1,1,10" option="int" visible="eq(-4,true)+!eq(-5,)" default="10" />
         <setting id="store_torrent.alldebrid" label="32060" type="bool" visible="eq(-5,true)+!eq(-6,)" default="false" />
-        <setting id="amble.ad.myaccounts" label="33029" type="action" option="close" action="RunPlugin(plugin://plugin.video.fen/?mode=myaccounts.open&amp;query=1.4)" visible="eq(-7,)" />
+        <setting id="amble.ad.myaccounts" label="33029" type="action" option="close" action="RunPlugin(plugin://plugin.video.fen/?mode=myaccounts.open&amp;query=1.5)" visible="eq(-7,)" />
         <!-- Trakt -->
         <setting label="32037" type="lsep" />
         <setting id="trakt_access_token" label="trakt access token" type="text" default="" visible="hidden" />

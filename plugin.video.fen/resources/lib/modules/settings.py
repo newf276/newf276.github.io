@@ -348,13 +348,13 @@ def initialize_databases():
 	if not xbmcvfs.exists(TRAKT_DB):
 		dbcon = database.connect(TRAKT_DB)
 		dbcon.execute("""CREATE TABLE IF NOT EXISTS fentrakt(
-					id TEXT UNIQUE, data TEXT, expires INTEGER)
+					id text unique, data text, expires INTEGER)
 							""")
 		dbcon.close()
 	if not xbmcvfs.exists(FEN_DB):
 		dbcon = database.connect(FEN_DB)
 		dbcon.execute("""CREATE TABLE IF NOT EXISTS fencache(
-					id TEXT UNIQUE, data TEXT, expires INTEGER)
+					id text unique, data text, expires INTEGER)
 							""")
 		dbcon.close()
 	return True

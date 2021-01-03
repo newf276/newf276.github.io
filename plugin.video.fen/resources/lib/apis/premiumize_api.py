@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui
 import requests
-import json
 import time
 import re
 from sys import exit as sysexit
 try: from urllib import urlencode
 except: from urllib.parse import urlencode
+from apis import simplejson as json
 from caches.fen_cache import cache_object
 from modules.utils import to_utf8
 from modules.utils import local_string as ls
@@ -14,6 +14,8 @@ from modules.settings_reader import get_setting, set_setting
 # from modules.utils import logger
 
 progressDialog = xbmcgui.DialogProgress()
+dialog = xbmcgui.Dialog()
+
 monitor = xbmc.Monitor()
 
 class PremiumizeAPI:
@@ -158,14 +160,20 @@ class PremiumizeAPI:
 					if item['id'] == transfer_id:
 						return item
 			return {}
-		def _return_failed(message=ls(32574)):
+		def _return_failed(message=ls(32574), cancelled=False):
 			try:
 				progressDialog.close()
 			except Exception:
 				pass
 			hide_busy_dialog()
 			xbmc.sleep(500)
-			xbmcgui.Dialog().ok(ls(32733), message)
+			if cancelled:
+				if not dialog.yesno(ls(32733), ls(32044)):
+					self.delete_transfer(transfer_id)
+				else:
+					xbmcgui.Dialog().ok(ls(32733), message)
+			else:
+				xbmcgui.Dialog().ok(ls(32733), message)
 			return False
 		show_busy_dialog()
 		extensions = supported_video_extensions()
@@ -193,7 +201,7 @@ class PremiumizeAPI:
 			if monitor.abortRequested() == True: return sysexit()
 			try:
 				if progressDialog.iscanceled():
-					return _return_failed(ls(32736))
+					return _return_failed(ls(32736), cancelled=True)
 			except Exception:
 				pass
 			if transfer_info.get('status') == 'stalled':
@@ -241,8 +249,8 @@ class PremiumizeAPI:
 		url = "transfer/create"
 		return self._post(url, data)
 
-	def delete_transfer(self, folder_id):
-		data = {'id': folder_id}
+	def delete_transfer(self, transfer_id):
+		data = {'id': transfer_id}
 		url = "transfer/delete"
 		return self._post(url, data)
 

@@ -11,8 +11,8 @@ except ImportError: from urllib.parse import urlencode
 
 def build_navigate_to_page(params):
 	import xbmcgui
-	import json
 	import ast
+	from apis import simplejson as json
 	from modules.settings import get_theme, nav_jump_use_alphabet
 	use_alphabet = nav_jump_use_alphabet()
 	invoker_on = get_setting('reuse_language_invoker') == 'true'
@@ -77,13 +77,13 @@ def paginate_list(item_list, page, letter, limit=20):
 	return pages[page - 1], total_pages
 
 def container_update(params):
-	import json
+	from apis import simplejson as json
 	try: final_params = json.loads(params['final_params'])
 	except: final_params = params['final_params']
 	xbmc.executebuiltin('Container.Update(%s)' % build_url(final_params))
 
 def container_refresh(params):
-	import json
+	from apis import simplejson as json
 	try: final_params = json.loads(params['final_params'])
 	except: final_params = params['final_params']
 	xbmc.executebuiltin('Container.Refresh(%s)' % build_url(final_params))
@@ -147,7 +147,7 @@ def focus_index(index):
 def play_trailer(url, all_trailers=[]):
 	if all_trailers:
 		import xbmcgui
-		import json
+		from apis import simplejson as json
 		from modules.utils import clean_file_name, to_utf8
 		all_trailers = to_utf8(json.loads(all_trailers))
 		if len(all_trailers) == 1:
@@ -662,7 +662,7 @@ def clear_scrapers_cache(silent=False):
 	if not silent: notification(ls(32576))
 
 def clear_and_rescrape(content, query, meta, is_widget):
-	import json
+	from apis import simplejson as json
 	show_busy_dialog()
 	clear_scrapers_cache(silent=True)
 	meta_json = json.dumps(meta)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui
-import json
+import os
+from apis import simplejson as json
 from modules.nav_utils import get_skin, show_busy_dialog, hide_busy_dialog, build_url, toggle_setting
 from modules.utils import selection_dialog, multiselect_dialog
 from modules.utils import local_string as ls
@@ -8,10 +9,15 @@ from modules import settings
 from modules.settings_reader import get_setting, set_setting
 # from modules.utils import logger
 
+addon_dir = xbmc.translatePath('special://home/addons/plugin.video.fen')
+
+icon = os.path.join(addon_dir, "icon.png")
+fanart = os.path.join(addon_dir, "fanart.png")
+
 def similar_recommendations_choice(params):
 	from modules.utils import selection_dialog
 	db_type = params['db_type']
-	meta_type = 'movie' if db_type  =='movies' else 'tvshow'
+	meta_type = 'movie' if db_type == 'movies' else 'tvshow'
 	dl = [ls(32592), ls(32593)]
 	fl = ['trakt_%s_related' % db_type, 'tmdb_%s_recommendations' % db_type]
 	mode = 'build_%s_list' % meta_type
@@ -23,31 +29,30 @@ def similar_recommendations_choice(params):
 	except: return
 
 def show_all_actors_choice(media_rootname, full_cast):
-	import os
-	import json
-	dialog = xbmcgui.Dialog()
+	from sys import argv
+	import xbmcplugin
+	from modules.nav_utils import setView
+	__handle__ = int(argv[1])
 	tmdb_api = settings.tmdb_api_check()
 	icon_directory = settings.get_theme()
 	actor_list = []
 	image_base = 'https://image.tmdb.org/t/p/%s%s'
 	for item in json.loads(full_cast):
 		name = item['name']
-		role = '[I]%s[/I]' % item['role']
+		display = '[B]%s:[/B]  %s' % (ls(32608).upper(), name)
 		thumbnail = item['thumbnail']
-		if thumbnail:
-			raw_image_path = '/' + thumbnail.split('/')[-1]
-			image = image_base % ('h632', raw_image_path)
-		else:
-			image = thumbnail =  os.path.join(icon_directory, 'genre_family.png')
-		listitem = xbmcgui.ListItem(name, role)
-		listitem.setArt({'icon': thumbnail})
-		listitem.setProperty('name', name)
-		actor_list.append(listitem)
-	selection = dialog.select('Fen', actor_list, useDetails=True)
-	if selection < 0: return
-	actor_name = actor_list[selection].getProperty('name')
-	extras_person_params = {'mode': 'people_search.extras_person_data', 'person_name': actor_name, 'tmdb_api': tmdb_api}
-	xbmc.executebuiltin('Container.Update(%s)' % build_url(extras_person_params))
+		if thumbnail: thumbnail = thumbnail.replace('w185', 'h632')
+		else: thumbnail = os.path.join(icon_directory, 'genre_family.png')
+		try: listitem = xbmcgui.ListItem(offscreen=True)
+		except: listitem = xbmcgui.ListItem()
+		listitem.setLabel(display)
+		listitem.setArt({'icon': thumbnail, 'poster': thumbnail, 'fanart': fanart})
+		listitem.setInfo('Video', {})
+		url = build_url({'mode': 'people_search.extras_person_data', 'person_name': name, 'tmdb_api': tmdb_api})
+		xbmcplugin.addDirectoryItem(__handle__, url, listitem, isFolder=True)
+	xbmcplugin.setContent(__handle__, 'files')
+	xbmcplugin.endOfDirectory(__handle__)
+	setView('view.main', 'files')
 
 def imdb_reviews_choice(imdb_id, rootname, poster):
 	from apis.imdb_api import imdb_reviews
@@ -104,7 +109,6 @@ def imdb_trivia_choice(imdb_id, rootname, poster, content):
 	if total_results > 1: return imdb_trivia_choice(imdb_id, rootname, poster, content)
 
 def imdb_parentsguide_choice(imdb_id, rootname):
-	import os
 	from apis.imdb_api import imdb_parentsguide
 	show_busy_dialog()
 	icon_directory = settings.get_theme()
@@ -141,6 +145,37 @@ def imdb_parentsguide_choice(imdb_id, rootname):
 	text = '\n\n'.join(['%02d. %s' % (count, i) for count, i in enumerate(chosen_parentsguide['listings'], 1)])
 	dialog.textviewer('%s - %s' % (inputs[chosen_parentsguide['title']][0], levels[chosen_parentsguide['ranking'].lower()].upper()), text)
 	if total_results > 1: return imdb_parentsguide_choice(imdb_id, rootname)
+
+def imdb_keywords_choice(params):
+	from sys import argv
+	import xbmcplugin
+	from apis.imdb_api import imdb_keywords
+	from modules.nav_utils import setView
+	__handle__ = int(argv[1])
+	meta = json.loads(params['meta'])
+	db_type = params['db_type']
+	imdb_id = meta['imdb_id']
+	poster, fanart, banner, clearart = meta['poster'], meta['fanart'], meta['banner'], meta['clearart']
+	clearlogo, landscape, discart = meta['clearlogo'], meta['landscape'], meta['discart']
+	keywords_info = imdb_keywords(imdb_id)
+	if keywords_info == 0:
+		from modules.nav_utils import notification
+		notification(ls(32760), 3500)
+	meta_type = 'movie' if db_type == 'movies' else 'tvshow'
+	mode = 'build_%s_list' % meta_type
+	for i in keywords_info:
+		try:
+			try: listitem = xbmcgui.ListItem(offscreen=True)
+			except: listitem = xbmcgui.ListItem()
+			listitem.setLabel(i.upper())
+			listitem.setArt({'poster': poster, 'fanart': fanart, 'icon': poster, 'banner': banner, 'clearart': clearart, 'clearlogo': clearlogo, 'landscape': landscape, 'discart': discart})
+			listitem.setInfo('Video', {})
+			url = build_url({'mode': mode, 'action': 'imdb_keywords_list_contents', 'list_id': i})
+			xbmcplugin.addDirectoryItem(__handle__, url, listitem, isFolder=True)
+		except: pass
+	xbmcplugin.setContent(__handle__, 'files')
+	xbmcplugin.endOfDirectory(__handle__)
+	setView('view.main', 'files')
 
 def imdb_videos_choice(videos):
 	videos = json.loads(videos)
@@ -570,22 +605,24 @@ def extras_menu(media_type, meta_json):
 	year_runner = build_url({'mode': 'build_%s_list' % ('movie' if base_media == 'movies' else 'tvshow'), 'action': 'tmdb_%s_year' % base_media, 'year': year})
 	genre_runner = build_url({'mode': 'build_%s_list' % ('movie' if base_media == 'movies' else 'tvshow'), 'action': 'tmdb_%s_genres' % base_media, 'genre_list': json.dumps(genre_dict)})
 	network_runner = build_url({'mode': 'build_%s_list' % ('movie' if base_media == 'movies' else 'tvshow'), 'action': 'tmdb_%s_networks' % base_media, 'network_id': network_id, 'network_name': network})
-	collection_runner = build_url({'mode': 'build_movie_list', 'action': 'tmdb_movies_collection', 'collection_id': collection_id})
+	if collection_id: collection_runner = build_url({'mode': 'build_movie_list', 'action': 'tmdb_movies_collection', 'collection_id': collection_id})
 	extra_info_runner = build_url({'mode': 'media_extra_info_choice', 'media_type': media_type, 'meta': meta_json, 'extra_info': json.dumps(extra_info)})
 	images_posters_runner = build_url({'mode': 'tmdb_artwork_image_results', 'db_type': base_media, 'tmdb_id': tmdb_id, 'image_type': 'posters'})
 	images_backdrops_runner = build_url({'mode': 'tmdb_artwork_image_results', 'db_type': base_media, 'tmdb_id': tmdb_id, 'image_type': 'backdrops'})
-	images_runner = build_url({'mode': 'imdb_image_results', 'imdb_id': imdb_id, 'page_no': 1, 'rolling_count': 0})
-	videos_runner = build_url({'mode': 'imdb_build_videos_list', 'imdb_id': imdb_id})
-	reviews_runner = build_url({'mode': 'imdb_reviews_choice', 'rootname': rootname, 'imdb_id': imdb_id, 'poster': poster})
-	trivia_runner = build_url({'mode': 'imdb_trivia_choice', 'rootname': rootname, 'content': 'trivia', 'imdb_id': imdb_id, 'poster': poster})
-	blunders_runner = build_url({'mode': 'imdb_trivia_choice', 'rootname': rootname, 'content': 'blunders', 'imdb_id': imdb_id, 'poster': poster})
-	parentsguide_runner = build_url({'mode': 'imdb_parentsguide_choice', 'rootname': rootname, 'imdb_id': imdb_id})
+	if imdb_id:
+		images_runner = build_url({'mode': 'imdb_image_results', 'imdb_id': imdb_id, 'page_no': 1, 'rolling_count': 0})
+		videos_runner = build_url({'mode': 'imdb_build_videos_list', 'imdb_id': imdb_id})
+		reviews_runner = build_url({'mode': 'imdb_reviews_choice', 'rootname': rootname, 'imdb_id': imdb_id, 'poster': poster})
+		trivia_runner = build_url({'mode': 'imdb_trivia_choice', 'rootname': rootname, 'content': 'trivia', 'imdb_id': imdb_id, 'poster': poster})
+		blunders_runner = build_url({'mode': 'imdb_trivia_choice', 'rootname': rootname, 'content': 'blunders', 'imdb_id': imdb_id, 'poster': poster})
+		parentsguide_runner = build_url({'mode': 'imdb_parentsguide_choice', 'rootname': rootname, 'imdb_id': imdb_id})
+		keywords_runner = build_url({'mode': 'imdb_keywords_choice', 'db_type': base_media, 'meta': meta_json})
 	extended_info_runner = build_url({'mode': 'extended_info_open', 'db_type': base_media, 'tmdb_id': tmdb_id})
 	items = []
 	items += [("%s/%s" % (ls(32592), ls(32593)), sim_recom_runner, False)]
 	if extra_info: items += [(ls(32605), extra_info_runner, False)]
 	if plot: items += [(ls(32987), plot_runner, False)]
-	if cast: items += [(ls(32608), actors_runner, False)]
+	if cast: items += [(ls(32608), actors_runner, True)]
 	if trailer: items += [(ls(32606), trailer_runner, False)]
 	if imdb_id:
 		items += [(ls(32988), images_runner, True)]
@@ -594,6 +631,7 @@ def extras_menu(media_type, meta_json):
 		items += [('%s (%s)' % (ls(32984), ls(32985)), trivia_runner, False)]
 		items += [('%s (%s)' % (ls(32986), ls(32985)), blunders_runner, False)]
 		items += [('%s (%s)' % (ls(32989), ls(32985)), parentsguide_runner, False)]
+		items += [(ls(32092), keywords_runner, True)]
 	if media_type == 'movies' and director: items += [(ls(32609), director_runner, True)]
 	if settings.addon_installed('script.extendedinfo'): items += [(ls(32610), extended_info_runner, False)]
 	if collection_id: items += [(ls(32611) % collection_name, collection_runner, True)]
@@ -621,8 +659,10 @@ def media_extra_info(media_type, meta, extra_info):
 	extra_info = json.loads(extra_info)
 	meta = json.loads(meta)
 	body = []
-	tagline_str, premiered_str, rating_str, votes_str, runtime_str, genres_str, budget_str, revenue_str, director_str, writer_str = ls(32619), ls(32620), ls(32621), ls(32623), ls(32622), ls(32624), ls(32625), ls(32626), ls(32627), ls(32628)
-	studio_str, collection_str, homepage_str, status_str, type_str, classification_str, network_str, created_by_str, last_aired_str, next_aired_str, seasons_str, episodes_str = ls(32615), ls(32499), ls(32629), ls(32630), ls(32631), ls(32632), ls(32480), ls(32633), ls(32634), ls(32635), ls(32636), ls(32506)
+	tagline_str, premiered_str, rating_str, votes_str, runtime_str = ls(32619), ls(32620), ls(32621), ls(32623), ls(32622)
+	genres_str, budget_str, revenue_str, director_str, writer_str = ls(32624), ls(32625), ls(32626), ls(32627), ls(32628)
+	studio_str, collection_str, homepage_str, status_str, type_str, classification_str = ls(32615), ls(32499), ls(32629), ls(32630), ls(32631), ls(32632)
+	network_str, created_by_str, last_aired_str, next_aired_str, seasons_str, episodes_str = ls(32480), ls(32633), ls(32634), ls(32635), ls(32636), ls(32506)
 	try:
 		if media_type == 'movies':
 			body.append('[B]%s:[/B] %s' % (tagline_str, meta['tagline']))

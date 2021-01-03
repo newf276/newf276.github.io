@@ -178,6 +178,10 @@ msgctxt "#32043"
 msgid "Activate Next Episode Search (%)"
 msgstr ""
 
+msgctxt "#32044"
+msgid "Continue Transfer in Background?"
+msgstr ""
+
 msgctxt "#32045"
 msgid "UTC (+/-)"
 msgstr ""
@@ -364,6 +368,10 @@ msgstr ""
 
 msgctxt "#32091"
 msgid "Full"
+msgstr ""
+
+msgctxt "#32092"
+msgid "Search Keywords"
 msgstr ""
 
 msgctxt "#32093"
@@ -3112,7 +3120,7 @@ msgid "%s of %s Watched"
 msgstr ""
 
 msgctxt "#33047"
-msgid "Watched Status Notifications (Movie, TV Show, Season)"
+msgid "Watched Status Notifications (Movie, TV Show, Season, Episode)"
 msgstr ""
 
 msgctxt "#33048"
@@ -3183,17 +3191,7 @@ msgctxt "#33066"
 msgid "Enable Notifications"
 msgstr ""
 
-msgctxt "#32011"
-msgid ""
-msgstr ""
-
-msgctxt "#32044"
-msgid ""
-msgstr ""
-
-msgctxt "#32092"
-msgid ""
-msgstr ""
+#########################################################################################################################
 
 msgctxt "#32094"
 msgid ""

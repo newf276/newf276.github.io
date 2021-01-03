@@ -5,12 +5,12 @@ except ImportError: from urllib.parse import parse_qsl
 try: from sqlite3 import dbapi2 as database
 except ImportError: from pysqlite2 import dbapi2 as database
 from sys import argv
-import json
 from datetime import date
 import _strptime  # fix bug in python import
 from threading import Thread
 from modules.nav_utils import build_url, setView, remove_unwanted_info_keys, notification
 from modules.utils import jsondate_to_datetime
+from apis import simplejson as json
 from apis.trakt_api import get_trakt_tvshow_id, trakt_get_next_episodes
 from indexers.tvshows import build_episode
 from modules.utils import local_string as ls

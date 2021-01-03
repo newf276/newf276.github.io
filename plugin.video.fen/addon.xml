@@ -1,4 +1,4 @@
-<addon id="plugin.video.fen" name="Fen" provider-name="Newf276, Tiki" version="10.8.22">
+<addon id="plugin.video.fen" name="Fen" provider-name="Newf276, Tiki" version="10.8.23">
     <requires>
         <import addon="script.module.requests" version="2.19.1" />
         <import addon="script.module.tikimeta" version="1.0.0" />

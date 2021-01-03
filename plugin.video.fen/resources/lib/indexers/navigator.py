@@ -1,10 +1,10 @@
 import xbmc, xbmcvfs, xbmcplugin, xbmcgui
 import os
 from sys import argv
-import json
 import time
 try: from urllib import urlencode
 except ImportError: from urllib.parse import urlencode
+from apis import simplejson as json
 from indexers.default_menus import DefaultMenus
 from modules.nav_utils import setView
 from modules.utils import to_utf8

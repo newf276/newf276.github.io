@@ -69,7 +69,7 @@ def in_progress_tvshow(db_type, page_no, letter):
 	return final_list, total_pages
 
 def build_in_progress_episode():
-	import json
+	from apis import simplejson as json
 	from modules.indicators_bookmarks import get_watched_info_tv
 	def process_eps(item):
 		episode_item = {"season": int(item[1]), "episode": int(item[2]), "meta": tvshow_meta('tmdb_id', item[0], meta_user_info),

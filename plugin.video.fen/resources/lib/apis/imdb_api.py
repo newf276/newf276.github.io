@@ -12,6 +12,8 @@ base_url = 'https://www.imdb.com/'
 watchlist_url = 'user/ur%s/watchlist'
 user_list_movies_url = 'list/%s/?view=detail&sort=%s&title_type=movie,short,video,tvShort,tvMovie,tvSpecial&start=1&page=%s'
 user_list_tvshows_url = 'list/%s/?view=detail&sort=%s&title_type=tvSeries,tvMiniSeries&start=1&page=%s'
+keywords_movies_url = 'search/keyword/?keywords=%s&sort=moviemeter,asc&title_type=movie,tvMovie&page=%s'
+keywords_tvshows_url = 'search/keyword/?keywords=%s&sort=moviemeter,asc&title_type=tvSeries,tvMiniSeries&page=%s'
 lists_link = 'user/ur%s/lists?tab=all&sort=mdfd&order=desc&filter=titles'
 reviews_url = 'title/%s/reviews?sort=helpfulness'
 trivia_url = 'title/%s/trivia'
@@ -19,6 +21,7 @@ blunders_url = 'title/%s/goofs'
 parentsguide_url = 'title/%s/parentalguide'
 images_url = 'title/%s/mediaindex?page=%s'
 videos_url = '_json/video/%s'
+keywords_url = 'title/%s/keywords?'
 people_images_url = 'name/%s/mediaindex?page=%s'
 people_search_url_backup = 'search/name/?name=%s'
 people_search_url = 'https://sg.media-imdb.com/suggests/%s/%s.json'
@@ -58,6 +61,15 @@ def imdb_user_list_contents(db_type, list_id, page_no):
 	params = {'url': list_id, 'action': 'imdb_user_list_contents', 'db_type': db_type, 'sort': sort, 'page_no': page_no}
 	return cache_object(get_imdb, string, params, False, 0.5)
 
+def imdb_keywords_list_contents(db_type, list_id, page_no):
+	''' 'list_id' is the keywords. '''
+	keywords = list_id.replace(' ', '-')
+	add_url = keywords_movies_url if db_type == 'movies' else keywords_tvshows_url
+	url = base_url + add_url % (keywords, page_no)
+	string = "%s_%s_%s_%s" % ('imdb_keywords_list_contents', db_type, keywords, page_no)
+	params = {'url': url, 'action': 'imdb_keywords_list_contents'}
+	return cache_object(get_imdb, string, params, False, 168)
+
 def imdb_reviews(imdb_id):
 	url = base_url + reviews_url % imdb_id
 	string = "%s_%s" % ('imdb_reviews', imdb_id)
@@ -95,6 +107,12 @@ def imdb_people_images(imdb_id, page_no):
 	params = {'url': url, 'action': 'imdb_images', 'next_page': 1}
 	return cache_object(get_imdb, string, params, False, 168)
 
+def imdb_keywords(imdb_id):
+	url = base_url + keywords_url % imdb_id
+	string = '%s_%s' % ('imdb_keywords', imdb_id)
+	params = {'url': url, 'action': 'imdb_keywords'}
+	return cache_object(get_imdb, string, params, False, 720)[0]
+
 def imdb_people_id(name):
 	name = name.lower()
 	string = "%s_%s" % ('imdb_people_id', name)
@@ -119,11 +137,12 @@ def get_imdb(params):
 		date_time = (datetime.utcnow() - timedelta(hours=5))
 		for i in re.findall('date\[(\d+)\]', url):
 			url = url.replace('date[%s]' % i, (date_time - timedelta(days = int(i))).strftime('%Y-%m-%d'))
-	if action in ('imdb_watchlist', 'imdb_user_list_contents'):
-		list_url_type = user_list_movies_url if params['db_type'] == 'movies' else user_list_tvshows_url
-		if action == 'imdb_watchlist':
-			url = parseDOM(to_utf8(remove_accents(requests.get(url).text)), 'meta', ret='content', attrs = {'property': 'pageId'})[0]
-		url = base_url + list_url_type % (url, params['sort'], params['page_no'])
+	if action in ('imdb_watchlist', 'imdb_user_list_contents', 'imdb_keywords_list_contents'):
+		if action in ('imdb_watchlist', 'imdb_user_list_contents'):
+			list_url_type = user_list_movies_url if params['db_type'] == 'movies' else user_list_tvshows_url
+			if action == 'imdb_watchlist':
+				url = parseDOM(to_utf8(remove_accents(requests.get(url).text)), 'meta', ret='content', attrs = {'property': 'pageId'})[0]
+			url = base_url + list_url_type % (url, params['sort'], params['page_no'])
 		result = requests.get(url)
 		result = to_utf8(remove_accents(result.text))
 		result = result.replace('\n', ' ')
@@ -257,7 +276,7 @@ def get_imdb(params):
 			imdb_list.append({'title': title, 'poster': poster, 'videos': videos})
 	elif action == 'imdb_people_id':
 		try:
-			import json
+			from apis import simplejson as json
 			name = params['name']
 			result = requests.get(url).content
 			result = to_utf8(json.loads(result.replace('imdb$%s(' % name.replace(' ', '_'), '')[:-1]))['d']
@@ -337,6 +356,17 @@ def get_imdb(params):
 						imdb['listings'].extend(spo['listings'])
 		for item in imdb_list:
 			item['listings'] = list(set(item['listings']))
+	elif action == 'imdb_keywords':
+		result = requests.get(url)
+		result = to_utf8(remove_accents(result.text))
+		result = result.replace('\n', ' ')
+		items = parseDOM(result, 'div', attrs={'class': 'sodatext'})
+		for item in to_utf8(items):
+			try:
+				keyword = re.findall('" >(.+?)</a>', item, re.DOTALL)[0]
+				imdb_list.append(keyword)
+			except: pass
+		imdb_list = sorted(imdb_list)
 	return (imdb_list, next_page)
 
 def clear_imdb_cache(silent=False):

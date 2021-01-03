@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import xbmcgui
-import json
+from apis import simplejson as json
 # from modules.utils import logger
 
 window = xbmcgui.Window(10000)

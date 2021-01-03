@@ -4,10 +4,10 @@ import os
 from sys import argv
 try: from urllib import unquote
 except ImportError: from urllib.parse import unquote
-import json
 import re
 try: from urlparse import parse_qsl
 except ImportError: from urllib.parse import parse_qsl
+from apis import simplejson as json
 from apis.opensubtitles_api import OpenSubtitlesAPI
 from apis.trakt_api import make_trakt_slug
 from modules.indicators_bookmarks import detect_bookmark, erase_bookmark

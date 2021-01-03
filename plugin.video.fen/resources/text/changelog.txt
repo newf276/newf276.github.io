@@ -1,4 +1,12 @@
 [B]Please utilize Fen Tips (Tools->Tips for Fen Use) to catch up on any important new features. New features will be highlighted with a [COLOR chartreuse]NEW!!![/COLOR] label.[/B]
+
+[COLOR dodgerblue][B]Version 1.8.23[/B][/COLOR]
+- Fixed incorrect progress and watched status values when using the progress notification.
+- Added Keyword Search in Extras Menu.
+- Changed some actions in the Extras Menu.
+- Added ability to continue transfer of uncached torrent to your cloud if you cancel the foreground process (thanks 123Venom). Item will not autoplay upon completed transfer if you choose this of course.
+- Other fixes.
+
 [COLOR dodgerblue][B]Version 1.8.22[/B][/COLOR]
 [B]THIS IS A REGRESSION UPDATE. FEATURES ARE BEING REMOVED. PLEASE REVERT YOUR INSTALL TO 1.8.19/20/21b IF YOU NEED TO KEEP THE FOLLOWING FEATURES, AND TURN OFF AUTO-UPDATES. THESE FEATURES WILL NOT BE RETURNING TO FEN.[/B]
 - Removed Library Integration (Fen Subscriptions). Please use another addon for library items moving forward.

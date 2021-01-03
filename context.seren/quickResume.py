@@ -7,13 +7,10 @@ if __name__ == '__main__':
     path = item.getPath()
 
     if 'action=showSeasons' in path:
-        path = path.replace('action=showSeasons', 'action=playbackResume')
-
-    elif 'action=smartPlay' in path:
-        path = path.replace('action=smartPlay', 'action=playbackResume')
+        path = path.replace('action=showSeasons', 'action=forceResumeShow')
 
     elif 'action=flatEpisodes' in path:
-        path = path.replace('action=flatEpisodes', 'action=playbackResume')
+        path = path.replace('action=flatEpisodes', 'action=forceResumeShow')
 
     elif 'action=playbackResume' in path:
         pass

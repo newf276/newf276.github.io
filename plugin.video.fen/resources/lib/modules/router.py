@@ -106,7 +106,7 @@ def routing(argv):
 		if mode == 'play_media':
 			from modules.sources import Sources
 			if 'params' in params:
-				import json
+				from apis import simplejson as json
 				params = json.loads(params['params'])
 			Sources().playback_prep(params)
 		elif mode == 'play_display_results':
@@ -163,6 +163,8 @@ def routing(argv):
 			dialogs.imdb_parentsguide_choice(params['imdb_id'], params['rootname'])
 		elif mode == 'imdb_trivia_choice':
 			dialogs.imdb_trivia_choice(params['imdb_id'], params['rootname'], params['poster'], params['content'])
+		elif mode == 'imdb_keywords_choice':
+			dialogs.imdb_keywords_choice(params)
 		elif mode == 'set_quality_choice':
 			dialogs.set_quality(params['quality_setting'])
 		elif mode == 'results_sorting_choice':
@@ -439,7 +441,7 @@ def routing(argv):
 			from indexers.alldebrid import resolve_ad
 			downloader.download(params, resolve_ad(params))
 		else:
-			import json
+			from apis import simplejson as json
 			from modules import sources
 			downloader.download(params, sources.Sources().resolve_sources(json.loads(params.get('source'))[0]))
 

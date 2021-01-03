@@ -2,7 +2,7 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
 from sys import argv
-import json
+from apis import simplejson as json
 from apis.imdb_api import imdb_user_lists, imdb_videos
 from modules.settings import get_theme
 from modules.nav_utils import build_url, setView

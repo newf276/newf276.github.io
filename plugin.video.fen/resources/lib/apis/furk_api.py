@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
 import requests
-import json
 import time
 from datetime import timedelta
 from caches import fen_cache
+from apis import simplejson as json
 from modules.utils import to_utf8, remove_accents
 from modules.settings_reader import get_setting, set_setting
 # from modules.utils import logger

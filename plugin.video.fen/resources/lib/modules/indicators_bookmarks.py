@@ -1,7 +1,7 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
-import json
 from datetime import datetime, date
+from apis import simplejson as json
 from modules.text import to_unicode
 from caches.trakt_cache import clear_trakt_watched_data, clear_trakt_collection_watchlist_data
 from modules.utils import local_string as ls

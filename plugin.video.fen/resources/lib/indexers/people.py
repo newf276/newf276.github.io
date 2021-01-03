@@ -2,9 +2,9 @@
 import xbmc, xbmcgui, xbmcplugin
 import os
 from sys import argv
-import json
 try: from urllib import unquote
 except ImportError: from urllib.parse import unquote
+from apis import simplejson as json
 from apis import tmdb_api as TMDb
 from modules.nav_utils import build_url, add_dir, setView, notification
 from modules.utils import local_string as ls
@@ -101,7 +101,6 @@ class People():
 		people_tagged_image_results(self.actor_name, self.actor_id, self.actor_image, self.page_no, self.count)
 
 	def video_results(self):
-		import json
 		from apis.imdb_api import imdb_people_id, imdb_videos
 		imdb_id = people_get_imdb_id(self.actor_name, self.actor_id)
 		try: videos_list = imdb_videos(imdb_id)
@@ -193,7 +192,6 @@ class People():
 		return actor_id, actor_name, actor_image
 
 	def extras_person_data(self, person_name, tmdb_api):
-		import json
 		if not tmdb_api: tmdb_api = settings.tmdb_api_check()
 		from apis.tmdb_api import get_tmdb
 		from caches.fen_cache import cache_object
@@ -206,29 +204,8 @@ class People():
 		url = 'https://api.themoviedb.org/3/search/person?api_key=%s&language=en-US&query=%s' % (tmdb_api, self.actor_name)
 		result = cache_object(get_tmdb, string, url, 4)
 		result = result['results']
-		actor_list = []
-		if len(result) > 1:
-			for item in result:
-				name = item['name']
-				thumbnail = self.image_base % ('w185', item['profile_path'])
-				image = self.image_base % ('original', item['profile_path'])
-				known_for_list = [i.get('title', 'NA') for i in item['known_for']]
-				known_for_list = [i for i in known_for_list if not i == 'NA']
-				known_for = '[I]%s[/I]' % ', '.join(known_for_list) if known_for_list else '[I]..........[/I]'
-				listitem = xbmcgui.ListItem(name, known_for)
-				listitem.setArt({'icon': thumbnail})
-				listitem.setProperty('id', str(item['id']))
-				listitem.setProperty('name', name)
-				listitem.setProperty('image', image)
-				actor_list.append(listitem)
-			selection = dialog.select('Fen', actor_list, useDetails=True)
-			if selection < 0: return
-			self.actor_id = int(actor_list[selection].getProperty('id'))
-			self.actor_name = actor_list[selection].getProperty('name')
-			self.actor_image = actor_list[selection].getProperty('image')
-		else:
-			self.actor_id = [item['id'] for item in result][0]
-			if not self.actor_image: self.actor_image = [self.image_base % ('original', item['profile_path']) for item in result][0]
+		self.actor_id = [item['id'] for item in result][0]
+		if not self.actor_image: self.actor_image = [self.image_base % ('original', item['profile_path']) for item in result][0]
 		self.main()
 
 	def _add_dir(self, list_name, mode, url_params, isFolder=True):

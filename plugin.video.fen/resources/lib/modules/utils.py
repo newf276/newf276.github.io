@@ -3,6 +3,17 @@ from xbmcaddon import Addon
 
 __addon__ = Addon(id='plugin.video.fen')
 
+def timeIt(func):
+	# Thanks to 123Venom
+	import time
+	fnc_name = func.__name__
+	def wrap(*args, **kwargs):
+		started_at = time.time()
+		result = func(*args, **kwargs)
+		logger('%s.%s' % (__name__ , fnc_name), (time.time() - started_at))
+		return result
+	return wrap
+
 def local_string(string):
 	try: string = int(string)
 	except: return string

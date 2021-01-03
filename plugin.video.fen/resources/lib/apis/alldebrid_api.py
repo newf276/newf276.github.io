@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui
 import requests
-import json
 import time
 import re
 from sys import exit as sysexit
+from apis import simplejson as json
 from caches.fen_cache import cache_object
 from modules.utils import local_string as ls
 from modules.settings_reader import get_setting, set_setting
 # from modules.utils import logger
 
 progressDialog = xbmcgui.DialogProgress()
+dialog = xbmcgui.Dialog()
+
 monitor = xbmc.Monitor()
 
 class AllDebridAPI:
@@ -158,15 +160,20 @@ class AllDebridAPI:
 	def add_uncached_torrent(self, magnet_url, pack=False):
 		import xbmc
 		from modules.nav_utils import show_busy_dialog, hide_busy_dialog
-		def _return_failed(message=ls(32574)):
+		def _return_failed(message=ls(32574), cancelled=False):
 			try:
 				progressDialog.close()
 			except Exception:
 				pass
-			self.delete_transfer(transfer_id)
 			hide_busy_dialog()
 			xbmc.sleep(500)
-			xbmcgui.Dialog().ok(ls(32733), message)
+			if cancelled:
+				if not dialog.yesno('Fen', ls(32044)):
+					self.delete_transfer(transfer_id)
+				else:
+					xbmcgui.Dialog().ok(ls(32733), message)
+			else:
+				xbmcgui.Dialog().ok(ls(32733), message)
 			return False
 		show_busy_dialog()
 		transfer_id = self.create_transfer(magnet_url)
@@ -203,7 +210,7 @@ class AllDebridAPI:
 			if monitor.abortRequested() == True: return sysexit()
 			try:
 				if progressDialog.iscanceled():
-					return _return_failed(ls(32736))
+					return _return_failed(ls(32736), cancelled=True)
 			except Exception:
 				pass
 			if 5 <= transfer_info['statusCode'] <= 10:

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import requests
 import re
-import json
 import datetime
 import base64
 try: from urllib import urlencode, quote # Python 2
 except ImportError: from urllib.parse import urlencode, quote # Python 3
+from apis import simplejson as json
 from caches import fen_cache
 from modules.utils import to_utf8
 from modules.settings_reader import get_setting, set_setting

@@ -3,13 +3,13 @@ import xbmc, xbmcgui
 import os
 import sys
 import re
-import json
 import time
 import datetime
 from importlib import import_module
 from threading import Thread
 try: from sqlite3 import dbapi2 as database
 except Exception: from pysqlite2 import dbapi2 as database
+from apis import simplejson as json
 from modules.nav_utils import show_busy_dialog, hide_busy_dialog, notification
 from modules.utils import byteify, clean_file_name
 from modules.utils import local_string as ls
@@ -88,7 +88,7 @@ class ExternalSource:
 						elif len_alive_threads > 6: line3 = string3 % str(len_alive_threads)
 						else: line3 = string3 % ', '.join(info).upper()
 						self.progressDialog.update(percent, line1, line2, line3)
-						if pre_emp == 'true':
+						if pre_emp:
 							combined_source_4k = self.source_4k + self.internalSources4K
 							combined_source_1080 = self.source_1080 + self.internalSources1080p
 							combined_source_720 = self.source_720 + self.internalSources720p
@@ -121,7 +121,7 @@ class ExternalSource:
 			start_time = time.time()
 			end_time = start_time + timeout
 			while time.time() < end_time:
-				if pre_emp == 'true':
+				if pre_emp:
 					combined_source_4k = self.source_4k + self.internalSources4K
 					combined_source_1080 = self.source_1080 + self.internalSources1080p
 					combined_source_720 = self.source_720 + self.internalSources720p
@@ -154,7 +154,7 @@ class ExternalSource:
 				else: pack_arg, source = None, sourceDict[i][0]
 				source_display, module_path = sourceDict[i][0], sourceDict[i][1]
 				threads.append(Thread(target=self.getEpisodeSource, args=(title, year, imdb, tvdb, season, episode, tvshowtitle, aliases, premiered, source, module_path, pack_arg), name=source_display))
-		pre_emp = get_setting('preemptive.termination')
+		pre_emp = get_setting('preemptive.termination', 'false') == 'true'
 		pre_emp_quality = get_setting('preemptive.quality')
 		pre_emp_limit = int(get_setting('preemptive.limit', '1000'))
 		timeout = int(get_setting('scrapers.timeout.1', '60'))
@@ -178,6 +178,10 @@ class ExternalSource:
 		[i.start() for i in threads]
 		if self.background: _background()
 		else: _scraperDialog()
+			# from windows.get_sources import getSources
+			# self.progressDialog = getSources()
+			# self.progressDialog.create('Test', line1='gib1', line2='gib2', line3='gib3')
+			# _scraperDialog()
 		self.final_sources.extend(self.sources)
 		self.sourcesStats(sourceDict, self.final_sources)
 		self.sourcesFilter()
@@ -323,13 +327,13 @@ class ExternalSource:
 		def _processTorrentFilters(item):
 			if item in ('Real-Debrid', 'Premiumize.me', 'AllDebrid'):
 				self.filter += [dict(i, **{'debrid':item}) for i in torrentSources if item == i.get('cache_provider')]
-				if self.uncachedTorrents == 'true':
+				if self.uncachedTorrents:
 					self.filter += [dict(i, **{'debrid':item}) for i in torrentSources if 'Uncached' in i.get('cache_provider') and item in i.get('cache_provider')]
 		def _processHosterFilters(item):
 			for k, v in item.items():
 				valid_hosters = [i for i in result_hosters if i in v]
 				self.filter += [dict(i, **{'debrid':k}) for i in hoster_sources if i['source'] in valid_hosters]
-		if 'true' in (self.removeDuplicates, self.removeDuplicatesTorrents):
+		if any([self.removeDuplicateHosters, self.removeDuplicateTorrents]):
 			if len(self.final_sources) > 0:
 				self.final_sources = list(self.sourcesRemoveDuplicates(self.final_sources))
 				if not self.background: notification(ls(32679) % self.duplicates, 2500)
@@ -397,11 +401,11 @@ class ExternalSource:
 		if internal:
 			for i in sources:
 				quality = i['quality']
-				if quality == '4K' and not 'uncached' in i: self.internalSources4K += 1
-				elif quality in ['1440p', '1080p'] and not 'uncached' in i: self.internalSources1080p += 1
-				elif quality in ['720p', 'HD'] and not 'uncached' in i: self.internalSources720p += 1
-				elif not 'uncached' in i: self.internalSourcesSD += 1
-				if not 'uncached' in i: self.internalSourcesTotal += 1
+				if quality == '4K': self.internalSources4K += 1
+				elif quality in ['1440p', '1080p']: self.internalSources1080p += 1
+				elif quality in ['720p', 'HD']: self.internalSources720p += 1
+				else: self.internalSourcesSD += 1
+				self.internalSourcesTotal += 1
 		else:
 			for i in sources:
 				quality = i['quality']
@@ -416,10 +420,10 @@ class ExternalSource:
 		uniqueHashes = set()
 		for source in sources:
 			try:
-				if self.removeDuplicates == 'true':
+				if self.removeDuplicateHosters:
 					if source['url'] not in uniqueURLs:
 						uniqueURLs.add(source['url'])
-						if self.removeDuplicatesTorrents == 'true':
+						if self.removeDuplicateTorrents:
 							if 'hash' in source:
 								if source['hash'] not in uniqueHashes:
 									uniqueHashes.add(source['hash'])
@@ -428,7 +432,7 @@ class ExternalSource:
 							else: yield source
 						else: yield source
 					else: self.duplicates += 1
-				elif self.removeDuplicatesTorrents == 'true':
+				elif self.removeDuplicateTorrents:
 					if 'hash' in source:
 						if source['hash'] not in uniqueHashes:
 							uniqueHashes.add(source['hash'])
@@ -472,7 +476,7 @@ class ExternalSource:
 			for item in [('Real-Debrid', 'rd_cached_hashes'), ('Premiumize.me', 'pm_cached_hashes'), ('AllDebrid', 'ad_cached_hashes')]:
 				if item[0] in self.debrid_torrents:
 					torrent_results.extend([dict(i, **{'cache_provider':item[0]}) for i in torrentSources if i['hash'] in cached_hashes[item[1]]])
-					if self.uncachedTorrents == 'true':
+					if self.uncachedTorrents:
 						torrent_results.extend([dict(i, **{'cache_provider':'Uncached %s' % item[0]}) for i in torrentSources if not i['hash'] in cached_hashes[item[1]]])
 			return torrent_results
 		except:
@@ -574,16 +578,15 @@ class ExternalSource:
 		self.duplicates = 0
 		self.database_timeout = 60.0
 		source_utils.checkDatabase()
-		self.remove_failing_scrapers = get_setting('remove.failing_scrapers')
-		if self.remove_failing_scrapers == 'true': self.sourcesRemoveFailing()
+		if get_setting('remove.failing_scrapers', 'false') == 'true': self.sourcesRemoveFailing()
 		self.providerDatabase = source_utils.database_path
 		self.direct_ext_scrapers = ['ororo', 'filepursuit', 'gdrive']
 		self.debrid_label_dict = {'real-debrid': 'RD', 'premiumize.me': 'PM', 'alldebrid': 'AD'}
 		self.hostDict = self.make_hostDict()
 		self.sourceDictPack = source_utils.packSources()
-		self.uncachedTorrents = get_setting('torrent.display.uncached')
-		self.removeDuplicates = get_setting('remove.duplicates')
-		self.removeDuplicatesTorrents = get_setting('remove.duplicates.torrents')
+		self.uncachedTorrents = get_setting('torrent.display.uncached', 'false') == 'true'
+		self.removeDuplicateHosters = get_setting('remove.duplicates') == 'true'
+		self.removeDuplicateTorrents = get_setting('remove.duplicates.torrents') == 'true'
 		self.sleep_time = display_sleep_time()
 		self.internalSourcesTotal = self.internalSources4K = self.internalSources1080p = self.internalSources720p = self.internalSourcesSD = 0
 		self.total = self.source_4k = self.source_1080 = self.source_720 = self.source_sd = 0

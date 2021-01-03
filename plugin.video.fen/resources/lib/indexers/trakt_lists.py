@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import xbmc, xbmcgui, xbmcplugin
 import os
-import json
 from sys import argv
+from apis import simplejson as json
 from apis.trakt_api import get_trakt 
 from modules.nav_utils import build_url, setView, add_dir
 from modules.settings_reader import get_setting
