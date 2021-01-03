@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf276" name="Repository Newf276" version="3.0" provider-name="Newf276">
-<extension point="xbmc.addon.repository" name="Repository Newf276">
+<addon id="repository.newf" name="Newf Repository" version="3.1" provider-name="Newf276">
+<extension point="xbmc.addon.repository" name="Newf Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/newf276/newf276.github.io/master/zips/addons.xml.md5</checksum>
@@ -30,6 +30,11 @@
             <info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://github.com/host505/repository.host505/raw/master/addons.xml</info>
+            <checksum>https://github.com/host505/repository.host505/raw/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/host505/repository.host505/master/</datadir>
         </dir>
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/addons.xml</info>
