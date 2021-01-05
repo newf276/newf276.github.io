@@ -1,0 +1,265 @@
+1.3.21     Corrected wrong setting labels
+1.3.20
+  Maven    Closed progress dialog after adding new media
+           Fixed problem to delete STRMs
+1.3.19
+  Maven    Fixed too early closing of the progress dialog when updating
+1.3.18
+  Maven    Option to hide update progress
+           Fixed the writing of the medialist entry if the plugin is different and the season is the same
+           Corrected wrong setting labels
+           Changed default db port in settings
+1.3.17
+  Maven    Changed 'service.watchdog' to 'service.librarywatchdog' for kodi version >= 19
+           Remove a single season if the medialist contains multiple seasons from the same provider
+           Corrected loglevel for kodi 19
+1.3.16
+  Maven    Fixed startup error when the addon data folder is missing
+           Fixed resume playback
+           Sync playback with the addon only for Kodi Matrix and higher
+           import _strptime directly
+           Keep year in filename for single movies
+           Fixed resume when the STRM file doesn't have its own parent folder
+           Playback: check the runtime for the first episode of next season and, if available, write it in Kodi's database
+1.3.15
+  Maven    Moved option to add infolabels for addons when playing STRMs to category 'playback'
+1.3.14
+  Maven    Fixed resume dialog when no addon is ignored in settings
+           Fixed setting infolabels when no addon is selected in settings
+           Sync library playcount with addon playcount
+1.3.13
+  Maven85  Added table 'schema_version' to each database
+           Fixed wrong folder names if the name for the media list entry was entered manually
+           Playback: fixed error when episode metadata doesn't exist
+           Write episode metadata when updating
+           Playback: Fixed error when the runtime was set and the last episode was reached
+           Fixed exporting music albums
+           Fixed creating STRMs for multiple shows
+           Removed 'XBMC.' prefixed in built-in commands
+           Fixed update via parent node
+           Infolabels and art set for music
+           Dialog: fixed Matrix error 
+           Fixed the "keep year" option when exporting multiple movies
+           Option to add infolabels for addons when playing STRMs
+           Fixed Matrix error when exporting music
+           music: added year as linkparam and update song in db when updating
+  lars-a   Added option to keep the year in movie titles
+           Fixed ignoring of E0 when tvbd search is used
+           Fixed setting for folder_medialistentry_movie and folder_movie
+1.3.12
+  Maven85  Refactoring
+           Option to select the playback dialog
+           Option to ignore addons by the playback dialog
+           Resume dialog depending on the setting 'myvideos.selectaction'
+           Fixed problem where the medialist not be written correctly
+           Started to translate the GUI
+           Rework of automatic library update
+           Automatic library update: Do not display a selection dialog when starting Kodi
+           Init databases at start
+           Mechanism to update the database schema
+           Save addon metadata for episodes
+           Playback: write the runtime for the next episode in Kodi's database
+1.3.11
+  Maven85  Fixed creating movie streams when streamref is original plugin
+1.3.10
+  Maven85  Fixed creating episode streams when streamref is original plugin
+1.3.9
+  Maven85  Fixed playing streams with umlauts
+  Maven85  Fixed stream url for individually added movies
+1.3.8
+  Maven85  Refactoring
+  Maven85  Fixed stream file creation
+1.3.7
+  Maven85  Create video streams from favorites
+  Maven85  Python 3 compability
+1.3.6
+  lars-a   Various improvements (tvdb, medialist handling etc.)
+  Maven85  Removed script.module.simple.downloader
+1.3.5
+  Maven85  Remove dialog: remove single provider from medialist & entry from OSMOSIS' database
+  Maven85  Possibility to select the entry from medialist in the creation dialog
+  Maven85  Skip OV-Streams for episodes
+  Maven85  Modernize folderstructure of languages
+  Maven85  New resumepoint dialog
+1.3.4
+  Maven85  Option to search for episode information from TheTVDB
+  Maven85  Refactoring and optimize encoding
+1.3.3
+  Maven85  Python cache enabled
+1.3.0-1.3.2
+  Maven85  Fix resume function in kodi18
+  Maven85  Search episode data on TVDB if season and episode numbers are not specified + caching
+  gu3nter  Added MYSQL support for Music
+  Gismo112 Add SkinUpdate Resume / Watchedstates
+  gu3nter  Sqlite3 and MYSQL are now supported in one Branch
+  Maven85  Set content of listitems; remove setting of support for exodus/xstream 
+  Maven85  Option to detect Kodi's SQLite DBs automatically
+  Maven85/Gismo112 Fix music for kodi 18
+  Maven85  New function to update single items  
+
+1.2.9-1.3.0
+  Gismo112 Fix watchedstate for not resumed video
+  gu3nter  Added option to hide movies in [OV] (e. g. AMAZON VOD)
+  gu3nter  Fix for "support single movies"
+  Gismo112 Fix for Series-Resume-Point
+  Maven85  Support single movies
+  Maven85  Add SkyGo extension
+  Maven85  Change the condition for displaying addons
+  Maven85  Check the provider for a medialist entry
+  Maven85  [TVShows]: Url update (db) if changed
+  Maven85  Abort the create dialog without error message 
+  Maven85  Display addon name in "Remove Media"-dialog
+  Maven85  JSON support
+  Maven85  [ADD TVShows]: Fix for adding a complete series (AmazonVOD)
+  Maven85  Movies: Option to save each stream to its own folder
+  Maven85  Fix Umlaut in "Remove Media"-dialog
+  Maven85  Movies: Option to save streams to its own superfolder (per MediaList entry)
+  Maven85  Xs fix
+  Maven85  Remove xS support
+  Maven85  Fix: Android add and remove
+  Maven85  Pluginextensions
+  Maven85  [ADD TVShows] overwriting fix
+  Maven85  "++RenamedTitle++" removed from folder names and gui
+  Maven85  Fix: Create/delete folders
+  Maven85  Bugfixing
+
+1.2.7 - 1.2.8
+ Paging Fix
+
+1.2.3 - 1.2.6
+  Fix for Progress bar
+  Fix for Paging TV-Shows
+  Fix for Paging in single show
+
+1.2.2
+  SQL Support
+  SQL Movies.db
+  SQL Shows.db
+  Resume Playing(Movies)
+  Select Provider dialog
+  New Look
+  
+
+1.0.7
+  Improved Auto update
+  Improved watched status (set as watched)
+  Update button
+  Suport for Music, you can add your music strms to the Kodi library.
+  YouTube support
+  Some fixes
+
+0.4.7
+  Improved Auto update
+  Improved watched status (set as watched)
+  Now you can write your strms to a samba share, with or without login credentials.
+	Note: you have to set the share as source in kodi's file manager!
+  Some fixes
+
+0.4.4 - 0.4.6
+  Some fixes
+
+0.4.3
+  New option: Update at startup
+  New Funktion: Rename
+  Some fixes
+
+0.4.2 
+  Some fixes
+
+0.4.1 RC
+New Funktion: Watched status for Movies and TV-Shows
+New Funktion: Timed update for your content
+  Some fixes
+
+0.4.0 RC
+  Some fixes
+
+0.3.9 RC
+  New Function: Shows-Collection
+  Some fixes
+
+0.3.8 RC
+  Code cleaning part5
+  Some fixes
+
+0.3.7 RC
+  Code cleaning part4
+  Added new methods addTVShows, getEpisodes and getTVShowsFromList
+  Some fixes
+
+0.3.5 RC
+  Code cleaning part3
+  Added new methods markSeries and markMovies as watched
+  Some fixes
+
+0.3.2 RC1
+  Code cleaning part2
+  Added new methods addMovies and addSeries
+  Movie strms are created in their own folder now 
+  Some fixes
+
+0.3.1 RC1
+  Code cleaning part1
+  Some fixes
+
+0.1.9
+  Fix for update loop
+
+0.2.4
+  Bug fixing
+  Last build before RC 1
+
+0.2.3
+  Bug fixing
+
+0.2.2
+  Fix
+
+0.2.1
+  New Funktions: Language selection after selectin "create_strms"
+  Fix for unstable folder structure.
+
+0.2.0
+  Remove files and folders for removed items in settings2.xml
+  Fix for update function full hours
+
+0.1.9
+  Fix for update loop
+
+0.1.8
+  Fix for AutoUpdate function
+
+0.1.7
+  Some other fixes
+
+0.1.6
+  Decoding error fix for ÄÜÖ
+  Fix for YouTube Playlists adding as TV
+  Some other fixes
+
+0.1.5
+  Some fixes
+
+0.1.4
+  Renaming Project to OSMOSIS
+
+0.1.3
+  Some fixes
+
+0.1.2
+  New Funktion: You can add audio strms now
+  New Funktion: Added a dialog that allows you to remove items from settings2.xml Open OSMOSIS >> select "Remove Media" >>     select   items to be removed(mullti selection) >> click on "delete" to remove the items form "settings2.xml"
+ Some fixes
+
+0.1.1
+  Support for Amazon Prime Music
+  New Function: NFO-Files for strms containing audio streams
+  To get library support, you have to add the audio strms as "Music Video"
+  Improved Auto update
+  Some fixes
+
+0.1.0
+  New Funktion: Auto update strms, 
+  New Funktion: Status bar for updates, 
+  New Funktion: Status when adding content, 
+  Some fixes
