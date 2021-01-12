@@ -1,0 +1,23 @@
+#EXTINF:-1 tvg-ID="CBC.news" tvg-logo="https://s3.amazonaws.com/ok2logo/cbcnewsnetwork.png" group-title="News",CBC NEWS HD
+https://livecbcdai-i.akamaihd.net/hls/live/567245/event2/CBCNN/master5.m3u8
+
+#EXTINF:-1 tvg-ID="CTV.news" tvg-logo="https://s3.amazonaws.com/ok2logo/ctvnews.png" group-title="News",CTV NEWS
+https://capi.9c9media.com/destinations/ctvnews_web/platforms/desktop/contents/68596/contentpackages/440602/manifest.mpd
+
+#EXTINF:-1 tvg-ID="Global" tvg-logo="https://i.imgur.com/Aqetvxz.png" group-title="News",Global News National 
+https://live.corusdigitaldev.com/groupd/live/49a91e7f-1023-430f-8d66-561055f3d0f7/live.isml/.m3u8
+
+#EXTINF:-1 tvg-id="CBS.news" tvg-logo="https://images.pluto.tv/channels/5dc481cda1d430000948a1b4/colorLogoPNG.png" group-title="News",CBSN Los Angeles
+http://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5dc481cda1d430000948a1b4/master.m3u8
+
+#EXTINF:-1 tvg-id="Sky.News" tvg-logo="http://static.epg.best/uk/SkyNews.uk.png" group-title="News",Sky News
+https://skynews2-plutolive-vo.akamaized.net/cdhlsskynewsamericas/1013/latest.m3u8
+
+#EXTINF:-1 tvg-ID="Bbw.News" tvg-logo="http://static.epg.best/gb/BBCWorldNews.uk.png" group-title="News",BBC World News
+http://ott-cdn.ucom.am/s24/index.m3u8
+
+#EXTINF:-1 tvg-ID="Aljazera" tvg-logo="https://i.imgur.com/Aqetvxz.png" group-title="News",Al Jazeera
+https://live-hls-web-aje.getaj.net/AJE/01.m3u8
+
+#EXTINF:-1 tvg-ID="Cheddar" tvg-logo="vg-logo="https://pyxis.nymag.com/v1/imgs/8a9/2e5/7c52c652541ec19f8927c4d57d1b541c27-30-cheddar-logo.rsquare.w1200.jpg",Cheddar News
+https://live.chdrstatic.com/cheddar/primary/1.m3u8
