@@ -4,3 +4,4 @@
 *.pyo
 *.old
 addons_xml_generator.py
+.DS_Store
