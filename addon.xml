@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="Repository Newf" version="3.0" provider-name="newf276">
+<addon id="repository.newf" name="Repository Newf" version="4.0" provider-name="newf276">
     <extension point="xbmc.addon.repository" name="Repository Newf">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/kodirepo/master/zips/addons.xml</info>
@@ -32,6 +32,16 @@
 			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/matrix/zips/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/matrix/zips/</datadir>
 		</dir>
+        <dir>
+	        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+	        <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+	        <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+		</dir>
+        <dir minversion="20.0">
+            <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter.test/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter.test/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter.test/master/zips</datadir>
+        </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>kodirepo</summary>
