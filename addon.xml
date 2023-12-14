@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="Repository Newf" version="5.0" provider-name="newf276">
+<addon id="repository.newf" name="Repository Newf" version="6.0" provider-name="newf276">
     <extension point="xbmc.addon.repository" name="Repository Newf">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/kodirepo/master/zips/addons.xml</info>
@@ -46,6 +46,11 @@
 			<info compressed="false">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/</datadir>
+        </dir>
+        <dir minversion="20.0">
+            <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips</datadir>
         </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
