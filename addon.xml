@@ -88,6 +88,11 @@
             <checksum>https://raw.githubusercontent.com/kodifitzwell/repo/master/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/kodifitzwell/repo/master/</datadir>
         </dir>
+        <dir>		
+            <info compressed="false">https://cmanbuilds.com/cman/repo/addons.xml</info>
+            <checksum>https://cmanbuilds.com/cman/repo/addonsmd5.txt</checksum>
+            <datadir zip="true">https://cmanbuilds.com/cman/repo/</datadir>
+		</dir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>kodirepo</summary>
