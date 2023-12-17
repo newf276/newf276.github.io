@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="Repository Newf" version="1.0.2" provider-name="newf276">
+<addon id="repository.newf" name="Repository Newf" version="1.0.3" provider-name="newf276">
     <extension point="xbmc.addon.repository" name="Repository Newf">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/kodirepo/master/zips/addons.xml</info>
@@ -47,11 +47,6 @@
 			<checksum>https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/</datadir>
         </dir>
-        <dir minversion="20.0">
-            <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips</datadir>
-        </dir>
         <dir>
             <info compressed="false">https://slyguy.uk/.repo/repository.slyguy/addons.xml</info>
             <checksum>https://slyguy.uk/.repo/repository.slyguy/addons.xml.md5</checksum>
@@ -68,8 +63,7 @@
             <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.youtube/</datadir>
         </dir>
         <dir minversion="18.9.701" maxversion="19.5">
-            <info compressed="false">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/addons.xml.md5</checksum>
+            <info compressed="false">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/addons.xml</info> <checksum>https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/</datadir>
         </dir>
 	    <dir minversion="19.8.0">
@@ -83,15 +77,15 @@
 			<datadir zip="true">https://github.com/CastagnaIT/repository.castagnait/raw/kodi/kodi19</datadir>
 			<hashes>false</hashes>
 		</dir>
-            <dir minversion="19.0.0">
-            <info compressed="false">https://raw.githubusercontent.com/kodifitzwell/repo/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/kodifitzwell/repo/master/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/kodifitzwell/repo/master/</datadir>
-        </dir>
         <dir>		
             <info compressed="false">https://cmanbuilds.com/cman/repo/addons.xml</info>
             <checksum>https://cmanbuilds.com/cman/repo/addonsmd5.txt</checksum>
             <datadir zip="true">https://cmanbuilds.com/cman/repo/</datadir>
+		</dir>
+        <dir>
+			<info compressed="false">https://raw.githubusercontent.com/zomboided/xbmc.zomboided.plugins/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/zomboided/xbmc.zomboided.plugins/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/zomboided/xbmc.zomboided.plugins/raw/master/plugins/</datadir>
 		</dir>
     </extension>
     <extension point="xbmc.addon.metadata">
