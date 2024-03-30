@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="Repository Newf" version="1.3.4" provider-name="newf276">
+<addon id="repository.newf" name="Repository Newf" version="1.3.5" provider-name="newf276">
     <extension point="xbmc.addon.repository" name="Repository Newf">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/kodirepo/master/zips/addons.xml</info>
@@ -41,6 +41,18 @@
             <info compressed="false">https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml</info>
             <checksum>https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml.md5</checksum>
             <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.youtube/</datadir>
+        </dir>
+        <dir>
+            <info>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
+            <datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
+            <artdir>https://github.com/a4k-openproject/a4kSubtitles/releases/download/v0.0.13</artdir>
+        </dir>
+        <dir>
+            <info compressed="false">https://magnetic.website/__zips/addons.xml</info>
+            <checksum>https://magnetic.website/__zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://magnetic.website/__zips/</datadir>
+            <hashes>false</hashes>
         </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
