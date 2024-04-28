@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="[COLOR deepskyblue]Repository Newf[/COLOR]" version="1.3.7" provider-name="[COLOR deepskyblue]Newf276[/COLOR]">
+<addon id="repository.newf" name="[COLOR deepskyblue]Repository Newf[/COLOR]" version="1.3.8" provider-name="[COLOR deepskyblue]Newf276[/COLOR]">
     <extension point="xbmc.addon.repository" name="[COLOR deepskyblue]Repository Newf[/COLOR]">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/kodirepo/master/zips/addons.xml</info>
@@ -10,12 +10,6 @@
             <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
-        </dir>
-        <dir>
-            <info>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
-            <datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
-            <artdir>https://github.com/a4k-openproject/a4kSubtitles/releases/download/v0.0.13</artdir>
         </dir>
 		<dir>
 	        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
