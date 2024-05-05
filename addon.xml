@@ -32,11 +32,6 @@
             <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.inputstreamhelper/</datadir>
         </dir>
         <dir>
-            <info compressed="false">https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml</info>
-            <checksum>https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml.md5</checksum>
-            <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.youtube/</datadir>
-        </dir>
-        <dir>
             <info>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
             <datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
