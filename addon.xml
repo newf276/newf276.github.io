@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="[COLOR deepskyblue]Repository Newf[/COLOR]" version="1.4.7" provider-name="[COLOR deepskyblue]Newf276[/COLOR]">
+<addon id="repository.newf" name="[COLOR deepskyblue]Repository Newf[/COLOR]" version="1.4.8" provider-name="[COLOR deepskyblue]Newf276[/COLOR]">
     <extension point="xbmc.addon.repository" name="[COLOR deepskyblue]Repository Newf[/COLOR]">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/kodirepo/master/zips/addons.xml</info>
