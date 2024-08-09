@@ -1,3 +1,7 @@
-[COLOR deepskyblue][B]Online Release Version 1.0.4[/B][/COLOR]
-- Some fixes for random list naming when used as widget.
+[COLOR dodgerblue][B]Version 1.0.5[/B][/COLOR]
+- Removed Settings->Features->"Open Extras When Selecting". Replaced with "Special Open Actions" within same Features tab.
+- Removed "Use Minimal Media Info" setting.
+- Added "More Like This" recommendations to Extras window and context menu of Movies and TV Shows.
+- Added rudimentary support for "Special" episodes. I see no use in including these, as there will almost never be sources for playback. But I had the request so here they are. Also, you will not be able to mark them as watched within Finder.
+- Added "guest star" cast members for TV Show episodes. Will include additional cast appearing in that specific episode. Requested.
 - Other changes/fixes.
