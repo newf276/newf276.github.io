@@ -1,3 +1,4 @@
-[COLOR red][B]Version 2.1.13[/B][/COLOR]
-- Added "Retry With Cache Check Ignored When No Results" to Settings->Results->General. If set to "Auto", then if there are no cached RD/AD results it will automatically show all results as Unchecked.
+Version 2.1.13
+
+Added "Retry With Cache Check Ignored When No Results" to Settings->Results->General. If set to "Auto", then if there are no cached RD/AD results it will automatically show all results as Unchecked.
 
