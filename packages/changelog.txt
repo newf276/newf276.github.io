@@ -1,0 +1,9 @@
+[B][COLOR dodgerblue]Newf's[/COLOR][/B] Wizard Version 5.0.0
+
+[B][COLOR dodgerblue]Newf's[/COLOR][/B] Wizard is for family members ONLY, Please do not install if you do not have promision
+
+[B]New Menu Items[/B]
+
+Use the new Authorize Premium Services under Kodi Search Icon next to Kodi Gear Icon.
+
+Or Open [B][COLOR dodgerblue]Newf's[/COLOR][/B] Wizard, and Select "Authorize Debbrid/Trakt Menu Item.
