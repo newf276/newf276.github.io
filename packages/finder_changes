@@ -1,0 +1,12 @@
+[COLOR dodgerblue][B]Version 3.0.0[/B][/COLOR]
+
+Initial Forked from Tikipeter, 
+
+Initial coder. Also a huge thank You to massimo233 for the additional code refresh and the provisioning for LibreELEC along with TOR Box.
+
+!!!----------------------------------------------------------------!!!
+
+Highlights:
+
+[COLOR dodgerblue][B]Version 3.0.0[/B][/COLOR]
+- Finder stable: TorBox provisioning via 6-digit code, optional self-signed SSL, and Git branch selection for updates (master/dev).
