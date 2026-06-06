@@ -1,0 +1,57 @@
+ [COLOR dodgerblue][B]Version 1.0.0[/B][/COLOR]
+
+• TMDB users list Auth Now Fixed.
+• Fixed and updated internal settings handling
+• Clear Cache and thumbnails and restart kodi so it takes effect.
+
+
+ [COLOR dodgerblue][B]Version 0.0.1[/B][/COLOR]
+
+• Fixed and updated internal settings.
+• Bug Fixes.
+• Removed obsolete internal settings.
+• Resolved Python code errors and improved execution stability.
+
+
+• Fix To Icon Not Sticking After Reboot.
+• No Reboot Needed Now After Authorization Accounts.
+• New Sleek metallic look.
+• Some Internal Settings Fixed.
+• Removed obsolete internal settings to prevent conflicts and reduce overhead.
+• Cleaned up deprecated and unused internal components.
+• Size Of Addon Reduced So Will Run Smooth On Any System.
+• Clean Thumbnails After Update For New Art To Take Effect.
+• Artwork size Compressed Thanks to Sarge
+• Added Torbox To Accounts.
+ • TMDB Player Supported.
+• Fully compatible with Kodi Favourites.
+
+
+🔹 Setup & Configuration
+ • NewfFlix Scrapers Will Install With Addon
+ • Setup NewfFlix Scrapers In NewfFlix Addon
+
+🔹 Setup & Configuration
+ • Authorize Your Debrid Service Within the Addon
+ • Debrid services must now be authenticated directly inside the addon.
+ • A full Kodi reboot is required after authorization to ensure the service is detected correctly.
+ • External Scraper Requirement
+ • These provide the scraping engine used for all source results.
+ • External Scraper Configuration
+ • External scrapers must be configured via Settings → External Scrapers.
+ • Allows full control over scraper behaviour and source handling.
+
+🔹 Core Changes
+ • Total Rebuild of NewfFlix
+ • The addon has been completely rebuilt.
+ • Cleaner codebase, improved structure, and better long-term maintainability.
+ • External Scrapers Only
+ • The addon now relies exclusively on external scrapers.
+ • Internal scraping logic has been fully removed to reduce duplication, bugs, and maintenance issues.
+
+🔹 Compatibility
+ • TMDB Player Support
+ • Fully compatible with TMDB Player, allowing seamless playback and integration.
+
+
+
