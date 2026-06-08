@@ -1,8 +1,8 @@
-[COLO dodgerblue][B]VERSION 3.1.2[/B][/COLOR]
+[COLOR dodgerblue][B]VERSION 3.1.2[/B][/COLOR]
 
 
 
-[COLO dodgerblue][B]Torbox QR Code Integration[/B][/COLOR]
+[COLOR dodgerblue][B]Torbox QR Code Integration[/B][/COLOR]
 
 New Feature
 
@@ -16,7 +16,7 @@ Improvements
 • Streamlines the authorization process for new and existing Torbox users.
 
 
-[COLO dodgerblue][B]Trakt Improvements & Fixes[/B][/COLOR]
+[COLOR dodgerblue][B]Trakt Improvements & Fixes[/B][/COLOR]
 
 Stability Fixes
 
@@ -38,7 +38,7 @@ User Experience Improvements
 • Smoother browsing experience when viewing extensive Trakt libraries.
 
 
-[COLO dodgerblue][B]Bug Fixes & General Stability[/B][/COLOR]
+[COLOR dodgerblue][B]Bug Fixes & General Stability[/B][/COLOR]
 
 Fixes
 
@@ -70,7 +70,7 @@ Stability
 • Fixed an unused background service object that was created but never needed.
 • Fixed the addon update checker running in a pointless loop that always exited after the first run anyway.
 
-[COLO dodgerblue][B]Trakt Fixes[/B][/COLOR]
+[COLOR dodgerblue][B]Trakt Fixes[/B][/COLOR]
 
 • New setting added:
 ‘Trakt Lists - Auto-load A-Z (no Next Page)’
@@ -121,7 +121,7 @@ Stability
 • Direct links now route to webdl downloads.
 
 
-[COLO dodgerblue][B]TORBOX OVERHAUL[/B][/COLOR]
+[COLOR dodgerblue][B]TORBOX OVERHAUL[/B][/COLOR]
 
 • Fixed torbox authentication and api key saving.
 • Fixed cached checks for torrents, usenet and webdl.
@@ -131,7 +131,7 @@ Stability
 • Improved http handling with better timeouts, safer json responses and graceful failures.
 
 
-[COLORgreen][B]TORBOX NOTICE[/B][/COLOR]
+[COLORRgreen][B]TORBOX NOTICE[/B][/COLOR]
 
 • Torbox is currently experiencing very high traffic due to a huge increase in new subscribers joining the service.
   because of this, the website and api may sometimes:
@@ -141,7 +141,7 @@ Stability
   this is affecting torbox itself and not the finder addon.
   things should settle down once the traffic calms and the servers stabilise.
 
-[COLORdarkred][B]WHERE TO FIND ME[/B][/COLOR]
+[COLORRdarkred][B]WHERE TO FIND ME[/B][/COLOR]
 
 •  Im not on reddit, twitter/x or facebook.
 •  The only official place to contact me for:
@@ -151,7 +151,7 @@ Stability
 •  Updates and news.
 •  Is through telegram only.
 
-[COLORblue][B] finder ADDON — TEMPORARY REAL DEBRID FIX[/B][/COLOR]
+[COLORRblue][B] finder ADDON — TEMPORARY REAL DEBRID FIX[/B][/COLOR]
 
 A temporary fix has now been added for Real Debrid users experiencing playback and scraping issues.
 
@@ -218,7 +218,7 @@ A temporary fix has now been added for Real Debrid users experiencing playback a
  • Fully compatible with TMDB Player, allowing seamless playback and integration.
 
 
-[COLOR dodgerblue][B]Version 3.0.0[/B][/COLOR]
+[COLORR dodgerblue][B]Version 3.0.0[/B][/COLOR]
 
 Initial Fork from Tikipeter's/Anonymous FenLight/FenlightAM code
 
