@@ -1,5 +1,5 @@
 {
-    "name": "Newf's Finder - Select Source",
+    "name": "Finder - Source Select",
     "plugin": "plugin.video.finder",
     "priority": 500,     
     "is_resolvable" : "true", 
