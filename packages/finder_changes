@@ -1,233 +1,161 @@
-[COLOR dodgerblue][B]VERSION 4.0.2[/B][/COLOR]
-• TorBox Fix
-
-[COLOR dodgerblue][B]VERSION 4.0.0[/B][/COLOR]
-• Icons now within addon
-• Trakt api code refresh
-• Enabled some more default Finder settings to work better within Newf Skin and Newf Build overall.
-
-[COLOR dodgerblue][B]VERSION 3.1.3[/B][/COLOR]
-• Added a new TMDB Key
-
-[COLOR dodgerblue][B]VERSION 3.1.2[/B][/COLOR]
-
-[COLOR dodgerblue][B]Torbox QR Code Integration[/B][/COLOR]
-
-New Feature
-
-• Added a Torbox QR Code option to simplify the account linking process.
-
-Improvements
-
-• Users can now quickly connect their Torbox account by simply scanning the QR code with a mobile device.
-• Eliminates the need to manually enter authentication details.
-• Provides a faster and more user-friendly setup experience.
-• Streamlines the authorization process for new and existing Torbox users.
-
-
-[COLOR dodgerblue][B]Trakt Improvements & Fixes[/B][/COLOR]
-
-Stability Fixes
-
-• Fixed a Trakt refresh crash that could occur when required settings data was missing or unavailable.
-• Fixed a Trakt OAuth issue that caused excessive authentication requests, resulting in repeated 401 (Unauthorized) and 429 (Rate Limit) errors.
-• Added improved error handling and fallback protection for unregistered or missing settings entries.
-• Enhanced token validation logic to reduce unnecessary authentication calls and improve overall reliability.
-
-Performance Enhancements
-
-• Improved Trakt synchronization stability across all supported sections.
-• Reduced API request overhead during authentication and account validation.
-• Optimized settings cache management to prevent unexpected refresh failures.
-
-User Experience Improvements
-
-• Trakt lists can now automatically load A–Z content without requiring users to manually select Next Page.
-• Improved navigation through large Trakt collections and custom lists.
-• Smoother browsing experience when viewing extensive Trakt libraries.
-
-
-[COLOR dodgerblue][B]Bug Fixes & General Stability[/B][/COLOR]
-
-Fixes
-
-• Fixed several minor issues reported by users throughout the addon.
-• Improved handling of missing configuration values.
-• Resolved edge cases that could cause unexpected errors during content loading.
-• Improved compatibility with various navigation and list-loading scenarios.
-
-Stability
-
-• Enhanced overall addon reliability and responsiveness.
-• Added additional safeguards to prevent crashes caused by invalid or incomplete data.
-• General code cleanup and backend optimizations for improved long-term maintainability.
-• Various under-the-hood improvements to provide a smoother and more stable user experience.
-
-• Fixed a security issue where certain internal actions could be exploited by a malformed URL. All actions are now validated before being run.
-• Fixed a rare deadlock where background threads could get stuck waiting on each other and freeze the addon.
-• Fixed a Python warning caused by using a deprecated threading function.
-• Fixed watched/hidden progress items being saved and loaded in an unsafe format. Now uses proper JSON.
-• Loading bookmarks for a show now uses a single database call instead of one per season, making it noticeably faster for large shows.
-• Databases are now written safely using WAL mode, preventing corruption if Kodi crashes mid-write.
-• Fixed a bug where two database files could accidentally be deleted on startup because of wrong filenames in the cleanup list.
-• Fixed Trakt sign-out not actually revoking the token on Trakt's side (the token was cleared before being sent to Trakt).
-• Fixed Trakt API calls that return no content (HTTP 204) being treated as failures.
-• Fixed a rare situation where a crashed Trakt token refresh could leave a lock in place forever, blocking all Trakt calls until Kodi restarts. The lock now expires automatically after 30 seconds.
-• Fixed the Trakt background service running sync checks every 30 minutes even when no Trakt account is set up.
-• Fixed a startup crash risk caused by a Python anti-pattern (mutable default argument) in settings sync.
-• Fixed the Trakt refresh cooldown timestamp being wiped on every Kodi startup, defeating the purpose of the cooldown.
-• Fixed an unused background service object that was created but never needed.
-• Fixed the addon update checker running in a pointless loop that always exited after the first run anyway.
-
-[COLOR dodgerblue][B]Trakt Fixes[/B][/COLOR]
-
-• New setting added:
-‘Trakt Lists - Auto-load A-Z (no Next Page)’
-(Enabled by default)
-
-• Watchlist, Collection, My Lists, and user lists now load on a single page in A–Z order.
-• Improved article-aware sorting:
-‘The Matrix’ now sorts under M
-‘A Game of Thrones’ now sorts under G
-
-• Added 1000-item cap to keep large lists fast and responsive.
-• Fixed Trakt refresh crash caused by a 'NoneType' object is not subscriptable error.
-• Added missing trakt.last_refresh_failed_at setting required for the new refresh cooldown system.
-• Fixed an issue where failed refresh attempts were not being recorded correctly.
-• Improved refresh handling to prevent repeated 401/429 requests hammering the Trakt /oauth/token endpoint.
-• Added safer fallback handling in SettingsCache.set() for unregistered settings.
-• Fixed Trakt losing authorisation after a few days.
-• Refresh is now serialized (no more parallel POSTs to /oauth/token with the same
-• Refresh_token, which Trakt would invalidate on rotation).
-• 60s cooldown after a failed refresh stops the refresh storm.
-• Proactive refresh when the access token has <7 days remaining.
-• Fixed request-headers being overwritten by response-headers on 429 retries.
-• Fixed Retry-After string being multiplied by 1000 instead of parsed as seconds.
-• Original request is now retried once after a 401-triggered refresh.
-
-
-• Fixed TorBox cloud storage integration issues caused by recent TorBox API and authentication flow changes.
-
-• Improved cloud scraping reliability and cloud source detection when using TorBox accounts.
-
-• Resolved issues where TorBox cloud files would fail to appear, fail cached checks, or randomly disappear during scraping.
-
-• Updated cloud resolve handling to better support TorBox’s latest backend and response formatting changes.
-
-• Improved compatibility with recent TorBox OAuth/session updates to reduce authorization failures and expired session problems.
-
-• Added better fallback handling for delayed TorBox responses during periods of heavy server traffic.
-
-• Improved cloud inspection stability and reduced false uncached results when resolving TorBox sources.
-
-• General optimizations and cleanup for TorBox cloud performance, stability, and playback reliability.
-
-
-• Torbox webdl submit menu.
-• Added new “send url to webdl” option in torbox section.
-• Paste direct http(s) links or magnet links straight into your torbox cloud.
-• Magnet links now route to torrents automatically.
-• Direct links now route to webdl downloads.
-
-
-[COLOR dodgerblue][B]TORBOX OVERHAUL[/B][/COLOR]
-
-• Fixed torbox authentication and api key saving.
-• Fixed cached checks for torrents, usenet and webdl.
-• Fixed playback and streaming url resolving.
-• Added full webdl support including cloud listing, scraper, delete, resolve and download.
-• Added cached check support for usenet and webdl.
-• Improved http handling with better timeouts, safer json responses and graceful failures.
-
-
-[COLORRgreen][B]TORBOX NOTICE[/B][/COLOR]
-
-• Torbox is currently experiencing very high traffic due to a huge increase in new subscribers joining the service.
-  because of this, the website and api may sometimes:
-  run slower than normal
-  temporarily go offline
-  fail cached checks or resolving from time to time
-  this is affecting torbox itself and not the finder addon.
-  things should settle down once the traffic calms and the servers stabilise.
-
-[COLORRdarkred][B]WHERE TO FIND ME[/B][/COLOR]
-
-•  Im not on reddit, twitter/x or facebook.
-•  The only official place to contact me for:
-•  Addon support.
-•  Bug reports.
-•  Help and questions.
-•  Updates and news.
-•  Is through telegram only.
-
-[COLORRblue][B] finder ADDON — TEMPORARY REAL DEBRID FIX[/B][/COLOR]
-
-A temporary fix has now been added for Real Debrid users experiencing playback and scraping issues.
-
-• FIX APPLIED TO COMET SCRAPER
-• To get things working properly again:
-• Go into:
-• Finder Scrapers Settings
-• Turn OFF:
-• All scrapers
-• Leave ON:
-• Comet only
-• The Comet scraper has now been adjusted and should work correctly with Real Debrid users while other scraper issues continue.
-
-
-• TMDB users list Auth Now Fixed.
-• Fixed and updated internal settings handling
-• Clear Cache and thumbnails and restart kodi so it takes effect.
-
-
-• Fixed and updated internal settings.
-• Bug Fixes.
-• Removed obsolete internal settings.
-• Resolved Python code errors and improved execution stability.
-
-
-• Fix To Icon Not Sticking After Reboot.
-• No Reboot Needed Now After Authorization Accounts.
-• New Sleek metallic look.
-• Some Internal Settings Fixed.
-• Removed obsolete internal settings to prevent conflicts and reduce overhead.
-• Cleaned up deprecated and unused internal components.
-• Size Of Addon Reduced So Will Run Smooth On Any System.
-• Clean Thumbnails After Update For New Art To Take Effect.
-• Artwork size Compressed Thanks to Sarge
-• Added Torbox To Accounts.
- • TMDB Player Supported.
-• Fully compatible with Kodi Favourites.
-
-
-   Setup & Configuration
- • Finder Scrapers Will Install With Addon
- • Setup Finder Scrapers In Finder Addon
-
-   Setup & Configuration
- • Authorize Your Debrid Service Within the Addon
- • Debrid services must now be authenticated directly inside the addon.
- • A full Kodi reboot is required after authorization to ensure the service is detected correctly.
- • External Scraper Requirement
- • These provide the scraping engine used for all source results.
- • External Scraper Configuration
- • External scrapers must be configured via Settings → External Scrapers.
- • Allows full control over scraper behaviour and source handling.
-
-   Core Changes
- • Total Rebuild of Finder
- • The addon has been completely rebuilt.
- • Cleaner codebase, improved structure, and better long-term maintainability.
- • External Scrapers Only
- • The addon now relies exclusively on external scrapers.
- • Internal scraping logic has been fully removed to reduce duplication, bugs, and maintenance issues.
-
-   Compatibility
- • TMDB Player Support
- • Fully compatible with TMDB Player, allowing seamless playback and integration.
-
-
-[COLORR dodgerblue][B]Version 3.0.0[/B][/COLOR]
-
-Initial Fork from Tikipeter's/Anonymous FenLight/FenlightAM code
-
+[COLOR dodgerblue][B]Version 5.0.0[/B][/COLOR]
+
+Forked a Fork of a Fork
+
+• Too Many change stories mention...
+
+[COLOR dodgerblue][B]Version 4.9.9i[/B][/COLOR]
+- Sources Browse (cached pack): close the results list before the pack file picker and playback so video is not hidden behind the list; Back during episode browse no longer restarts scraping when playback is already active.
+- Sources Browse: limited to pack results only (single-file torrents use click-to-play); empty pack lists fall back to the same resolve path as clicking the source; one-file packs play without an extra picker step.
+
+[COLOR dodgerblue][B]Version 4.9.9h[/B][/COLOR]
+- Tools: Finder Favorites & Progress Import & Export — backup Finder favorites and local progress to JSON; import with merge (keep furthest progress, keep local-only items) or replace per section in the file.
+- Settings: Import & Export Directory under General, default folder for Finder favorites and progress backup file browse. On Android, folder browse for non-empty download/backup paths starts at local root so parent navigation is not blocked (a Kodi browser quirk).
+- Add to Cloud: Real Debrid and All Debrid now show No URL Found for Add to Cloud (matching Download Pack) when the magnet has nothing to send, instead of Failed.
+- Resolve lock: fixed Resolve or playback in progress blocking new play attempts after cancelling resume, backing out of resolve, or other early exit from playback (busy flag was not always cleared).
+- Resolve lock: stale resolve busy flag is cleared automatically when nothing is playing and no stream is opening.
+- Playback: debrid / cloud direct links no longer reopen at Kodi's saved URL resume point (near end of file); Finder StartPercent resume is still used when set.
+- Playback: failed resolve/play from source search now shows a Playback Failed dialog instead of failing silently (closes progress window first; uses Kodi native OK dialog so it is not blocked by the resolve UI thread).
+- Prescrape (Check Before Full Search): choosing Run External Scraper Search no longer shows a second OK confirm — the list row is the action; external scrapers start immediately.
+
+[COLOR dodgerblue][B]Version 4.9.9g[/B][/COLOR]
+- Download File: fixed immediate No URL found when resolving external debrid links (Sources resolve flags were unset on the lightweight downloader path).
+- Download Pack: Real-Debrid empty/failed pack lists no longer throw on add-magnet failure (was showing generic Error instead of the shared No URL found for Download message used by all debrids); RD add-magnet failures now clean up the temp torrent before returning.
+- Autoplay: show No Results Found when nothing is playable (e.g. only uncached external torrents, with Include Uncached on or off) instead of closing silently; same dialog when autoplay/background resolve exhausts all links.
+
+[COLOR dodgerblue][B]Version 4.9.9f[/B][/COLOR]
+- TorBox and Offcloud: Include Uncached Results (External Scrapers) shown only when Check Cached Status is enabled, matching Premiumize (v4.9.9e). Include uncached has no effect while cache check is off.
+
+[COLOR dodgerblue][B]Version 4.9.9e[/B][/COLOR]
+- Intended functionality can have unintended consequences! Reverted v4.9.6 cancel navigation: stopping playback or resolve during source selection closes the progress dialog and returns to the episode/results browser instead of reopening the sources list.
+- Resolve cancel: Fixed occasional FenLightAM behaviour where backing out of resolve causes Kodi crash.
+- Scrape cancel: Changed FenLightAM behaviour, backing out of the progress dialog now aborts the search, releases the busy lock immediately, and suppresses late results.
+- Prescrape (Check Before Full Search): renamed Run Full Source Search to Run External Scraper Search in results; confirm prompt asks Run external torrent scrapers? — cloud/EasyNews prescrape already ran; the follow-up step is external torrent scrapers only.
+- Prescrape external follow-up: other enabled cloud/debrid/folder scrapers no longer run again when continuing to external torrent search (only prescrape results plus external scrapers are collected).
+- Prescrape external follow-up: refreshes quality filters, result sort order, and debrid priority ranks before merging external torrent results.
+- Prescrape empty cloud: no confirmation popup when Check Before Full Search finds nothing — automatically continues with other enabled scrapers and shows a No Cloud Results Found notice above the results list.
+- All Debrid: Check Cached Status (External Scrapers) toggle under Sources Accounts, matching Real Debrid, TorBox, Premiumize, and Offcloud (uses existing AD_check cache API).
+- Premiumize: Include Uncached Results (External Scrapers) toggle under Sources Accounts, matching TorBox and Offcloud (uncached rows in main list; selecting adds to Premiumize cloud). Shown only when Check Cached Status is enabled.
+- External cache check defaults: Check Cached Status (External Scrapers) now defaults to on for Premiumize, Offcloud, and TorBox; Real Debrid and All Debrid remain off by default. Existing installs: one-time migration sets PM/OC/TB cache check on when still off.
+- Kodi Log Uploader: dismiss busy spinner before the Pastebin QR countdown so Back can cancel the dialog; close the progress window when exiting early or when the timer finishes; QR screen now runs a 2 minute countdown (was 50 seconds) and auto-closes when it reaches zero.
+
+[COLOR dodgerblue][B]Version 4.9.9d[/B][/COLOR]
+- In Progress lists: when Watched Indicators are Trakt and Trakt is authorised, refresh from Trakt each time a list is opened, as well as when empty. Movies and In Progress Episodes pull playback progress; TV Shows In Progress pulls watched episode state. Episodes with resume at or below 1% are excluded, matching movies.
+
+[COLOR dodgerblue][B]Version 4.9.9c[/B][/COLOR]
+- External cache check: per-provider toggles under each Debrid account (Real Debrid, TorBox, Premiumize, Offcloud). TorBox/Offcloud include-uncached moved to their Debrid sections. Existing settings migrate automatically. Premiumize cache check wired for external scrapers.
+- Fixed Movies In Progress empty when using Trakt watched indicators: playback progress is saved locally on stop, and Trakt sync no longer wipes those rows while waiting for Trakt to catch up. If Finder has no progress rows, the list refreshes from Trakt when authorised.
+
+[COLOR dodgerblue][B]Version 4.9.9b[/B][/COLOR]
+- Filter Results by Name: EasyNews and Local Folders use exact show-title match before SxxExx (e.g. Wings no longer matches Behind The Wings). Debrid cloud scrapers, use S/E match plus optional title filter; turn off for S/E-only recall.
+- Rescrape Actions: clearer labels (Offer Full Search After Early Results, Disabled External Providers, Real Debrid Only for no cache check). Rescrape Actions settings screen shows Action and Order only; full help in Settings description. Check Before Full Search / Run Full Source Search remain independent of rescrape full_scrape.
+- Rescrape Actions: setting label shortened to: "Rescrape With No Cache Check (RD Only)".
+- Fixed Rescrape With Episode Group crashing when a custom group was already applied (another old FenLightAM bug).
+
+[COLOR dodgerblue][B]Version 4.9.9a[/B][/COLOR]
+- Offcloud support (ported from v1.3.x): QR OAuth auth, My Services Cloud Storage and History, cloud scrape, external cache check, resolve, packs, highlight colour. Include uncached results (Offcloud) under External Scrapers (default Off). Notify when added torrents are ready in Cloud. Clear Offcloud Cache in cache tools.
+- Sources Accounts: provider sections reordered alphabetically (All Debrid, EasyNews, Offcloud, Premiumize, Real Debrid, TorBox; Local Media Folders last). External Scrapers debrid toggles ordered Offcloud, Real Debrid, TorBox when each provider is enabled.
+- My Services: same alphabetical provider order (All Debrid, EasyNews, Offcloud, Premiumize, Real Debrid, TorBox).
+- Fixed Custom Sort to Top for movies: Set Filters to Top now promotes matching rows to the top of each quality band (4K, 1080p, etc.) instead of the 1.3.x tie-breaker that only reordered identical quality/size/provider rows. SD HDR no longer sorts above 1080p Remux. Debrid cloud results keep pref order when quality limits apply.
+- External Scrapers: setting label shortened to “Check for cached status of Results (RD)”. Description text amended.
+
+[COLOR dodgerblue][B]Version 4.9.9[/B][/COLOR]
+- Fixed scrape progress window staying open after a search returns no results (including unreleased episodes).
+- When a source search finds nothing, now shows a Finder style "No results found" dialog after the scrape progress window closes, with the Kodi dialog as a fallback if the skin window cannot open.
+
+[COLOR dodgerblue][B]Version 4.9.8[/B][/COLOR]
+- Fixed playback progress / Trakt scrobbling (and Simkl, MDbList, etc.) not updating for TorBox and TorBox Cloud sources: v4.9.7 played those links with a bare Kodi player, skipping Finder’s playback monitor and script.trakt.ids.
+
+[COLOR dodgerblue][B]Version 4.9.7[/B][/COLOR]
+- Service (AM Lite): optional wait for Account Manager Lite Trakt sync only when script.module.acctmgr is installed; runs in the background so startup is not blocked. Fixes “Unknown addon id script.module.acctmgr” log spam and scrape/playback failing to start when AM Lite is not installed (regression from v4.9.6).
+
+[COLOR dodgerblue][B]Version 4.9.6[/B][/COLOR]
+- TorBox Cloud (source search): fixed intermittent empty results — folder list cache call was invalid.
+- Premiumize Cloud: faster, more reliable scrape (no early exit before internal_results).
+- External: “Check for cached status” is Real Debrid only — All Debrid removed from this check (AD API changes; prior AD cache logic caused worse results). With the setting off, TorBox/Premiumize no longer call checkcached unless “Include uncached TorBox” is on. Torrent host threads get a short grace period after timeout.
+- Cancel during playback/resolve returns straight to the sources results list; progress dialog closes faster on cancel.
+- Cancel during resolve stops retrying other sources and returns to the sources list instead of the results/episode browser.
+- Premiumize/TorBox cloud: episode files use exact S/E matching end-to-end; title filter no longer uses pack-range episode patterns (fixes episode 1 listing episode 2).
+- TorBox cloud scrape: restored v4.9.5 search speed by using cached mylist during source search (live bypass_cache only for Cloud Storage browse). Keeps RD-style title+year folder prefilter and per-folder fetch cap so large libraries do not hang.
+- TorBox: Cloud Storage loads all torrent/usenet/webdl lists in parallel (faster, full list on open); only caches a complete fetch for quick Back navigation. Partial API failures are not cached and show a notification.
+- TorBox: Fixed Cloud Storage folder browse on Kodi 21 (removed deprecated setInfo; use name/file_id from API). Cloud Storage list loads sequentially in the UI to avoid plugin thread errors; source search still uses parallel mylist fetch.
+- Fixed debrid cloud (RD/PM/AD/TB) always appearing at the bottom when Show Results at Top is off: quality limits re-appended all cloud results after non-cloud links; they are now re-sorted into the normal provider/quality order unless Show Results at Top is enabled for that scraper.
+- Premiumize Cloud: scrape via folder/list (same as Cloud Storage browser) instead of item/listall only — fixes empty results when files live under folders such as My Files, and is much faster on large mixed libraries. Filter-by-name off applies to title rules only; episodes still match S/E, movies still match year.
+- Fixed source search hang when debrid cloud and External scrapers are both enabled.
+- Fixed TorBox download saving files as the hashtag, instead of the filename.
+- Other small fixes.
+
+[COLOR dodgerblue][B]Version 4.9.5[/B][/COLOR]
+- Fixed Results > Choose Rescrape Actions crashing (KeyError) after Start Full Scrape was added: order labels and the Set Order dialog now support six priority slots (0–5).
+- Fixed progress bar stuck on EXTERNAL after debrid/EasyNews scrapers finish: the External scrapers module name was treated as a pending internal provider, so the dialog waited for the full Results Timeout even when no torrent hosts were still running.
+- Fixed External scraper phase taking much longer than Finder v1.1.8: since v4.9.2, Debrid Cloud scrapers blocked the Coco/Magneto/Gears External module until every cloud API call finished (v4.9.4 added up to 25s more). Cloud scrapers still start first when enabled, but External runs in parallel again like v1.1.8.
+
+[COLOR dodgerblue][B]Version 4.9.4[/B][/COLOR]
+- TorBox Cloud: cloud search now respects the Results Timeout budget and skips non-matching folders earlier, so a large TorBox library no longer blocks the entire source search when nothing matches.
+- Source search: internal scrapers finish (or time out at 25s) before the external scraper phase starts, so external no longer sits at a red progress bar waiting on slow internal/cloud scrapers.
+- Fixed Real Debrid (and other debrid) cloud results ignoring Show Results at Top: quality limits were re-appending all cloud results to the bottom after they had already been sorted to the top.
+- Fixed All Debrid external cache check returning inconsistent results: API failures no longer mark every torrent as cached, hash matching is normalized to lowercase, invalid hashes are skipped, and instant/ready/cached flags are parsed more reliably from the magnet/instant API.
+
+[COLOR dodgerblue][B]Version 4.9.3[/B][/COLOR]
+- Fixed skin widgets (e.g. Movies > Trending) staying empty after a settings DB upgrade: widget calls no longer block on settings bootstrap, failed Trakt list fetches are not cached, and widgets are silently reloaded with ReloadSkin only when sync_settings actually migrates or repairs an existing settings.db (not on every boot).
+- Fixed slow startup and browsing after the v4.9.2 boot-crash fix: settings reads no longer hit SQLite on every call once properties are loaded, the database is not synced twice on boot, path-existence checks are skipped on the read path, and default-settings metadata is cached in memory.
+- Fixed widget and skin list loads hanging ~5 seconds (or failing) after opening Finder: the font/skin background thread now runs only in the service process, not in the plugin invoker where it blocked every widget exit.
+- Fixed widgets staying empty after the above change: widget calls no longer bulk-load settings into window properties (which could fail silently); they read from a warmed in-memory DB cache instead when properties are not yet loaded.
+
+[COLOR dodgerblue][B]Version 4.9.2[/B][/COLOR]
+- Fixed Kodi boot crash after upgrading from older versions when legacy settings.db contained invalid values. On boot the service migrates/sanitizes the database first, then loads settings into window properties after the GUI is up (so widgets and skin labels work). Skin/XML updates still run when Finder is first opened.
+
+[COLOR dodgerblue][B]Version 4.9.1[/B][/COLOR]
+- Fixed prescrape regression: "Start Full Scrape" no longer appears when only EasyNews or debrid cloud results are shown unless Check Before Full Search is enabled or external scrapers still need to run. Debrid cloud still runs before external scrapers when the provider is enabled.
+- TorBox Cloud: episode search only returns files matching the requested season/episode (no longer lists every file in a season pack when the folder title matches).
+- Start Full Scrape: clean second-pass scrape — resets state, applies Results limits/filters and external scraper settings. Configurable under Tools > Settings > Rescrape Actions > Start Full Scrape (After Prescrape) (default Prompt).
+- Meta Accounts: TMDb Lists read access token is user-configurable (with restore default and test), same pattern as Trakt client credentials and the TMDb API key.
+- External scrapers: All Debrid cached-result filter now uses the All Debrid instant API (per hash) instead of MediaFusion only, so "Check for cached status (RD & AD)" returns AD results again when torrents are on your account.
+- External scrapers: fixed debrid cache check skipping re-query after a previous "not cached" result and failing to update when cache status changed (first pass empty, auto second pass).
+- External scrapers: All Debrid instant check uses GET magnet/instant (documented API), accepts instant/ready flags, and does not mark every torrent uncached when the API call fails.
+
+[COLOR dodgerblue][B]Version 4.9.0[/B][/COLOR]
+- TorBox Cloud: debrid cloud results (TorBox, RD, PM, AD) bypass Results quality/HDR/size filters — your cloud library is always shown.
+
+[COLOR dodgerblue][B]Version 4.8.9[/B][/COLOR]
+- Fixed online icons not loading on update. Please restart Kodi, python keeps old code in memory on a simple update.
+
+[COLOR dodgerblue][B]Version 4.8.8[/B][/COLOR]
+- Menu and UI icons (flags, posters, etc.) load from GitHub (slimmer plugin). Addon icon and fanart remain bundled in the addon.
+- Backing out of Trakt or TMDb authorisations no longer show a failure message (same as Debrid services). Real errors still notify.
+
+[COLOR dodgerblue][B]Version 4.8.7[/B][/COLOR]
+- Torbox authorisation now a QR code or auto copy/paste into browser (on same device), instead of an API.
+- Fixed Real Debrid copy/paste into browser, this was broken in FenLightAM. Clipboard copy now uses stdin instead of shell echo.
+- Now using unique QR image filenames to avoid stale/cached QR codes.
+- TinyURL now uses HTTPS and validates response.
+- Backing out of Debrid authorisations no longer show a failure message. Real errors still notify.
+- Wording in the Debrid authorisation dialogs rewritten and consistent, tailored to what each service supports.
+
+[COLOR dodgerblue][B]Version 4.8.6[/B][/COLOR]
+- Fixed Torbox Cloud Storage files not playing. This was broken in FenLightAM.
+- Added "Send URL to WebDL" to My Services > Torbox.
+- Default Finder fanart changed from local to special path.
+
+[COLOR dodgerblue][B]Version 4.8.5[/B][/COLOR]
+- A few small fixes.
+
+[COLOR dodgerblue][B]Version 4.8.4[/B][/COLOR]
+- Fixed Open External Scraper Settings.
+
+[COLOR dodgerblue][B]Version 4.8.3[/B][/COLOR]
+- Fixed Torbox Cloud Storage (manually added web-links).
+- Fixed database error on first run.
+
+[COLOR dodgerblue][B]Version 4.8.2[/B][/COLOR]
+- Fixed external playback error. Apologies, an oversight.
+
+[COLOR dodgerblue][B]Version 4.8.1[/B][/COLOR]
+- Fixed Trakt list contents not appearing from Trakt list search. Clear Trakt cache if you experienced this issue.
+
+[COLOR dodgerblue][B]Version 4.8.0[/B][/COLOR]
+- Redundant options removed from Tools and Settings menus.
+- Code cleaned up.
+
+[COLOR dodgerblue][B]Version 0.0.1[/B][/COLOR]
+- Initial release.
