@@ -1,0 +1,4 @@
+<node order="10" visible="Library.HasContent(Movies)">
+	<label>342</label>
+	<icon>DefaultMovies.png</icon>
+</node>

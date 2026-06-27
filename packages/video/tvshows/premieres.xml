@@ -1,0 +1,5 @@
+<node order="110" type="folder">
+	<label>Premieres</label>
+	<icon>special://home/addons/plugin.video.finder/resources/media/icons/fresh.png</icon>
+	<path>plugin://plugin.video.finder/?name=Premieres&amp;mode=build_tvshow_list&amp;action=tmdb_tv_premieres&amp;random_support=true&amp;iconImage=fresh/</path>
+</node>

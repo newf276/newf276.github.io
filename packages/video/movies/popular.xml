@@ -1,0 +1,5 @@
+<node order="90" type="folder">
+	<label>Popular</label>
+	<icon>special://home/addons/plugin.video.finder/resources/media/icons/popular.png</icon>
+	<path>plugin://plugin.video.finder/?name=Popular&amp;mode=build_movie_list&amp;action=tmdb_movies_popular&amp;random_support=true&amp;iconImage=popular/</path>
+</node>

@@ -1,0 +1,5 @@
+<node order="130" type="folder">
+	<label>Top 10 Box Office</label>
+	<icon>special://home/addons/plugin.video.finder/resources/media/icons/box_office.png</icon>
+	<path>plugin://plugin.video.finder/?name=Top+10+Box+Office&amp;mode=build_movie_list&amp;action=trakt_movies_top10_boxoffice&amp;iconImage=box_office/</path>
+</node>

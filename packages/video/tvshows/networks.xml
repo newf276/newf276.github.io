@@ -1,0 +1,5 @@
+<node order="10" type="folder">
+	<label>Networks</label>
+	<icon>special://home/addons/plugin.video.finder/resources/media/icons/networks.png</icon>
+	<path>plugin://plugin.video.finder/?name=Networks&amp;mode=navigator.networks&amp;menu_type=tvshow&amp;random_support=true&amp;iconImage=networks/</path>
+</node>
