@@ -1,5 +1,0 @@
-<node type="folder">
-	<label>My Movie WatchList</label>
-    <icon>special://home/addons/plugin.video.finder/resources/media/icons/movies.png</icon>
-	<path>plugin://plugin.video.finder/?mode=tmdblist.build_tmdb_list&amp;list_id=watchlist&amp;media_type=movie&amp;list_name=Movie+Watchlist</path>
-</node>

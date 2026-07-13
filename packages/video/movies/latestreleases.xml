@@ -1,5 +1,0 @@
-<node order="110" type="folder">
-	<label>Latest Releases</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/dvd.png</icon>
-	<path>plugin://plugin.video.finder/?name=Latest+Releases&amp;mode=build_movie_list&amp;action=tmdb_movies_latest_releases&amp;random_support=true&amp;iconImage=dvd/</path>
-</node>

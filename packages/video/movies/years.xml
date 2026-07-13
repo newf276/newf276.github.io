@@ -1,5 +1,0 @@
-<node order="150" type="folder">
-	<label>Years</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/calender.png</icon>
-	<path>plugin://plugin.video.finder/?name=Years&amp;mode=navigator.years&amp;menu_type=movie&amp;random_support=true&amp;iconImage=calender/</path>
-</node>

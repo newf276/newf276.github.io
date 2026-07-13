@@ -1,5 +1,0 @@
-<node order="140" type="folder">
-	<label>Trending</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/trending.png</icon>
-	<path>plugin://plugin.video.finder/?name=Trending&amp;mode=build_movie_list&amp;action=trakt_movies_trending&amp;random_support=true&amp;iconImage=trending</path>
-</node>

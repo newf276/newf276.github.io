@@ -1,5 +1,0 @@
-<node order="70" type="folder">
-	<label>Most Watched</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/most_watched.png</icon>
-	<path>plugin://plugin.video.finder/?name=Most+Watched&amp;mode=build_movie_list&amp;action=trakt_movies_most_watched&amp;random_support=true&amp;iconImage=most_watched/</path>
-</node>

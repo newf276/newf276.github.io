@@ -1,5 +1,0 @@
-<node order="60" type="folder">
-	<label>Most Favourited</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/favorites.png</icon>
-	<path>plugin://plugin.video.finder/?name=Most+Favorited&amp;mode=build_tvshow_list&amp;action=trakt_tv_most_favorited&amp;random_support=true&amp;iconImage=favorites/</path>
-</node>

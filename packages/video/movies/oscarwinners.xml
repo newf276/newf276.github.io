@@ -1,5 +1,0 @@
-<node order="80" type="folder">
-	<label>Oscar Winners</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/oscar_winners.png</icon>
-	<path>plugin://plugin.video.finder/?name=Oscar+Winners&amp;mode=build_movie_list&amp;action=tmdb_movies_oscar_winners&amp;random_support=true&amp;iconImage=oscar_winners/</path>
-</node>

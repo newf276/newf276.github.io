@@ -1,5 +1,0 @@
-<node order="140" type="folder">
-	<label>Trending Recently</label>
-	<icon>special://home/addons/plugin.video.finder/resources/media/icons/trending_recent.png</icon>
-	<path>plugin://plugin.video.finder/?name=Trending+Recent&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent&amp;random_support=true&amp;iconImage=trending_recent/</path>
-</node>
