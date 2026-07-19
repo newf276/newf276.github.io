@@ -1,10 +1,1 @@
-[COLOR dodgerblue][B]Version 0.2.24[/B][/COLOR]
-
-- Newf's Simple Wizard to manage builds and caches for family and friends
-
-- Added Authorization for Finder's TMDB Watchlist
--Added Torbox ResolveURL Authorization ability as well.
--Added ability to save your Finder Userdata during Build Updates.
-
-[COLOR dodgerblue][B]Version 0.2.22[/B][/COLOR]
-- Initial release for Kodi (V-22) Piers
+Added Ability to Clear Kos=di's Min Caches.
