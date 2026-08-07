@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="[B]Newf's Builds Repo[/B]" version="0.0.29" provider-name="newf276">
+<addon id="repository.newf" name="[B]Newf's Builds Repo[/B]" version="0.0.30" provider-name="newf276">
     <extension point="xbmc.addon.repository" name="[B]Newf's Builds Repo[/B]">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/newf276/build/master/zips/addons.xml</info>
@@ -36,6 +36,16 @@
             <info compressed="false">https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml</info>
             <checksum>https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml.md5</checksum>
             <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.youtube/</datadir>
+        </dir>
+        <dir minversion="19.0.0">
+            <info compressed="false">https://kodiyashimaru.github.io/repo/packages/addons.xml</info>
+            <checksum>https://kodiyashimaru.github.io/repo/packages/addons.xml.md5</checksum>
+            <datadir zip="true">https://kodiyashimaru.github.io/repo/</datadir>
+        </dir>
+        <dir minversion="19.0.0">
+            <info compressed="false">https://kodifitzwell.github.io/repo/packages/addons.xml</info>
+            <checksum>https://kodifitzwell.github.io/repo/packages/addons.xml.md5</checksum>
+            <datadir zip="true">https://kodifitzwell.github.io/repo/</datadir>
         </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
