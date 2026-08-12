@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.newf" name="[B]Newf's Builds Repo[/B]" version="1.0.0" provider-name="newf276">
-    <extension point="xbmc.addon.repository" name="[B]Newf's Builds Repo[/B]">
+<addon id="repository.newf" name="[B]Newfs Builds Repo[/B]" version="4.1.0" provider-name="newf276">
+    <extension point="xbmc.addon.repository" name="[B]Newfs Builds Repo[/B]">
         <dir><!--Newf's Main Repository-->
             <info compressed="false">https://raw.githubusercontent.com/newf276/build/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/newf276/build/refs/heads/master/zips/addons.xml.md5</checksum>
@@ -42,26 +42,6 @@
             <checksum>https://kodiyashimaru.github.io/repo/packages/addons.xml.md5</checksum>
             <datadir zip="true">https://kodiyashimaru.github.io/repo/</datadir>
         </dir>
-        <dir minversion="19.0.0"><!--Kodifitzwell's Main Repository-->
-            <info compressed="false">https://kodifitzwell.github.io/repo/packages/addons.xml</info>
-            <checksum>https://kodifitzwell.github.io/repo/packages/addons.xml.md5</checksum>
-            <datadir zip="true">https://kodifitzwell.github.io/repo/</datadir>
-        </dir>
-		<dir><!--The Red Repo Main-->
-			<info compressed="false">https://repo.redwizard.xyz/redwizardrepo/main/addons.xml</info>
-			<checksum>https://repo.redwizard.xyz/redwizardrepo/main/addons.xml.md5</checksum>
-			<datadir zip="true">https://repo.redwizard.xyz/redwizardrepo/main/</datadir>
-		</dir>
-		<dir minversion="20.9.0" maxversion="21.8.9"><!--The Red Repo Omega-->
-			<info compressed="false">https://repo.redwizard.xyz/redwizardrepo/21omega/addons.xml</info>
-			<checksum>https://repo.redwizard.xyz/redwizardrepo/21omega/addons.xml.md5</checksum>
-			<datadir zip="true">https://repo.redwizard.xyz/redwizardrepo/21omega/</datadir>
-		</dir>
-		<dir minversion="21.9.0" maxversion="22.8.9"><!--The Red Repo Piers-->
-			<info compressed="false">https://repo.redwizard.xyz/redwizardrepo/22piers/addons.xml</info>
-			<checksum>https://repo.redwizard.xyz/redwizardrepo/22piers/addons.xml.md5</checksum>
-			<datadir zip="true">https://repo.redwizard.xyz/redwizardrepo/22piers/</datadir>
-		</dir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>[B]Newf's Builds Repo[/B]</summary>
