@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.newf" name="[B]Newfs Builds Repo[/B]" version="4.1.0" provider-name="newf276">
+    <extension point="xbmc.addon.repository" name="[B]Newfs Builds Repo[/B]">
+        <dir><!--Newf's Main Repository-->
+            <info compressed="false">https://raw.githubusercontent.com/newf276/build/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/newf276/build/refs/heads/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/newf276/build/master/zips/</datadir>
+        </dir>
+		<dir><!--ResolveURL Repository-->
+	        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+	        <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+	        <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+		</dir>
+        <dir><!--Dobbelina's Main Repository-->
+            <info compressed="false">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/</datadir>
+        </dir>
+        <dir><!--A4K's Subtitle Repository-->
+            <info>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
+            <datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
+            <artdir>https://github.com/a4k-openproject/a4kSubtitles/releases/download/v0.0.13</artdir>
+        </dir>
+        <dir><!--SlyGuys's Main Repository-->
+            <info compressed="false">https://slyguy.uk/.repo/repository.slyguy/addons.xml</info>
+            <checksum>https://slyguy.uk/.repo/repository.slyguy/addons.xml.md5</checksum>
+            <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy/</datadir>
+        </dir>
+        <dir><!--SlyGuys's InputstreamHelper Repository-->
+            <info compressed="false">https://slyguy.uk/.repo/repository.slyguy.inputstreamhelper/addons.xml</info>
+           	<checksum>https://slyguy.uk/.repo/repository.slyguy.inputstreamhelper/addons.xml.md5</checksum>
+           	<datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.inputstreamhelper/</datadir>
+        </dir>
+        <dir><!--SlyGuys's Youtube Repository-->
+            <info compressed="false">https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml</info>
+            <checksum>https://slyguy.uk/.repo/repository.slyguy.youtube/addons.xml.md5</checksum>
+            <datadir zip="true">https://slyguy.uk/.repo/repository.slyguy.youtube/</datadir>
+        </dir>
+        <dir minversion="19.0.0"><!--KodiYashimaru's Main Repository-->
+            <info compressed="false">https://kodiyashimaru.github.io/repo/packages/addons.xml</info>
+            <checksum>https://kodiyashimaru.github.io/repo/packages/addons.xml.md5</checksum>
+            <datadir zip="true">https://kodiyashimaru.github.io/repo/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>[B]Newf's Builds Repo[/B]</summary>
+        <description>Newf's Public Repo</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <source>https://github.com/newf276/build/tree/master/zips</source>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
