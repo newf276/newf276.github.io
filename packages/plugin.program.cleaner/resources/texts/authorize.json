@@ -1,0 +1,63 @@
+{
+  "supported_addons": [
+    {
+      "id": "plugin.video.finder",
+      "name": "Finder",
+      "services": {
+          "mdblist": [
+          {
+            "type": "plugin",
+            "value": "plugin.video.finder/?mode=mdblist.mdblist_authenticate",
+            "label": "MDBList Auth"
+          }
+        ],
+          
+           "tmdb": [
+          {
+            "type": "plugin",
+            "value": "plugin.video.finder/?mode=tmdblist_api.authenticate",
+            "label": "TMDB Auth"
+          }
+        ],         
+          
+          
+          "trakt": [
+          {
+            "type": "plugin",
+            "value": "plugin://plugin.video.finder/?mode=trakt.trakt_authenticate",
+            "label": "Trakt Auth"
+          }
+        ],
+          
+        "alldebrid": [
+          {
+            "type": "plugin",
+            "value": "plugin://plugin.video.finder/?mode=alldebrid.authenticate",
+            "label": "All-Debrid Auth"
+          }
+        ],
+        "premiumize": [
+          {
+            "type": "plugin",
+            "value": "plugin://plugin.video.finder/?mode=premiumize.authenticate",
+            "label": "Premiumize Auth"
+          }
+        ],
+        "realdebrid": [
+          {
+            "type": "plugin",
+            "value": "plugin://plugin.video.finder/?mode=real_debrid.authenticate",
+            "label": "Real-Debrid Auth"
+          }
+        ],
+        "torbox": [
+          {
+            "type": "plugin",
+            "value": "plugin://plugin.video.finder/?mode=torbox.authenticate",
+            "label": "Torbox Auth"
+          }
+        ]
+      }
+    }
+  ]
+}

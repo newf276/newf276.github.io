@@ -1,0 +1,7 @@
+Added some more things to maintenance menu.
+
+- Clear Kodi caches and temp files.
+
+- Clear thumbnails
+
+- Tweaked Authorize premium Services.
