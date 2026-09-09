@@ -1,0 +1,54 @@
+{
+  "id": "org.trakt.fb84084a",
+  "version": "1.0.0",
+  "name": "Trakt Integration",
+  "resources": [
+    "catalog"
+  ],
+  "types": [
+    "movie",
+    "series"
+  ],
+  "catalogs": [
+    {
+      "type": "series",
+      "id": "watchlist",
+      "name": "Trakt Watchlist"
+    },
+    {
+      "type": "movie",
+      "id": "watchlist",
+      "name": "Trakt Watchlist"
+    },
+    {
+      "type": "movie",
+      "id": "recommendations",
+      "name": "Trakt Recommendations"
+    },
+    {
+      "type": "series",
+      "id": "recommendations",
+      "name": "Trakt Recommendations"
+    },
+    {
+      "type": "series",
+      "id": "collection",
+      "name": "Trakt Collection"
+    },
+    {
+      "type": "movie",
+      "id": "collection",
+      "name": "Trakt Collection"
+    },
+    {
+      "type": "series",
+      "id": "history",
+      "name": "Trakt History"
+    },
+    {
+      "type": "movie",
+      "id": "history",
+      "name": "Trakt History"
+    }
+  ]
+}
